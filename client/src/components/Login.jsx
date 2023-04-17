@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 
-import { app } from "../config/firebase.config";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app, auth } from "../config/firebase.config";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,43 @@ import {LoginBg} from "../assets/video/index";
 const Login = ({ setAuth }) => {
 
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    console.log(email);
-  }
+
+  const handleLogin = async () => {
+    if(email !== null && password !== null) {
+        signInWithEmailAndPassword(firebaseAuth, email, password)
+        .then(() => {
+        setAuth(true);
+        window.localStorage.setItem("auth", "true");
+
+        firebaseAuth.onAuthStateChanged((userCred) => {
+          if (userCred) {
+
+            userCred.getIdToken().then((token) => {
+              validateUser(token).then((data)=> {
+                dispatch({
+                  type:actionType.SET_USER,
+                  user:data,
+                })
+              })
+            });
+
+            navigate("/", { replace: true });
+          } else {
+            setAuth(false);
+            dispatch({
+              type:actionType.SET_USER,
+              user:null,
+            })
+            navigate("/login");
+          }
+        });
+            
+        })
+        .catch((err) => alert(err));
+    }
+}
 
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -86,17 +117,24 @@ const Login = ({ setAuth }) => {
                 <label for="email" className="block mb-2 text-2xl font-semibold bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">Login</label>
 
 
-                    <form method="POST" className="" action="#" onsubmit="return false;">
+                    
                         <div className="mb-5">
                             <label for="email" className="block mb-2 text-sm font-medium text-gray-600">Email</label>
-                            <input type="text" name="email" className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" />
+                            <input type="email" name="email" className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
                         <div className="mb-5">
                             <label for="password" className="block mb-2 text-sm font-medium text-gray-600">Password</label>
-                            <input type="password" name="password" className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" />
+                            <input type="password" name="password" className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none" 
+                             value={password}
+                             onChange={(e) => setPassword(e.target.value)}
+                            
+                            />
                         </div>
-                        <button className="w-full p-3 mt-4 bg-indigo-600 text-white rounded shadow">Login</button>
-                    </form>
+                        <button className="w-full p-3 mt-4 bg-indigo-600 text-white rounded shadow" onClick={handleLogin}>Login</button>
+                    
                 
                 <div className="flex flex-col justify-center items-center p-4 gap-2 text-base border-t border-gray-300 bg-white">
                   <hr/>
