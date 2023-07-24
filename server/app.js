@@ -5,11 +5,12 @@ require("dotenv/config");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 
-// app.use(express.json());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   return res.json("hii")
 })
+
 
 //user authentication route
 const userRoute = require("./routes/auth");

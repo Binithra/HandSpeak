@@ -42,7 +42,7 @@ const newUserData = async (decodeValue, req, res) => {
   try {
     const savedUser = await newUser.save();
     res.status(200).send({ user: savedUser });
-  } catch (error) {
+  } catch (error) { 
     res.status(400).send({ success: false, msg: error });
   }
 };
