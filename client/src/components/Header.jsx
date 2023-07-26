@@ -32,7 +32,7 @@ const Header = () => {
           <NavLink
             to={"/home"}
             className={
-              "bg-purple-300 text-lg rounded-br-lg ... p-2 ... text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-purple-400 ..."
+              "bg-purple-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-purple-400 "
             }
           >
             Home
@@ -42,7 +42,7 @@ const Header = () => {
           <NavLink
             to={"/musics"}
             className={
-              "bg-teal-300 text-lg p-2 ... rounded-br-lg ... text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-teal-400 ..."
+              "bg-teal-300 text-lg p-2 px-6 rounded-br-3xl text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-teal-400 "
             }
           >
             Finger Spelling
@@ -53,7 +53,7 @@ const Header = () => {
           <NavLink
             to={"/premium"}
             className={
-              "bg-rose-300 text-lg rounded-br-lg ... p-2 ... text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-rose-400 ..."
+              "bg-rose-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-rose-400 "
             }
           >
             Videos
@@ -62,9 +62,9 @@ const Header = () => {
 
         <li className="mx-5 text-lg">
           <NavLink
-            to={"/progress"}
+            to={"/Progress"}
             className={
-              "bg-blue-300 text-lg rounded-br-lg ... p-2 ... text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-blue-400 ..."
+              "bg-blue-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-blue-400"
             }
           >
             My Progress
@@ -96,9 +96,11 @@ const Header = () => {
                 Profile
               </p>
             </NavLink>
+            <NavLink to={"/support"}>
             <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
               Support
             </p>
+            </NavLink>
 
             <hr />
             {user?.user?.role === "admin" && (
