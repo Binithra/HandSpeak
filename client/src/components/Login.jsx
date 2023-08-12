@@ -23,6 +23,7 @@ const Login = ({ setAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   async function handleLogin() {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(firebaseAuth, email, password)
@@ -74,11 +75,10 @@ const Login = ({ setAuth }) => {
           if (userCred) {
             userCred.getIdToken().then((token) => {
               validateUser(token).then((data) => {
-                console.log(data);
-                // dispatch({
-                //   type: actionType.SET_USER,
-                //   user: data,
-                // });
+                dispatch({
+                  type: actionType.SET_USER,
+                  user: data,
+                });
               });
             });
 

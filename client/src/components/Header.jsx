@@ -80,7 +80,7 @@ const Header = () => {
       <img src={user?.user?.imageURL} className="w-12 h-12 min-w-[44px] object-cover rounded-full shadow-lg" alt="" referrerPolicy="no-refferer"/>
         <div className="flex flex-col">
           <p className="text-textColor text-lg hover:text-headingColor font-semibold">{user?.user?.name}</p>        
-          <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">Student
+          <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">{user?.user.role}
           </p>
         </div>
 
@@ -103,7 +103,7 @@ const Header = () => {
             </NavLink>
 
             <hr />
-            {user?.user?.role === "admin" && (
+            {user?.user?.role === "Admin" && (
               <>
                 <NavLink to={"/dashboard/home"}>
                   <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
