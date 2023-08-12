@@ -12,14 +12,16 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const logOut=()=>{ 
-    const firebaseAuth=getAuth(app);
-    firebaseAuth.signOut().then(()=>{
-      window.localStorage.setItem("auth","false");
-
-    }).catch((e) => console.log(e));
-    navigate("/login",{replace:true})
-  }
+  const logOut = () => {
+    const firebaseAuth = getAuth(app);
+    firebaseAuth
+      .signOut()
+      .then(() => {
+        window.localStorage.setItem("auth", "false");
+      })
+      .catch((e) => console.log(e));
+    navigate("/login", { replace: true });
+  };
 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6 bg-white">
@@ -51,7 +53,7 @@ const Header = () => {
 
         <li className="mx-5 text-lg">
           <NavLink
-            to={"/premium"}
+            to={"/Welcome"}
             className={
               "bg-rose-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-rose-400 "
             }
@@ -77,10 +79,18 @@ const Header = () => {
         onMouseLeave={() => setisMenu(false)}
         className="flex items-center ml-auto cursor-pointer gap-2 relative"
       >
-      <img src={user?.user?.imageURL} className="w-12 h-12 min-w-[44px] object-cover rounded-full shadow-lg" alt="" referrerPolicy="no-refferer"/>
+        <img
+          src={user?.user?.imageURL}
+          className="w-12 h-12 min-w-[44px] object-cover rounded-full shadow-lg"
+          alt=""
+          referrerPolicy="no-refferer"
+        />
         <div className="flex flex-col">
-          <p className="text-textColor text-lg hover:text-headingColor font-semibold">{user?.user?.name}</p>        
-          <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">Student
+          <p className="text-textColor text-lg hover:text-headingColor font-semibold">
+            {user?.user?.name}
+          </p>
+          <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">
+            Student
           </p>
         </div>
 
@@ -97,9 +107,9 @@ const Header = () => {
               </p>
             </NavLink>
             <NavLink to={"/support"}>
-            <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-              Support
-            </p>
+              <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+                Support
+              </p>
             </NavLink>
 
             <hr />
@@ -112,10 +122,8 @@ const Header = () => {
                   <hr />
                 </NavLink>
               </>
-              
             )}
 
-            
             <p
               className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"
               onClick={logOut}
