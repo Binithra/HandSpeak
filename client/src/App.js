@@ -23,14 +23,12 @@ const App = () => {
   useEffect(() => {
     firebaseAuth.onAuthStateChanged((userCred) => {
       if (userCred) {
-        //if we have the user credentials
         userCred.getIdToken().then((token) => {
-          // console.log(token);
           validateUser(token).then((data) => {
             dispatch({
               type: actionType.SET_USER,
               user: data,
-            });
+            })
           });
         });
       } else {
@@ -39,36 +37,12 @@ const App = () => {
         dispatch({
           type: actionType.SET_USER,
           user: null,
-        });
+        })
         navigate("/login");
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   firebaseAuth.onAuthStateChanged((userCred) => {
-  //     if (userCred) {
-  //       //if we have the user credentials
-  //       userCred.getIdToken().then((token) => {
-  //         // console.log(token);
-  //         validateUser(token).then((data) => {
-  //           dispatch({
-  //             type: actionType.SET_USER,
-  //             user: data,
-  //           });
-  //         });
-  //       });
-  //     } else {
-  //       setAuth(false);
-  //       window.localStorage.setItem("auth", "false");
-  //       dispatch({
-  //         type: actionType.SET_USER,
-  //         user: null,
-  //       });
-  //       navigate("/signup");
-  //     }
-  //   });
-  // }, []);
   return (
     <AnimatePresence>
       <div className="h-auto min-w-[680px] bg-primary flex justify-center items-center">
