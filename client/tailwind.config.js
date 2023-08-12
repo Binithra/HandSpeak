@@ -61,11 +61,12 @@ module.exports = {
         cartItem: "#2e3033",
         cartTotal: "#343739",
         loaderOverlay: "rgba(256,256,256,0.1)",
+        progressloader: "#800080",
       },
     },
   },
-  
-  plugins: [require('flowbite/plugin')],
+
+  plugins: [require("daisyui")],
 
 
  

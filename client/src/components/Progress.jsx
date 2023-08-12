@@ -3,9 +3,11 @@ import Header from './Header'
 import Uncomp from './Uncomp'
 
 import { Prog} from "../assets/img/index";
-import { Progress as Progressbar } from 'flowbite-react';
 
 const Progress = () => {
+
+const quiz = <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScsuynfDfMof1mqGweKLyCRz_wkZwJAydqsTMGDx5qwf5KWsQ/viewform?embedded=true" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-white">
         <Header />
@@ -16,14 +18,10 @@ const Progress = () => {
             <p className='text-green-600 font-semibold'> 20% Completed</p>
         </div>
   
-        <div class=" bg-gray-200 rounded-full h-12 dark:bg-gray-700 m-3 w-96">
-         <div class="bg-purple-600 h-12 rounded-full dark:bg-purple-500 w-32" ></div>
-        </div>
+        <progress className="progress progress-primary bg-slate-300 shadow-lg w-80 h-10" value="40" max="100"></progress>
 
-        {/* <Progressbar 
-        color="Purple"
-        progress={45}
-        size="xl" /> */}
+        
+
     
         
         <div className='flex flex-row m-8 gap-10 items-center justify-center '>
