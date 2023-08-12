@@ -12,6 +12,9 @@ const Header = () => {
 
   const navigate = useNavigate();
 
+  const isNotActiveStyles = `p-2 px-6 text-gray-500 text-lg rounded-full hover:text-headingColor duration-100 transition-all hover:bg-teal-400 `;
+  const isActiveStyles = `p-2 px-6 text-gray-500 text-headingColor rounded-full bg-slate-300 text-lg font-bold`;
+
   const logOut=()=>{ 
     const firebaseAuth=getAuth(app);
     firebaseAuth.signOut().then(()=>{
@@ -31,41 +34,41 @@ const Header = () => {
         <li className="mx-5 text-lg">
           <NavLink
             to={"/home"}
-            className={
-              "bg-purple-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-purple-400 "
-            }
+            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }
           >
             Home
           </NavLink>
         </li>
         <li className="mx-5 text-lg">
           <NavLink
-            to={"/musics"}
-            className={
-              "bg-teal-300 text-lg p-2 px-6 rounded-br-3xl text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-teal-400 "
-            }
+            to={"/SignPractice"}
+            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }
           >
-            Finger Spelling
+            Sign Practice
           </NavLink>
         </li>
 
         <li className="mx-5 text-lg">
           <NavLink
-            to={"/premium"}
-            className={
-              "bg-rose-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-rose-400 "
-            }
+            to={"/Videos"}
+            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }
           >
             Videos
+          </NavLink>
+        </li>
+        <li className="mx-5 text-lg">
+          <NavLink
+            to={"/Quiz"}
+            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }
+          >
+            Quiz
           </NavLink>
         </li>
 
         <li className="mx-5 text-lg">
           <NavLink
             to={"/Progress"}
-            className={
-              "bg-blue-300 text-lg rounded-br-3xl p-2 px-6 text-headingColor font-semibold hover:text-headingColor duration-100 transition-all hover:bg-blue-400"
-            }
+            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }
           >
             My Progress
           </NavLink>
@@ -106,7 +109,7 @@ const Header = () => {
             {user?.user?.role === "Admin" && (
               <>
                 <NavLink to={"/dashboard/home"}>
-                  <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
                     Dashboard
                   </p>
                   <hr />
