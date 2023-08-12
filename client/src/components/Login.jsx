@@ -23,40 +23,6 @@ const Login = ({ setAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-  async function handleLogin() {
-    if (email !== null && password !== null) {
-      signInWithEmailAndPassword(firebaseAuth, email, password)
-        .then(() => {
-          setAuth(true);
-          window.localStorage.setItem("auth", "true");
-
-          firebaseAuth.onAuthStateChanged((userCred) => {
-            if (userCred) {
-              userCred.getIdToken().then((token) => {
-                validateUser(token).then((data) => {
-                  dispatch({
-                    type: actionType.SET_USER,
-                    user: data,
-                  });
-                });
-              });
-
-              navigate("/", { replace: true });
-            } else {
-              setAuth(false);
-              dispatch({
-                type: actionType.SET_USER,
-                user: null,
-              });
-              navigate("/login");
-            }
-          });
-        })
-        .catch((err) => alert(err));
-    }
-  }
-
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
@@ -96,6 +62,39 @@ const Login = ({ setAuth }) => {
       }
     });
   };
+
+  const handleLogin = async () => {
+    if (email !== null && password !== null) {
+      signInWithEmailAndPassword(firebaseAuth, email, password)
+        .then(() => {
+          setAuth(true);
+          window.localStorage.setItem("auth", "true");
+
+          firebaseAuth.onAuthStateChanged((userCred) => {
+            if (userCred) {
+              userCred.getIdToken().then((token) => {
+                validateUser(token).then((data) => {
+                  dispatch({
+                    type: actionType.SET_USER,
+                    user: data,
+                  });
+                });
+              });
+
+              navigate("/", { replace: true });
+            } else {
+              setAuth(false);
+              dispatch({
+                type: actionType.SET_USER,
+                user: null,
+              });
+              navigate("/login");
+            }
+          });
+        })
+        .catch((err) => alert(err));
+    }
+  }
 
    useEffect(() => {
     if (window.localStorage.getItem("auth" === "true")) {
