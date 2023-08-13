@@ -134,8 +134,15 @@ const Header = () => {
                   </p>
                   <hr />
                 </NavLink>
+                
               </>
             )}
+            <NavLink to={"/Welcome"}>
+                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
+                    WelcomeScreen
+                  </p>
+                  <hr />
+                </NavLink>
 
             <p
               className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"
