@@ -23,7 +23,47 @@ const Login = ({ setAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleLogin() {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const navigate = useNavigate();
+  const [dispatch] = useState();
+
+  // const [{ user }, dispatch] = useStateValue();
+
+  const loginWithGoogle = async () => {
+    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
+      if (userCred) {
+        setAuth(true);
+        window.localStorage.setItem("auth", "true");
+
+        firebaseAuth.onAuthStateChanged((userCred) => {
+          if (userCred) {
+            userCred.getIdToken().then((token) => {
+              validateUser(token).then((data) => {
+                dispatch({
+                  type: actionType.SET_USER,
+                  user: data,
+                });
+              });
+            });
+
+            navigate("/", { replace: true });
+          }
+           else {
+            setAuth(false);
+            dispatch({
+              type: actionType.SET_USER,
+              user: null,
+            });
+            navigate("/login");
+          }
+        });
+      }
+    });
+  };
+
+  const handleLogin = async () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(firebaseAuth, email, password)
         .then(() => {
@@ -55,47 +95,6 @@ const Login = ({ setAuth }) => {
         .catch((err) => alert(err));
     }
   }
-
-  const firebaseAuth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  const navigate = useNavigate();
-  const [dispatch] = useState();
-
-  // const [{ user }, dispatch] = useStateValue();
-
-  const loginWithGoogle = async () => {
-    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
-      if (userCred) {
-        setAuth(true);
-        window.localStorage.setItem("auth", "true");
-
-        firebaseAuth.onAuthStateChanged((userCred) => {
-          if (userCred) {
-            userCred.getIdToken().then((token) => {
-              validateUser(token).then((data) => {
-                console.log(data);
-                // dispatch({
-                //   type: actionType.SET_USER,
-                //   user: data,
-                // });
-              });
-            });
-
-            navigate("/", { replace: true });
-          }
-           else {
-            setAuth(false);
-            dispatch({
-              type: actionType.SET_USER,
-              user: null,
-            });
-            navigate("/login");
-          }
-        });
-      }
-    });
-  };
 
    useEffect(() => {
     if (window.localStorage.getItem("auth" === "true")) {

@@ -5,28 +5,32 @@ const user = require("../models/user");
 const admin = require("../config/firebase.config");
 
 router.get("/login", async (req, res) => {
-  if (!req.headers.authorization) {
-    return res.status(500).send({ message: "Invalid Token" });
+  if(!req.headers.authorization) {
+      return res.status(500).send({auth : false, message : "No token provided"});
   }
 
   const token = req.headers.authorization.split(" ")[1];
-  try {
-    const decodeValue = await admin.auth().verifyIdToken(token);
-    if (!decodeValue) {
-      return res.status(505).json({ message: "Unauthorized" });
-    } else {
-      //checking user exists or not
-      const userExists = await user.findOne({ user_id: decodeValue.user_id });
-      if (!userExists) {
-        newUserData(decodeValue, req, res);
-      } else {
-        updateNewUserData (decodeValue,req,res)
+  try{
+
+  const decodeValue = await admin.auth().verifyIdToken(token);
+  if (!decodeValue) {
+      return res.status(505).json({message : "User is not verified"})
+      }else{
+          //checking user exist or not
+          const userExist = await user.findOne({user_id : decodeValue.uid});
+          if(!userExist){
+              newUserData(decodeValue, req, res);
+          }else{
+              updateNewUserData(decodeValue, req, res);
+          }
+
       }
-    }
-  } catch (error) {
-    return res.status(505).json({ message: error });
+
+  } catch(error) {
+      return res.status(505).json({message : error});
   }
-});
+
+})
 
 const newUserData = async (decodeValue, req, res) => {
   const newUser = new user({
@@ -35,16 +39,16 @@ const newUserData = async (decodeValue, req, res) => {
     imageURL: decodeValue.picture,
     user_id: decodeValue.user_id,
     email_verified: decodeValue.email_verified,
-    role: "member",
+    role: "Member",
     auth_time: decodeValue.auth_time,
   });
 
-  try {
+  try{
     const savedUser = await newUser.save();
-    res.status(200).send({ user: savedUser });
-  } catch (error) { 
-    res.status(400).send({ success: false, msg: error });
-  }
+    res.status(200).send({user : savedUser});
+} catch(error) {
+    res.status(400).send({success : false, message : error});
+}
 };
 
 const updateNewUserData = async (decodeValue, req, res) => {
@@ -66,5 +70,27 @@ const updateNewUserData = async (decodeValue, req, res) => {
     res.status(400).send({ success: false, msg: error });
   }
 };
+
+router.get("/getUsers", async (req, res) => {
+  const options = {
+      sort: {
+        createdAt: 1,
+      },
+    };
+
+    const cursor = await user.find(options);
+
+    if (cursor) {
+      return res.status(200).send({
+        success: true,
+        data: cursor,
+      });
+    }else{
+      return res.status(400).send({
+          success: false,
+          message: "No data",
+        });
+    }
+});
 
 module.exports = router;
