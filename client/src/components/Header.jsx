@@ -77,6 +77,17 @@ const Header = () => {
 
         <li className="mx-5 text-lg">
           <NavLink
+            to={"/StoryBook"}
+            className={({ isActive }) =>
+              isActive ? isActiveStyles : isNotActiveStyles
+            }
+          >
+            Storybook Library
+          </NavLink>
+        </li>
+
+        <li className="mx-5 text-lg">
+          <NavLink
             to={"/Progress"}
             className={({ isActive }) =>
               isActive ? isActiveStyles : isNotActiveStyles
@@ -114,11 +125,23 @@ const Header = () => {
             exit={{ opacity: 0, y: 50 }}
             className="absolute z-10 flex flex-col p-3 top-12 right-0 w-275 gap-2 bg-card shadow-lg rounded-lg backdrop-blur-sm "
           >
-            <NavLink to={"/userProfile"}>
+            {/* <NavLink to={"/UserProfile"}>
               <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
                 Profile
               </p>
-            </NavLink>
+            </NavLink> */}
+
+            {user?.user?.role === "Student" && (
+              <>
+                <NavLink to={"/Welcome"}>
+                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
+                    WelcomeScreen
+                  </p>
+                  <hr />
+                </NavLink>
+              </>
+            )}
+
             <NavLink to={"/support"}>
               <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
                 Support
@@ -134,15 +157,8 @@ const Header = () => {
                   </p>
                   <hr />
                 </NavLink>
-                
               </>
             )}
-            <NavLink to={"/Welcome"}>
-                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
-                    WelcomeScreen
-                  </p>
-                  <hr />
-                </NavLink>
 
             <p
               className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"

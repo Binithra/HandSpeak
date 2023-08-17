@@ -1,2 +1,12 @@
 export {default as LoginBg} from "./bg.mp4";
 export {default as RegBg} from "./reg.mp4";
+export {default as q1} from "./q1.mp4";
+export {default as q2} from "./q2.mp4";
+export {default as q3} from "./q3.mp4";
+export {default as q4} from "./q4.mp4";
+export {default as q5} from "./q5.mp4";
+export {default as q6} from "./q6.mp4";
+export {default as q7} from "./q7.mp4";
+export {default as w1} from "./w1.mp4";
+export {default as q8} from "./q8.mp4";
+export {default as h1} from "./h1.mp4";
