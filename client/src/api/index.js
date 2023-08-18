@@ -27,3 +27,23 @@ export const getAllUsers = async () =>{
      return null;
     } 
  };
+
+ export const changingUserRole = async () =>{
+    try {
+     const res = await axios.get(`${baseURL}/api/users/changeUserRole`);
+     return res.data;
+     
+    } catch (error) {
+     return null;
+    } 
+ };
+ 
+ export const removeUser = async () =>{
+    try {
+     const res = await axios.get(`${baseURL}/api/users/removeUser`);
+     return res.data;
+     
+    } catch (error) {
+     return null;
+    } 
+ };

@@ -3,7 +3,7 @@ import { Logo, Reg } from "../assets/img/index";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import { app,auth } from "../config/firebase.config";
+import { app, auth } from "../config/firebase.config";
 
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
@@ -16,7 +16,6 @@ import {
 } from "firebase/auth";
 
 const SignUp = (setAuth) => {
-  
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
@@ -46,7 +45,7 @@ const SignUp = (setAuth) => {
                 type: actionType.SET_USER,
                 user: null,
               });
-              navigate("/signup");
+              navigate("/Signup");
             }
           });
         })
@@ -85,7 +84,7 @@ const SignUp = (setAuth) => {
               type: actionType.SET_USER,
               user: null,
             });
-            navigate("/signup");
+            navigate("/Signup");
           }
         });
       }
@@ -123,7 +122,7 @@ const SignUp = (setAuth) => {
             >
               Register
             </label>
-           
+
             <div className="mb-4">
               <label
                 for="email"
@@ -156,7 +155,7 @@ const SignUp = (setAuth) => {
                 onChange={(e) => setpassword(e.target.value)}
               />
             </div>
-             <div className="mb-4">
+            <div className="mb-4">
               <label
                 for="confirmPassword"
                 className="block mb-1 text-sm font-medium text-sky-700"
