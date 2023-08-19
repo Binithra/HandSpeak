@@ -9,25 +9,25 @@ const Videos = () => {
       <Header />
       <div className="text-2xl font-semibold p-4 ">Video Lessons for you</div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <VideoCard1 />
-        <VideoCard2 />
-        <VideoCard3 />
-        <VideoCard4 />
-        <VideoCard5 />
-        <VideoCard6 />
-        <VideoCard7 />
-        <VideoCard8 />
+        <VideoCard  video={q2} title={'අකුරු'} screen={"/VideoScreen"}/>
+        <VideoCard video={q5} title={'අංක'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q1} title={'මිනිසුන්'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q3} title={'පළතුරු'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q7} title={'ස්ථාන'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q4} title={'සුභ පැතුම්'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q6} title={'දෛනික භාවිත'} screen={"/VideoScreen1"}/>
+        <VideoCard video={q8} title={'පාට'} screen={"/VideoScreen1"}/>
       </div>
     </div>
   );
 };
 
-export const VideoCard1 = () => {
+export const VideoCard  = ({video , title, screen }) => {
   return (
     <div className="card card-compact w-80 bg-yellow-500 shadow-xl">
       <figure>
         <video
-          src={q2}
+          src={video}
           type="video/mp4"
           autoPlay
           muted
@@ -36,9 +36,9 @@ export const VideoCard1 = () => {
         ></video>
       </figure>
       <div className="card-body">
-        <h2 className="card-title">අකුරු</h2>
+        <h2 className="card-title">{title}</h2>
         <div className="card-actions justify-end">
-          <NavLink to={"/VideoScreen"}>
+          <NavLink to={screen}>
             <button className="btn btn-primary">බලන්න</button>
           </NavLink>
         </div>
