@@ -11,6 +11,7 @@ app.get("/", (req, res) => {
   return res.json("hii")
 })
 
+app.use(cors({origin : true}));
 
 //user authentication route
 const userRoute = require("./routes/auth");

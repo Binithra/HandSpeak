@@ -1,20 +1,40 @@
-import React from 'react'
-import Header from './Header'
-import SupportCard from './SupportCard'
-import { S1 ,S2,S3} from "../assets/img/index";
+import React from "react";
+import Header from "./Header";
+import SupportCard from "./SupportCard";
+import { NavLink } from "react-router-dom";
+import { S1, S2, S3 } from "../assets/img/index";
 
 const Support = () => {
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center bg-white">
-    <Header />
-    <h3 className='underline text-3xl font-medium text-green-700'>Support</h3>
-    <div className='flex flex-row p-5 '>
-        <SupportCard image={S1} content="User Guide" description=" Get step-By-Step"/>
-        <SupportCard image={S2} content="Common Issues" description="Frequently asked Question and answers"/>
-        <SupportCard image={S3} content="Contact Us" description=""/>
+    <div className="w-full h-auto items-center justify-center bg-slate-800">
+      <Header />
+      <h2 className="text-center text-2xl font-semibold text-green-600 pt-12 pb-4">
+        සහාය සදහා
+      </h2>
+      <div className="w-full h-auto flex flex-col items-center justify-center">
+        {" "}
+        {
+          <NavLink to={"/QuizScreen"}>
+            <SupportCard
+              image={S1}
+              content="පරිශීලක මාර්ගෝපදේශය"
+              description=" පියවරෙන් පියවර මාර්ගෝපදේශය ලබා ගන්න"
+            />
+            <SupportCard
+              image={S2}
+              content="පොදු ගැටළු"
+              description="නිතර අසන ප්‍රශ්න සහ පිළිතුරු"
+            />
+            <SupportCard
+              image={S3}
+              content="ගුරුවරයෙකු අමතන්න"
+              description="ගුරුවරයෙකුගෙන් උපකාර ලබාගන්න"
+            />
+          </NavLink>
+        }
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Support
+export default Support;
