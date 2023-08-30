@@ -64,6 +64,8 @@ const DashboardUserCard = ({ data, index }) => {
           <MdDelete className="text-xl text-red-400 hover:text-red-500" />
         </motion.div>
       )}
+
+      {/* user image */}
       <div className="w-275 min-w-[160px] flex items-center justify-center">
         <img
           src={data.imageURL}

@@ -1,8 +1,7 @@
 export const initialState = {
-    user : null,
-    allUsers : null,
-    allBooks : null,
-    quiz : null,
-    allVideos : null
-
+  user: null,
+  allUsers: null,
+  allBooks: null,
+  allquiz: null,
+  allVideos: null,
 };

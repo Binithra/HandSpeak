@@ -1,6 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { Dashboard, Home, Login, Progress, Quiz, QuizScreen, SignPractice, SignUp, Support, Videos, Welcome, VideoScreen, StoryBook, Dboard1, DashboardUsers} from "./components";
+import {
+  Dashboard,
+  Home,
+  Login,
+  Progress,
+  Quiz,
+  QuizScreen,
+  SignPractice,
+  SignUp,
+  Support,
+  Videos,
+  Welcome,
+  VideoScreen,
+  StoryBook,
+  DashboardHome,
+  DashboardUser,
+  DashboardStorybook,
+  DashboardVideo,
+} from "./components";
 import { app } from "./config/firebase.config";
 
 import { getAuth } from "firebase/auth";
@@ -28,7 +46,7 @@ const App = () => {
             dispatch({
               type: actionType.SET_USER,
               user: data,
-            })
+            });
           });
         });
       } else {
@@ -37,7 +55,7 @@ const App = () => {
         dispatch({
           type: actionType.SET_USER,
           user: null,
-        })
+        });
         navigate("/Login");
       }
     });
@@ -48,20 +66,22 @@ const App = () => {
       <div className="h-auto min-w-[680px] bg-primary flex justify-center items-center">
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
-          <Route path="/Signup" element={<SignUp/>} />
+          <Route path="/Signup" element={<SignUp />} />
           <Route path="/*" element={<Home />} />
-          <Route path='/Videos' element={<Videos/>} />
-          <Route path='/Progress' element={<Progress/>} />
-          <Route path='/SignPractice' element={<SignPractice/>} />
-          <Route path='/Support' element={<Support/>} />
-          <Route path='/Quiz' element={<Quiz/>} />
-          <Route path="/Dashboard/*" element={<Dashboard/>} />
-          <Route path='/QuizScreen' element={<QuizScreen/>} />
-          <Route path='/Welcome' element={<Welcome/>} />
-          <Route path='/VideoScreen' element={<VideoScreen/>} />
-          <Route path='/StoryBook' element={<StoryBook/>} />
-          <Route path='/Dboard1' element={<Dboard1/>} />
-          <Route path='/DashboardUsers' element={<DashboardUsers/>} />
+          <Route path="/Videos" element={<Videos />} />
+          <Route path="/Progress" element={<Progress />} />
+          <Route path="/SignPractice" element={<SignPractice />} />
+          <Route path="/Support" element={<Support />} />
+          <Route path="/Quiz" element={<Quiz />} />
+          <Route path="/Dashboard/*" element={<Dashboard />} />
+          <Route path="/QuizScreen" element={<QuizScreen />} />
+          <Route path="/Welcome" element={<Welcome />} />
+          <Route path="/VideoScreen" element={<VideoScreen />} />
+          <Route path="/StoryBook" element={<StoryBook />} />
+          <Route path="/DashboardHome" element={<DashboardHome />} />
+          <Route path="/DashboardUser" element={<DashboardUser />} />
+          <Route path="/DashboardVideo" element={<DashboardVideo />} />
+          <Route path="/DashboardStorybook" element={<DashboardStorybook />} />
         </Routes>
       </div>
     </AnimatePresence>
