@@ -24,9 +24,9 @@ import { app } from "./config/firebase.config";
 
 import {
   getAuth,
-  // GoogleAuthProvider,
-  // inMemoryPersistence,
-  // signInWithPopup,
+  GoogleAuthProvider,
+  inMemoryPersistence,
+  signInWithPopup,
 } from "firebase/auth";
 
 import { AnimatePresence } from "framer-motion";
@@ -38,7 +38,7 @@ function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
 
-  const [{ user, allStorybooks, allVideos }, dispatch] = useStateValue();
+  const [{ user, allBooks, allVideos }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(false);
 
   const [auth, setAuth] = useState(
@@ -73,11 +73,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!allStorybooks && user) {
+    if (!allBooks && user) {
       getAllStorybooks().then((data) => {
         dispatch({
           type: actionType.SET_ALL_BOOKS,
-          allStorybooks: data.data,
+          allBooks: data.data,
         });
       });
     }
@@ -87,7 +87,7 @@ function App() {
     if (!allVideos && user) {
       getAllVideos().then((data) => {
         dispatch({
-          type: actionType.SET_ALL_BOOKS,
+          type: actionType.SET_ALL_VIDEOS,
           allVideos: data.data,
         });
       });

@@ -1,4 +1,67 @@
 # HandSpeak
 #### let your Hand Speak
 
+tfjs file:
+
 https://www.figma.com/file/BopR7u9VkAOuVdMDw99dub/Untitled?type=design&node-id=0%3A1&mode=design&t=SYZpbz44zJOamQoc-1
+
+<div>Teachable Machine Image Model</div>
+<button type="button" onclick="init()">Start</button>
+<div id="webcam-container"></div>
+<div id="label-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "https://teachablemachine.withgoogle.com/models/E8BXZyvao/";
+
+    let model, webcam, labelContainer, maxPredictions, highestPredictionIndex;
+
+    // Load the image model and setup the webcam
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        // load the model and metadata
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const flip = true; // whether to flip the webcam
+        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // append elements to the DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+    }
+
+    async function loop() {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    // run the webcam image through the image model
+    async function predict() {
+        // predict can take in an image, video or canvas html element
+        const prediction = await model.predict(webcam.canvas);
+
+        // Find the index with the highest probability
+        highestPredictionIndex = 0;
+        for (let i = 1; i < maxPredictions; i++) {
+            if (prediction[i].probability > prediction[highestPredictionIndex].probability) {
+                highestPredictionIndex = i;
+            }
+        }
+
+        // Display the highest prediction
+        labelContainer.innerHTML = prediction[highestPredictionIndex].className + ": " +
+            prediction[highestPredictionIndex].probability.toFixed(2);
+    }
+</script>

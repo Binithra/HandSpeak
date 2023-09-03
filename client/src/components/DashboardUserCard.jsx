@@ -11,7 +11,7 @@ const DashboardUserCard = ({ data, index }) => {
   const [isUpdateRole, setIsUpdateRole] = useState(false);
 
   const [{ allUsers, user }, dispatch] = useStateValue();
-  const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
+  const createdAt = moment(new Date(data.createdAt)).format("MMMM DD YYYY");
 
   const UpdateUserRole = (userId, role) => {
     setIsLoading(true);
@@ -31,7 +31,7 @@ const DashboardUserCard = ({ data, index }) => {
     });
   };
 
-  const deleteuser = (userId) => {
+  const deleteUser = (userId) => {
     setIsLoading(true);
     removeUser(userId).then((res) => {
       if (res) {
@@ -59,7 +59,7 @@ const DashboardUserCard = ({ data, index }) => {
         <motion.div
           whileTap={{ scale: 0.75 }}
           className="absolute left-4 w-8 h-8 rounded-md flex items-center justify-center bg-gray-200"
-          onClick={() => deleteuser(data._id)}
+          onClick={() => deleteUser(data._id)}
         >
           <MdDelete className="text-xl text-red-400 hover:text-red-500" />
         </motion.div>
@@ -83,7 +83,7 @@ const DashboardUserCard = ({ data, index }) => {
       </p>
 
       <p className="text-base text-textColor w-275 min-w-[160px] text-center">
-        {data.email_verfied ? "True" : "False"}
+        {data.email_verified ? "True" : "False"}
       </p>
 
       <p className="text-base text-textColor w-275 min-w-[160px] text-center">
@@ -97,9 +97,7 @@ const DashboardUserCard = ({ data, index }) => {
             className="text-[12px]  font-semibold text-teal-700 flex items-center px-1 h-12 w-20 hover:bg-teal-700 hover:text-gray-200 bg-gray-200 rounded-sm hover:shadow-md"
             onClick={() => setIsUpdateRole(true)}
           >
-            {data.role === "Change to Admin"
-              ? "Change to Student"
-              : "Change to Admin"}
+            {data.role === "Admin" ? "Change to Student" : "Change to Admin"}
           </motion.p>
         )}
         {isUpdateRole && (
@@ -109,6 +107,7 @@ const DashboardUserCard = ({ data, index }) => {
             exit={{ opacity: 0, scale: 0.5 }}
             className="absolute z-10 top-12 right-9 rounded-md p-4 flex items-start flex-col gap-6 bg-white shadow-xl"
           >
+            {/* the role of the logged in account cant be changed */}
             <p className="text-textColor text-sm font-semibold">
               Are you sure to assign this user as{" "}
               <span>{data.role === "Admin" ? "Student" : "Admin"}</span> ?

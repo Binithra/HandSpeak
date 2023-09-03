@@ -21,7 +21,7 @@ export const DashBoardCard = ({ icon, name, userCount }) => {
 };
 
 const DashBoardHome = () => {
-  const [{ allUsers, allVideos, allStorybooks }, dispatch] = useStateValue();
+  const [{ allUsers, allVideos, allBooks }, dispatch] = useStateValue();
   useEffect(() => {
     if (!allUsers) {
       getAllUsers().then((data) => {
@@ -36,16 +36,16 @@ const DashBoardHome = () => {
       getAllVideos().then((data) => {
         dispatch({
           type: actionType.SET_ALL_VIDEOS,
-          allVideos: data.data,
+          allVideos: data.video,
         });
       });
     }
 
-    if (!allStorybooks) {
+    if (!allBooks) {
       getAllStorybooks().then((data) => {
         dispatch({
           type: actionType.SET_ALL_BOOKS,
-          allStorybooks: data.data,
+          allBooks: data.storybooks,
         });
       });
     }
@@ -65,7 +65,7 @@ const DashBoardHome = () => {
       <DashBoardCard
         icon={<SlBookOpen className="text-3xl text-textColor" />}
         name={"Storybooks"}
-        userCount={allStorybooks?.length > 0 ? allStorybooks?.length : 0}
+        userCount={allBooks?.length > 0 ? allBooks?.length : 0}
       />
     </div>
   );

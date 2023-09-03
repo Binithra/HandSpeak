@@ -79,14 +79,14 @@ router.get("/getUser/:userId", async (req, res) => {
   }
 });
 
-router.delete("/delete/:userId", async (req, res) => {
+router.delete("/deleteUser/:userId", async (req, res) => {
   const filter = { _id: req.params.userId };
 
   const result = await user.deleteOne(filter);
   if (result.deletedCount === 1) {
-    res.status(200).send({ success: true, msg: "Data Deleted" });
+    res.status(200).send({ success: true, msg: "User Deleted" });
   } else {
-    res.status(200).send({ success: false, msg: "Data Not Found" });
+    res.status(200).send({ success: false, msg: "User Not Found" });
   }
 });
 
