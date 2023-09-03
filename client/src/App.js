@@ -18,30 +18,39 @@ import {
   DashboardUser,
   DashboardStorybook,
   DashboardVideo,
+  DashboardUserCard,
 } from "./components";
 import { app } from "./config/firebase.config";
 
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  // GoogleAuthProvider,
+  // inMemoryPersistence,
+  // signInWithPopup,
+} from "firebase/auth";
 
 import { AnimatePresence } from "framer-motion";
-import { validateUser } from "./api";
+import { validateUser, getAllStorybooks, getAllVideos } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
 
-const App = () => {
+function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, allStorybooks, allVideos }, dispatch] = useStateValue();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [auth, setAuth] = useState(
     false || window.localStorage.getItem("auth") === "true"
   );
 
   useEffect(() => {
+    setIsLoading(true);
     firebaseAuth.onAuthStateChanged((userCred) => {
       if (userCred) {
         userCred.getIdToken().then((token) => {
+          window.localStorage.setItem("auth", "true");
           validateUser(token).then((data) => {
             dispatch({
               type: actionType.SET_USER,
@@ -49,31 +58,58 @@ const App = () => {
             });
           });
         });
+        setIsLoading(false);
       } else {
         setAuth(false);
-        window.localStorage.setItem("auth", "false");
         dispatch({
           type: actionType.SET_USER,
           user: null,
         });
-        navigate("/Login");
+        setIsLoading(false);
+        window.localStorage.setItem("auth", "false");
+        navigate("/login");
       }
     });
   }, []);
 
+  useEffect(() => {
+    if (!allStorybooks && user) {
+      getAllStorybooks().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_BOOKS,
+          allStorybooks: data.data,
+        });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!allVideos && user) {
+      getAllVideos().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_BOOKS,
+          allVideos: data.data,
+        });
+      });
+    }
+  }, []);
   return (
     <AnimatePresence>
-      <div className="h-auto min-w-[680px] bg-primary flex justify-center items-center">
+      <div className="h-auto flex items-center justify-center min-w-[680px]">
+        {isLoading ||
+          (!user && (
+            <div className="fixed inset-0 bg-loaderOverlay backdrop-blur-sm "></div>
+          ))}
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/*" element={<Home />} />
-          <Route path="/Videos" element={<Videos />} />
+          <Route path="/videos" element={<Videos />} />
           <Route path="/Progress" element={<Progress />} />
           <Route path="/SignPractice" element={<SignPractice />} />
           <Route path="/Support" element={<Support />} />
           <Route path="/Quiz" element={<Quiz />} />
-          <Route path="/Dashboard/*" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/QuizScreen" element={<QuizScreen />} />
           <Route path="/Welcome" element={<Welcome />} />
           <Route path="/VideoScreen" element={<VideoScreen />} />
@@ -82,10 +118,11 @@ const App = () => {
           <Route path="/DashboardUser" element={<DashboardUser />} />
           <Route path="/DashboardVideo" element={<DashboardVideo />} />
           <Route path="/DashboardStorybook" element={<DashboardStorybook />} />
+          <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
         </Routes>
       </div>
     </AnimatePresence>
   );
-};
+}
 
 export default App;

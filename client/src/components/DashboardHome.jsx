@@ -6,7 +6,7 @@ import { actionType } from "../context/reducer";
 import { getAllUsers, getAllVideos, getAllStorybooks } from "../api";
 import { bgColors } from "../utils/styles";
 
-export const DashBoardCard = ({ icon, name, count }) => {
+export const DashBoardCard = ({ icon, name, userCount }) => {
   const bg_color = bgColors[parseInt(Math.random() * bgColors.length)];
   return (
     <div
@@ -15,7 +15,7 @@ export const DashBoardCard = ({ icon, name, count }) => {
     >
       {icon}
       <p className="text-xl text-textColor font-semibold">{name}</p>
-      <p className="text-sm text-textColor">{count}</p>
+      <p className="text-sm text-textColor">{userCount}</p>
     </div>
   );
 };
@@ -44,7 +44,7 @@ const DashBoardHome = () => {
     if (!allStorybooks) {
       getAllStorybooks().then((data) => {
         dispatch({
-          type: actionType.SET_ALL_STORYBOOKS,
+          type: actionType.SET_ALL_BOOKS,
           allStorybooks: data.data,
         });
       });
@@ -55,17 +55,17 @@ const DashBoardHome = () => {
       <DashBoardCard
         icon={<SlUser className="text-3xl text-textColor" />}
         name={"Users"}
-        count={allUsers?.length > 0 ? allUsers?.length : 0}
+        userCount={allUsers?.length > 0 ? allUsers?.length : 0}
       />
       <DashBoardCard
         icon={<RxVideo className="text-3xl text-textColor" />}
         name={"Videos"}
-        count={allVideos?.length > 0 ? allVideos?.length : 0}
+        userCount={allVideos?.length > 0 ? allVideos?.length : 0}
       />
       <DashBoardCard
         icon={<SlBookOpen className="text-3xl text-textColor" />}
         name={"Storybooks"}
-        count={allStorybooks?.length > 0 ? allStorybooks?.length : 0}
+        userCount={allStorybooks?.length > 0 ? allStorybooks?.length : 0}
       />
     </div>
   );

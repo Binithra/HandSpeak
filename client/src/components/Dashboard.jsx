@@ -6,9 +6,11 @@ import DashboardStorybook from "./DashboardStorybook";
 import DashboardVideo from "./DashboardVideo";
 import DashboardHome from "./DashboardHome";
 import DashboardUser from "./DashboardUser";
+import { useStateValue } from "../context/StateProvider";
 import Header from "./Header";
 
 const Dashboard = () => {
+  const [{ userCount }] = useStateValue();
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
       <Header />

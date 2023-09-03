@@ -94,10 +94,12 @@ const DashboardUserCard = ({ data, index }) => {
         {data._id !== user?.user._id && (
           <motion.p
             whileTap={{ scale: 0.75 }}
-            className="text-[10px]  font-semibold text-textColor px-1 bg-purple-200 rounded-sm hover:shadow-md"
+            className="text-[12px]  font-semibold text-teal-700 flex items-center px-1 h-12 w-20 hover:bg-teal-700 hover:text-gray-200 bg-gray-200 rounded-sm hover:shadow-md"
             onClick={() => setIsUpdateRole(true)}
           >
-            {data.role === "admin" ? "Member" : "Admin"}
+            {data.role === "Change to Admin"
+              ? "Change to Student"
+              : "Change to Admin"}
           </motion.p>
         )}
         {isUpdateRole && (
@@ -105,20 +107,20 @@ const DashboardUserCard = ({ data, index }) => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className="absolute z-10 top-6 right-4 rounded-md p-4 flex items-start flex-col gap-4 bg-white shadow-xl"
+            className="absolute z-10 top-12 right-9 rounded-md p-4 flex items-start flex-col gap-6 bg-white shadow-xl"
           >
             <p className="text-textColor text-sm font-semibold">
-              Are you sure do u want to mark the user as{" "}
-              <span>{data.role === "admin" ? "Member" : "Admin"}</span> ?
+              Are you sure to assign this user as{" "}
+              <span>{data.role === "Admin" ? "Student" : "Admin"}</span> ?
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-2">
               <motion.button
                 whileTap={{ scale: 0.75 }}
-                className="outline-none border-none text-sm px-4 py-1 rounded-md bg-blue-200 text-black hover:shadow-md"
+                className="outline-none border-none text-sm px-5 py-1 rounded-md bg-teal-700 text-white hover:shadow-md"
                 onClick={() =>
                   UpdateUserRole(
                     data._id,
-                    data.role === "admin" ? "member" : "admin"
+                    data.role === "Admin" ? "Student" : "Admin"
                   )
                 }
               >
@@ -126,7 +128,7 @@ const DashboardUserCard = ({ data, index }) => {
               </motion.button>
               <motion.button
                 whileTap={{ scale: 0.75 }}
-                className="outline-none border-none text-sm px-4 py-1 rounded-md bg-gray-200 text-black hover:shadow-md"
+                className="outline-none border-none text-sm px-5 py-1 rounded-md bg-gray-200 text-black hover:shadow-md"
                 onClick={() => setIsUpdateRole(false)}
               >
                 No

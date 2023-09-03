@@ -20,4 +20,4 @@ export { default as DashboardHome } from "./DashboardHome";
 export { default as DashboardUser } from "./DashboardUser";
 export { default as DashboardVideo } from "./DashboardVideo";
 export { default as DashboardStorybook } from "./DashboardStorybook";
-// export {default as WelcomeHeader} from "./WelcomeHeader";
+export { default as DashboardUserCard } from "./DashboardUserCard";

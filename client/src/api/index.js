@@ -42,10 +42,12 @@ export const getAllStorybooks = async () => {
   }
 };
 
-export const changingUserRole = async () => {
+export const changingUserRole = async (userId, role) => {
   try {
-    const res = await axios.get(`${baseURL}api/users/changeUserRole`);
-    return res.data;
+    const res = axios.put(`${baseURL}api/users/updateRole/${userId}`, {
+      data: { role: role },
+    });
+    return res;
   } catch (error) {
     return null;
   }
@@ -55,6 +57,42 @@ export const removeUser = async () => {
   try {
     const res = await axios.get(`${baseURL}api/users/removeUser`);
     return res.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const saveNewVideo = async (data) => {
+  try {
+    const res = axios.post(`${baseURL}api/videos/save`, { ...data });
+    return (await res).data.artist;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const saveNewStorybook = async (data) => {
+  try {
+    const res = axios.post(`${baseURL}api/storybooks/save`, { ...data });
+    return (await res).data.artist;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const deleteVideoById = async (id) => {
+  try {
+    const res = axios.delete(`${baseURL}api/videos/delete/${id}`);
+    return res;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const deleteStorybookById = async (id) => {
+  try {
+    const res = axios.delete(`${baseURL}api/storybooks/delete/${id}`);
+    return res;
   } catch (error) {
     return null;
   }
