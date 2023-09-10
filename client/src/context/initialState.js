@@ -4,4 +4,8 @@ export const initialState = {
   allBooks: null,
   allquiz: null,
   allVideos: null,
+  videoFilter:null,
+  filterTerm: "all",
+  levelFilter:null,
+  categoryFilter:null,
 };

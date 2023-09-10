@@ -21,3 +21,5 @@ export { default as DashboardUser } from "./DashboardUser";
 export { default as DashboardVideo } from "./DashboardVideo";
 export { default as DashboardStorybook } from "./DashboardStorybook";
 export { default as DashboardUserCard } from "./DashboardUserCard";
+export { default as VideoDisplay } from "./VideoDisplay";
+export { default as DashboardNewVideo } from "./DashboardNewVideo";

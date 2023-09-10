@@ -6,6 +6,7 @@ import DashboardStorybook from "./DashboardStorybook";
 import DashboardVideo from "./DashboardVideo";
 import DashboardHome from "./DashboardHome";
 import DashboardUser from "./DashboardUser";
+import DashboardNewVideo from "./DashboardNewVideo";
 import { useStateValue } from "../context/StateProvider";
 import Header from "./Header";
 
@@ -16,15 +17,13 @@ const Dashboard = () => {
       <Header />
 
       <div className="w-[60%] my-2 p-4 flex items-center justify-evenly">
-        {/* prettier-ignore */}
+        
         <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-textColor" /></NavLink>
-        {/* prettier-ignore */}
+        
         <NavLink to={"/dashboard/user"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Users </NavLink>
 
-        {/* prettier-ignore */}
         <NavLink to={"/dashboard/videos"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Videos </NavLink>
 
-        {/* prettier-ignore */}
         <NavLink to={"/dashboard/storybooks"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Storybooks </NavLink>
       </div>
       <div className="my-4 w-full p-4">
@@ -33,6 +32,7 @@ const Dashboard = () => {
           <Route path="/user" element={<DashboardUser />} />
           <Route path="/videos" element={<DashboardVideo />} />
           <Route path="/storybooks" element={<DashboardStorybook />} />
+          <Route path="/newVideo" element={<DashboardNewVideo />} />
         </Routes>
       </div>
     </div>
