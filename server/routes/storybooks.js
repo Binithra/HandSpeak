@@ -8,6 +8,7 @@ router.post("/save", async (req, res) => {
     name: req.body.name,
     imageURL: req.body.imageURL,
     bookURL: req.body.bookURL,
+    level:req.body.level,
     category: req.body.category,
   });
 
@@ -73,6 +74,7 @@ router.put("/update/:id", async (req, res) => {
         name: req.body.name,
         imageURL: req.body.imageURL,
         bookURL: req.body.bookURL,
+        level:req.body.level,
         category: req.body.category,
       },
       options

@@ -8,6 +8,7 @@ router.post("/save", async (req, res) => {
     name: req.body.name,
     imageURL: req.body.imageURL,
     videoURL: req.body.videoURL,
+    level:req.body.level,
     category: req.body.category,
   });
 
@@ -39,7 +40,7 @@ router.get("/getAll", async (req, res) => {
 
   const data = await video.find(options);
   if (data) {
-    return res.status(200).send({ success: true, video: data });
+    return res.status(200).send({ success: true, videos: data });
   } else {
     return res.status(400).send({ success: false, msg: "Data not found" });
   }
@@ -73,6 +74,7 @@ router.put("/update/:id", async (req, res) => {
         name: req.body.name,
         imageURL: req.body.imageURL,
         videoURL: req.body.videoURL,
+        level:req.body.level,
         category: req.body.category,
       },
       options

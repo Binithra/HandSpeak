@@ -65,7 +65,7 @@ export const removeUser = async (userId) => {
 export const saveNewVideo = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/videos/save`, { ...data });
-    return (await res).data.artist;
+    return (await res).data.savedVideo;
   } catch (error) {
     return null;
   }
@@ -74,7 +74,7 @@ export const saveNewVideo = async (data) => {
 export const saveNewStorybook = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/storybooks/save`, { ...data });
-    return (await res).data.artist;
+    return (await res).data.savedstorybooks;
   } catch (error) {
     return null;
   }

@@ -10,13 +10,13 @@ import {VideoDisplay} from '../components/VideoDisplay'
 const DashboardVideo=()=> {
   const [videoFilter, setVideoFilter] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-  const[{allVideos},dispath] = useStateValue()
+  const[{allVideos},dispatch] = useStateValue()
 
   useEffect(()=>{
     if(!allVideos){
       getAllVideos().then((data)=>{
         console.log(data.video);
-        dispath({
+        dispatch({
           type:actionType.SET_ALL_VIDEOS,
           allVideos:data.video,
         })

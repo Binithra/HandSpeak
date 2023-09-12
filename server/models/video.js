@@ -16,6 +16,10 @@ const videoSchema = mongoose.Schema(
             type:String,
             required:true,
         },
+        level:{
+            type:String,
+            required:true,
+        },
         category:{
             type:String,
             required:true,

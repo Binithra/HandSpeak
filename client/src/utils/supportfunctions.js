@@ -1,5 +1,5 @@
-import { deleteObject, ref } from "firebase/storage";
-import { storage } from "../config/firebase.config";
+// import { deleteObject, ref } from "firebase/storage";
+// import { storage } from "../config/firebase.config";
 
 export const filters = [
   { id: 1, name: "Letters", value: "Letters" },
@@ -12,13 +12,13 @@ export const filters = [
   { id: 8, name: "Colors", value: "Colors" },
 ];
 
-export const levelFilter = [
+export const filterByLevel = [
   { id: 1, name: "Beginner", value: "Beginner" },
   { id: 2, name: "Intermediate", value: "Intermediate" },
   { id: 3, name: "Advanced", value: "Advanced" },
 ];
 
-// export const deleteAnObject = (referenceUrl) => {
+// export const deleteFileObject = (referenceUrl) => {
 //   const deleteRef = ref(storage, referenceUrl);
 //   deleteObject(deleteRef)
 //     .then(() => {
