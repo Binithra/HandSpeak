@@ -6,11 +6,14 @@ import DashboardStorybook from "./DashboardStorybook";
 import DashboardVideo from "./DashboardVideo";
 import DashboardHome from "./DashboardHome";
 import DashboardUser from "./DashboardUser";
+import DashboardNewStorybook from "./DashboardNewStorybook";
 import DashboardNewVideo from "./DashboardNewVideo";
 import { useStateValue } from "../context/StateProvider";
 import Header from "./Header";
+import Alert from "./Alert";
 
 const Dashboard = () => {
+  const [{alertType},dispatch] = useStateValue();
   const [{ userCount }] = useStateValue();
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
@@ -32,9 +35,11 @@ const Dashboard = () => {
           <Route path="/user" element={<DashboardUser />} />
           <Route path="/videos" element={<DashboardVideo />} />
           <Route path="/storybooks" element={<DashboardStorybook />} />
+          <Route path="/newStorybook" element={<DashboardNewStorybook />} />
           <Route path="/newVideo" element={<DashboardNewVideo />} />
         </Routes>
       </div>
+      {alertType && (<Alert type = {alertType} />)}
     </div>
   );
 };

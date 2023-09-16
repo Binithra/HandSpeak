@@ -8,4 +8,5 @@ export const initialState = {
   filterTerm: "all",
   levelFilter:null,
   categoryFilter:null,
+  alertType:null,
 };

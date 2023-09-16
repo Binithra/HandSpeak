@@ -8,6 +8,8 @@ export const actionType = {
   SET_FILTER_TERM: "SET_FILTER_TERM",
   SET_CATEGORY_FILTER: "SET_CATEGORY_FILTER",
   SET_LEVEL_FILTER: "SET_LEVEL_FILTER",
+
+  SET_ALERT_TYPE:"SET_ALERT_TYPE",
 }
 
 const reducer = (state, action) => {
@@ -62,6 +64,12 @@ const reducer = (state, action) => {
         return {
           ...state,
           levelFilter: action.levelFilter,
+        };
+
+        case actionType.SET_ALERT_TYPE:
+        return {
+          ...state,
+          alertType: action.alertType,
         };
 
 

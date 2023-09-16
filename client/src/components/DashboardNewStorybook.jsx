@@ -12,32 +12,46 @@ import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { storage } from "../config/firebase.config";
 import { useStateValue } from "../context/StateProvider";
-import { getAllVideos, saveNewVideo } from "../api";
+import { getAllStorybooks, saveNewStorybook } from "../api";
 import { actionType } from "../context/reducer";
 import { filterByLevel, filters } from "../utils/supportfunctions";
 import { IoMusicalNote } from "react-icons/io5";
 import FilterButtons from "./FilterButtons";
-// import AlertSuccess from "./AlertSuccess";
-// import AlertError from "./AlertError";
 
-const DashboardNewVideo = () => {
-  const [videoName, setVideoName] = useState("");
-  const [videoImageCover, setVideoImageCover] = useState(null);
-  const [videoImageUrl, setVideoImageUrl] = useState(null);
+const DashboardNewStorybook = () => {
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      // Ensure the selected file is a PDF 
+      if (selectedFile.type === "application/pdf") {
+        setBookImageCover(URL.createObjectURL(selectedFile));
+      } else {
+        alert("Please select a PDF file.");
+      }
+    }
+  };
+
+  //story book image cover
+  const [storybookName, setStorybookName] = useState("");
+  const [storybookImageCover, setStorybookImageCover] = useState(null);
+  const [storybookImageUrl, setStorybookImageUrl] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
-  const [audioImageCover, setAudioImageCover] = useState(null);
-  const [audioUploadingProgress, setAudioUploadingProgress] = useState(0);
-  const [isAudioLoading, setIsAudioLoading] = useState(false);
-  const [{ allVideos, filterTerm, levelFilter }, dispatch] = useStateValue();
+  // the book
+  const [bookImageCover, setBookImageCover] = useState(null);
+  const [bookUploadingProgress, setBookUploadingProgress] = useState(0);
+  const [isbookLoading, setIsBookLoading] = useState(false);
+  const [{ allBooks, filterTerm, levelFilter,alertType }, dispatch] = useStateValue();
 
   useEffect(() => {
-    if (!allVideos) {
-      getAllVideos().then((data) => {
+    if (!allBooks) {
+      getAllStorybooks().then((data) => {
         dispatch({
-          type: actionType.SET_ALL_VIDEOS,
-          allVideos: data.videos,
+          type: actionType.SET_ALL_BOOKS,
+          allBooks: data.storybooks,
         });
       });
     }
@@ -46,45 +60,77 @@ const DashboardNewVideo = () => {
   const deleteFileObject = (url, isImage) => {
     if (isImage) {
       setIsImageLoading(true);
-      setIsAudioLoading(true);
+      setIsBookLoading(true);
+      
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
-      setVideoImageCover(null);
-      setAudioImageCover(null);
+    
+      setStorybookImageCover(null);
+      setBookImageCover(null);
       setIsImageLoading(false);
-      setIsAudioLoading(false);
+      setIsBookLoading(false);
+      
     });
+    dispatch({
+      type:actionType.SET_ALERT_TYPE,
+      alertType:"success"
+    })
+    setInterval(() => {
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+      alertType:null
+      }) 
+    }, 4000);
   };
 
-  const saveVideo = () => {
-    if (!videoImageCover || !audioImageCover) {
-      //throw the alert
+  const saveStorybook = () => {
+    if (!storybookImageCover || bookImageCover) {
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"error"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
     } else {
-      setIsAudioLoading(true);
+      setIsBookLoading(true);
       setIsImageLoading(true);
 
       const data = {
-        name: videoName,
-        imageURL: videoImageCover,
-        videoURL: audioImageCover,
+        name: storybookName,
+        imageURL: storybookImageCover,
+        bookURL: bookImageCover,
         level: levelFilter,
         category: filterTerm,
       };
-      saveNewVideo(data).then((res) => {
-        getAllVideos().then((videos) => {
+      saveNewStorybook(data).then((res) => {
+        getAllStorybooks().then((storybooks) => {
           dispatch({
-            type: actionType.SET_ALL_VIDEOS,
-            allVideos: videos.videos,
+            type: actionType.SET_ALL_BOOKS,
+            allBooks: storybooks.storybooks,
           });
         });
       });
-
-      setVideoName(null);
-      setIsAudioLoading(false);
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"error"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
+        
+      setStorybookName("");
+      setIsBookLoading(false);
       setIsImageLoading(false);
-      setVideoImageCover(null);
-      setAudioImageCover(null);
+      setStorybookImageCover(null);
+      setBookImageCover(null);
       dispatch({ type: actionType.SET_LEVEL_FILTER, levelFilter: null });
       dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
     }
@@ -94,10 +140,10 @@ const DashboardNewVideo = () => {
     <div className="flex  flex-col items-center justify-center p-4 border border-gray-300 gap-4 rounded-md">
       <input
         type="text"
-        placeholder="Type video name..."
+        placeholder="Type book name..."
         className="w-full p-3 rounded-md text-base font-regular text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
-        value={videoName}
-        onChange={(e) => setVideoName(e.target.value)}
+        value={storybookName}
+        onChange={(e) => setStorybookName(e.target.value)}
       />
 
       <div className="flex gap-8">
@@ -108,9 +154,9 @@ const DashboardNewVideo = () => {
         {isImageLoading && <FileLoader progress={imageUploadProgress} />}
         {!isImageLoading && (
           <>
-            {!videoImageCover ? (
+            {!storybookImageCover ? (
               <FileUploader
-                updateState={setVideoImageCover}
+                updateState={setStorybookImageCover}
                 setProgress={setImageUploadProgress}
                 isLoading={setIsImageLoading}
                 isImage={true}
@@ -118,7 +164,7 @@ const DashboardNewVideo = () => {
             ) : (
               <div className="relative w-full h-full overflow-hidden rounded-md">
                 <img
-                  src={videoImageCover}
+                  src={storybookImageCover}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -126,7 +172,7 @@ const DashboardNewVideo = () => {
                   type="button"
                   className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                   onClick={() => {
-                    deleteFileObject(videoImageCover, true);
+                    deleteFileObject(storybookImageCover, true);
                   }}
                 >
                   <MdDelete className="text-white " />
@@ -137,49 +183,61 @@ const DashboardNewVideo = () => {
         )}
       </div>
 
-      {/* Audio file uploading */}
+      {/* Book uploading */}
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
-        {isAudioLoading && <FileLoader progress={audioUploadingProgress} />}
-        {!isAudioLoading && (
+        {isbookLoading && <FileLoader progress={bookUploadingProgress} />}
+        {!isbookLoading && (
           <>
-            {!audioImageCover ? (
+            {!bookImageCover ? (
               <FileUploader
-                updateState={setAudioImageCover}
-                setProgress={setAudioUploadingProgress}
-                isLoading={setIsAudioLoading}
+                updateState={setBookImageCover}
+                setProgress={setBookUploadingProgress}
+                isLoading={setIsBookLoading}
                 isImage={false}
               />
             ) : (
               <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-md">
-                <video
-                  src={audioImageCover}
-                  controls
-                  className="w-full h-full object-cover"
-                ></video>
-                <button
-                  type="button"
-                  className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
-                  onClick={() => {
-                    deleteFileObject(audioImageCover, false);
-                  }}
-                >
-                  <MdDelete className="text-white " />
-                </button>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  id="pdf-upload"
+                  style={{ display: "none" }}
+                />
+                <label htmlFor="pdf-upload">
+                  <button
+                    type="button"
+                    className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
+                    onClick={() => {
+                      deleteFileObject(bookImageCover, false);
+                    }}
+                  >
+                    <MdDelete className="text-white " />
+                  </button>
+                </label>
+                {bookImageCover && (
+                  <embed
+                    src={bookImageCover}
+                    type="application/pdf"
+                    width="100%"
+                    height="500px"
+                  />
+                )}
               </div>
             )}
           </>
         )}
       </div>
       <div className="flex items-center justify-center w-60 p-4">
-        {isImageLoading || isAudioLoading ? (
+        {isImageLoading || isbookLoading ? (
           <DisabledButton />
         ) : (
           <motion.button
             whileTap={{ scale: 0.75 }}
             className="px-8 py-2 w-full text-white rounded-md bg-red-600 hover:shadow-lg"
-            onClick={saveVideo}
+            onClick={saveStorybook}
           >
-            Save video
+            Save Storybook
           </motion.button>
         )}
       </div>
@@ -192,7 +250,7 @@ export const DisabledButton = () => {
     <button
       disabled
       type="button"
-      className="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 inline-flex items-center"
+      className="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 inline-flex items-center"
     >
       <svg
         role="status"
@@ -239,7 +297,7 @@ export const FileUploader = ({
     const uploadedFile = e.target.files[0];
     const storageRef = ref(
       storage,
-      `${isImage ? "Images" : "Video"}/${Date.now()}-${uploadedFile.name}`
+      `${isImage ? "BookCover" : "Book"}/${Date.now()}-${uploadedFile.name}`
     );
     const uploadTask = uploadBytesResumable(storageRef, uploadedFile);
 
@@ -268,14 +326,14 @@ export const FileUploader = ({
             <BiCloudUpload />
           </p>
           <p className="text-lg">
-            Click to upload {isImage ? "an image for the video" : "an video"}
+            Click to upload {isImage ? "an image for the book" : "a book"}
           </p>
         </div>
       </div>
       <input
         type="file"
         name="upload-file"
-        accept={`${isImage ? "image/*" : "video/*"}`}
+        accept={`${isImage ? "bookcover/*" : "book/*"}`}
         className={"w-0 h-0"}
         onChange={uploadFile}
       />
@@ -283,4 +341,4 @@ export const FileUploader = ({
   );
 };
 
-export default DashboardNewVideo;
+export default DashboardNewStorybook;

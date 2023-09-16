@@ -15,10 +15,10 @@ const DashboardVideo=()=> {
   useEffect(()=>{
     if(!allVideos){
       getAllVideos().then((data)=>{
-        console.log(data.video);
+        console.log(data.videos);
         dispatch({
           type:actionType.SET_ALL_VIDEOS,
-          allVideos:data.video,
+          allVideos:data.videos,
         })
       })
     }
@@ -51,7 +51,7 @@ const DashboardVideo=()=> {
         </i>
       </div>
           {/* Main Container */}
-          <div className="relative w-full my-4 p-4 border border-gray-300 rounded-md">
+          <div className="relative w-full my-4 p-4 py-16 border border-gray-300 rounded-md">
             {/* The count */}
             <div className="absolute top-4 left-4">
               <p className="text-xl font-bold"><span className="text-sm font-semibold text-black">Count : </span>
