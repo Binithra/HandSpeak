@@ -4,16 +4,16 @@ const router = require("express").Router();
 const storybooks = require("../models/storybooks");
 
 router.post("/save", async (req, res) => {
-  const newstorybooks = storybooks({
+  const newStorybook = storybooks({
     name: req.body.name,
     imageURL: req.body.imageURL,
     bookURL: req.body.bookURL,
-    level:req.body.level,
+    // level:req.body.level,
     category: req.body.category,
   });
 
   try {
-    const savedstorybooks = await newstorybooks.save();
+    const savedstorybooks = await newStorybook.save();
     return res.status(200).send({ success: true, storybooks: savedstorybooks });
   } catch (error) {
     return res.status(400).send({ success: false, msg: error });
@@ -74,7 +74,7 @@ router.put("/update/:id", async (req, res) => {
         name: req.body.name,
         imageURL: req.body.imageURL,
         bookURL: req.body.bookURL,
-        level:req.body.level,
+        // level:req.body.level,
         category: req.body.category,
       },
       options

@@ -19,6 +19,7 @@ import {
   DashboardStorybook,
   DashboardVideo,
   DashboardUserCard,
+  VideoPlayer,
 } from "./components";
 import { app } from "./config/firebase.config";
 
@@ -29,7 +30,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { validateUser, getAllStorybooks, getAllVideos } from "./api";
 import { useStateValue } from "./context/StateProvider";
 import { actionType } from "./context/reducer";
@@ -38,7 +39,7 @@ function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
 
-  const [{ user, allBooks, allVideos }, dispatch] = useStateValue();
+  const [{ user, isVideoPlaying, allBooks, allVideos }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(false);
 
   const [auth, setAuth] = useState(
@@ -120,6 +121,16 @@ function App() {
           <Route path="/DashboardStorybook" element={<DashboardStorybook />} />
           <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
         </Routes>
+
+        {isVideoPlaying &&(
+          <motion.div
+          initial={{opacity :0, y:50}}
+          animate={{opacity:1,y:0}}
+          className={`fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`} >
+            <VideoPlayer />
+
+          </motion.div>
+        )}
       </div>
     </AnimatePresence>
   );

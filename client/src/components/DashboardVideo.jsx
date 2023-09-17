@@ -5,9 +5,9 @@ import { IoAdd, IoPause, IoPlay, IoTrash } from "react-icons/io5";
 import { useStateValue } from "../context/StateProvider";
 import { getAllVideos } from "../api";
 import {actionType} from '../context/reducer'
-import {VideoDisplay} from '../components/VideoDisplay'
+import {CardDisplay} from './CardDisplay'
 
-const DashboardVideo=()=> {
+export const DashboardVideo=()=> {
   const [videoFilter, setVideoFilter] = useState("");
   const [isFocus, setIsFocus] = useState(false);
   const[{allVideos},dispatch] = useStateValue()
@@ -68,7 +68,7 @@ const DashboardVideo=()=> {
     return(
       <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
         {data && data.map((video,i)=>(
-          <VideoDisplay key={video._id} data={video} index={i}/>
+          <CardDisplay key={video._id} data={video} index={i} type="video"/>
         ))}
       </div>
     )

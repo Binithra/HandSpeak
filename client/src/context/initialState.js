@@ -9,4 +9,6 @@ export const initialState = {
   levelFilter:null,
   categoryFilter:null,
   alertType:null,
+  isVideoPlaying :false,
+  videoIndex:0,
 };

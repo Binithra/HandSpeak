@@ -47,19 +47,49 @@ const DashboardNewVideo = () => {
     if (isImage) {
       setIsImageLoading(true);
       setIsAudioLoading(true);
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"success"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"error"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
       setVideoImageCover(null);
       setAudioImageCover(null);
       setIsImageLoading(false);
       setIsAudioLoading(false);
     });
+    
   };
 
   const saveVideo = () => {
     if (!videoImageCover || !audioImageCover) {
-      //throw the alert
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"error"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
     } else {
       setIsAudioLoading(true);
       setIsImageLoading(true);
@@ -79,6 +109,16 @@ const DashboardNewVideo = () => {
           });
         });
       });
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"success"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
 
       setVideoName(null);
       setIsAudioLoading(false);

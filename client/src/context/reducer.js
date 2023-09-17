@@ -10,6 +10,8 @@ export const actionType = {
   SET_LEVEL_FILTER: "SET_LEVEL_FILTER",
 
   SET_ALERT_TYPE:"SET_ALERT_TYPE",
+  SET_ISVIDEO_PLAYING : "SET_ISVIDEO_PLAYING",
+  SET_VIDEO_INDEX :"SET_VIDEO_INDEX"
 }
 
 const reducer = (state, action) => {
@@ -71,6 +73,17 @@ const reducer = (state, action) => {
           ...state,
           alertType: action.alertType,
         };
+
+        case actionType.SET_ISVIDEO_PLAYING:
+          return {
+            ...state,
+            isVideoPlaying: action.isVideoPlaying,
+          };
+          case actionType.SET_VIDEO_INDEX:
+            return {
+              ...state,
+              videoIndex: action.videoIndex,
+            };
 
 
     default:

@@ -20,18 +20,18 @@ import FilterButtons from "./FilterButtons";
 
 const DashboardNewStorybook = () => {
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
+  // const handleFileChange = (event) => {
+  //   const selectedFile = event.target.files[0];
 
-    if (selectedFile) {
-      // Ensure the selected file is a PDF 
-      if (selectedFile.type === "application/pdf") {
-        setBookImageCover(URL.createObjectURL(selectedFile));
-      } else {
-        alert("Please select a PDF file.");
-      }
-    }
-  };
+  //   if (selectedFile) {
+  //     // Ensure the selected file is a PDF 
+  //     if (selectedFile.type === "application/pdf") {
+  //       setBookImageCover(URL.createObjectURL(selectedFile));
+  //     } else {
+  //       alert("Please select a PDF file.");
+  //     }
+  //   }
+  // };
 
   //story book image cover
   const [storybookName, setStorybookName] = useState("");
@@ -44,14 +44,15 @@ const DashboardNewStorybook = () => {
   const [bookImageCover, setBookImageCover] = useState(null);
   const [bookUploadingProgress, setBookUploadingProgress] = useState(0);
   const [isbookLoading, setIsBookLoading] = useState(false);
-  const [{ allBooks, filterTerm, levelFilter,alertType }, dispatch] = useStateValue();
+  const [{ allBooks, filterTerm, alertType }, dispatch] = useStateValue();
+  // const [{ allBooks, filterTerm, levelFilter,alertType }, dispatch] = useStateValue();
 
   useEffect(() => {
     if (!allBooks) {
       getAllStorybooks().then((data) => {
         dispatch({
           type: actionType.SET_ALL_BOOKS,
-          allBooks: data.storybooks,
+          allBooks: data.data,
         });
       });
     }
@@ -61,27 +62,37 @@ const DashboardNewStorybook = () => {
     if (isImage) {
       setIsImageLoading(true);
       setIsBookLoading(true);
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"success"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
       
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
-    
+      dispatch({
+        type:actionType.SET_ALERT_TYPE,
+        alertType:"error"
+      })
+      setInterval(() => {
+        dispatch({
+          type:actionType.SET_ALERT_TYPE,
+        alertType:null
+        }) 
+      }, 4000);
       setStorybookImageCover(null);
       setBookImageCover(null);
       setIsImageLoading(false);
       setIsBookLoading(false);
       
     });
-    dispatch({
-      type:actionType.SET_ALERT_TYPE,
-      alertType:"success"
-    })
-    setInterval(() => {
-      dispatch({
-        type:actionType.SET_ALERT_TYPE,
-      alertType:null
-      }) 
-    }, 4000);
+  
   };
 
   const saveStorybook = () => {
@@ -104,7 +115,7 @@ const DashboardNewStorybook = () => {
         name: storybookName,
         imageURL: storybookImageCover,
         bookURL: bookImageCover,
-        level: levelFilter,
+        // level: levelFilter,
         category: filterTerm,
       };
       saveNewStorybook(data).then((res) => {
@@ -117,7 +128,7 @@ const DashboardNewStorybook = () => {
       });
       dispatch({
         type:actionType.SET_ALERT_TYPE,
-        alertType:"error"
+        alertType:"success"
       })
       setInterval(() => {
         dispatch({
@@ -131,7 +142,7 @@ const DashboardNewStorybook = () => {
       setIsImageLoading(false);
       setStorybookImageCover(null);
       setBookImageCover(null);
-      dispatch({ type: actionType.SET_LEVEL_FILTER, levelFilter: null });
+      // dispatch({ type: actionType.SET_LEVEL_FILTER, levelFilter: null });
       dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
     }
   };
@@ -148,7 +159,7 @@ const DashboardNewStorybook = () => {
 
       <div className="flex gap-8">
         <FilterButtons filterData={filters} flag={"Category"} />
-        <FilterButtons filterData={filterByLevel} flag={"Level"} />
+        {/* <FilterButtons filterData={filterByLevel} flag={"Level"} /> */}
       </div>
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {isImageLoading && <FileLoader progress={imageUploadProgress} />}
@@ -197,14 +208,20 @@ const DashboardNewStorybook = () => {
               />
             ) : (
               <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-md">
-                <input
+                <video
+                  src={bookImageCover}
+                  controls
+                  className="w-full h-full object-cover"
+                ></video>
+                
+                {/* <input
                   type="file"
                   accept=".pdf"
                   onChange={handleFileChange}
                   id="pdf-upload"
                   style={{ display: "none" }}
                 />
-                <label htmlFor="pdf-upload">
+                <label htmlFor="pdf-upload"> */}
                   <button
                     type="button"
                     className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
@@ -214,15 +231,15 @@ const DashboardNewStorybook = () => {
                   >
                     <MdDelete className="text-white " />
                   </button>
-                </label>
-                {bookImageCover && (
+                {/* </label> */}
+                {/* {bookImageCover && (
                   <embed
                     src={bookImageCover}
                     type="application/pdf"
                     width="100%"
                     height="500px"
                   />
-                )}
+                )} */}
               </div>
             )}
           </>

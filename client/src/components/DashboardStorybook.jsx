@@ -5,7 +5,7 @@ import { IoAdd} from "react-icons/io5";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks } from "../api";
 import {actionType} from '../context/reducer'
-import {BookDisplay} from './BookDisplay'
+import {CardDisplay} from './CardDisplay'
 
 const DashboardStorybook=()=> {
   const [storybookFilter, setStorybookFilter] = useState("");
@@ -15,7 +15,7 @@ const DashboardStorybook=()=> {
   useEffect(()=>{
     if(!allBooks){
         getAllStorybooks().then((data)=>{
-        // console.log(data.storybooks);
+        console.log(data.storybooks);
         dispatch({
           type:actionType.SET_ALL_BOOKS,
           allBooks:data.storybooks,
@@ -42,7 +42,7 @@ const DashboardStorybook=()=> {
           } rounded-md bg-transparent outline-none duration-150 transition-all ease-in-out text-base text-textColor font-semibold`}
           value={storybookFilter}
           onChange={(e) => setStorybookFilter(e.target.value)}
-          onBlur={() => {setIsFocus(false);}}
+          onBlur={() => setIsFocus(false)}
           onFocus={() => setIsFocus(true)}
         />
 
@@ -68,7 +68,7 @@ const DashboardStorybook=()=> {
     return(
       <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
         {data && data.map((storybooks,i)=>(
-          <BookDisplay key={storybooks._id} data={storybooks} index={i}/>
+          <CardDisplay key={storybooks._id} data={storybooks} index={i} type="storybook"/>
         ))}
       </div>
     )
