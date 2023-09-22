@@ -110,7 +110,7 @@ const DashboardNewStorybook = () => {
 
       const data = {
         name: storybookName,
-        imageURL: storybookImageCover,
+        coverURL: storybookImageCover,
         bookURL: bookImageCover,
         level: levelFilter,
         category: filterTerm,

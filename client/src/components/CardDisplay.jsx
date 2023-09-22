@@ -19,7 +19,7 @@ export const CardDisplay = ({ data, index, type }) => {
   const deleteData = (data) => {
     //Storybook deleting
     if (type === "storybook") {
-      const deleteRef = ref(storage, data.imageURL);
+      const deleteRef = ref(storage, data.coverURL);
       deleteObject(deleteRef).then(() => {});
 
       deleteStorybookById(data._id).then((res) => {
@@ -113,12 +113,12 @@ export const CardDisplay = ({ data, index, type }) => {
 
   return (
     <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
-    onClick={type ==="video" && addToContext}
+    onClick={type ==="video" || "storybooks" && addToContext}
     >
       <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
-          src={data.imageURL}
+          src={data.imageURL || data.coverURL}
           className="w-full h-full rounded-lg object-cover"
         />
       </div>
@@ -166,6 +166,8 @@ export const CardDisplay = ({ data, index, type }) => {
         </motion.div>
       )}
     </motion.div>
+
+    
   );
 };
 

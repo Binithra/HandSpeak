@@ -6,7 +6,7 @@ const storybooksSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    imageURL: {
+    coverURL: {
       type: String,
       required: true,
     },

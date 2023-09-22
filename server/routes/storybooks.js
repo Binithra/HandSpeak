@@ -6,9 +6,9 @@ const storybooks = require("../models/storybooks");
 router.post("/save", async (req, res) => {
   const newStorybook = storybooks({
     name: req.body.name,
-    imageURL: req.body.imageURL,
+    coverURL: req.body.coverURL,
     bookURL: req.body.bookURL,
-    // level:req.body.level,
+    level:req.body.level,
     category: req.body.category,
   });
 
@@ -72,9 +72,9 @@ router.put("/update/:id", async (req, res) => {
       filter,
       {
         name: req.body.name,
-        imageURL: req.body.imageURL,
+        coverURL: req.body.coverURL,
         bookURL: req.body.bookURL,
-        // level:req.body.level,
+        level:req.body.level,
         category: req.body.category,
       },
       options
