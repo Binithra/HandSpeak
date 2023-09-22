@@ -2,14 +2,15 @@
 // import { storage } from "../config/firebase.config";
 
 export const filters = [
-  { id: 1, name: "Letters", value: "Letters" },
-  { id: 2, name: "Number", value: "Number" },
-  { id: 3, name: "People", value: "People" },
-  { id: 4, name: "Fruits", value: "Fruits" },
-  { id: 5, name: "Places", value: "Places" },
-  { id: 6, name: "Greetings", value: "Greetings" },
-  { id: 7, name: "Daily Usage", value: "Daily Usage" },
-  { id: 8, name: "Colors", value: "Colors" },
+  { id: 1, name: "Colors", value: "Colors" },
+  { id: 2, name: "Daily Usage", value: "Daily Usage" },
+  { id: 3, name: "Fruits", value: "Fruits" },
+  { id: 4, name: "Greetings", value: "Greetings" },
+  { id: 5, name: "Letters", value: "Letters" },
+  { id: 6, name: "Number", value: "Number" },
+  { id: 7, name: "Places", value: "Places" },
+  { id: 8, name: "People", value: "People" },
+  
 ];
 
 export const filterByLevel = [

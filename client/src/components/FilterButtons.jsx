@@ -50,10 +50,7 @@ const FilterButtons = ({filterData,flag}) => {
               key={data.name}
               className="flex items-center gap-2 px-4 py-1 hover:bg-gray-200"
               onClick={()=> updateFilterButton(data.name)} >
-                {(flag === "Category") && (
-                    <img
-                    src={data.imageURL} className='w-8 min-w-[32px] h-8 rounded-full object-cover'/>
-                )}
+                
                  <p className="w-full">
                 {data.name.length > 15
                   ? `${data.name.slice(0, 14)}...`

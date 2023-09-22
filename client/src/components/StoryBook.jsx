@@ -1,7 +1,18 @@
-import React from "react";
+import React,  { useState, useEffect } from "react";
 import Header from "./Header";
 import { Con5, Con4, Con } from "../assets/img/index";
 import { NavLink } from "react-router-dom";
+// import { Button } from "./components/Button";
+// import { Modal } from "./components/Modal";
+import {getDownloadURL, ref} from 'firebase/storage'
+import { storage } from "../config/firebase.config";
+
+export const ResumeButton = ({setModal}) => {
+  return (
+    <button className='btn btn-primary btn-md'
+    onClick={()=>setModal(true)}>View my Resume</button>
+  )
+}
 
 const StoryBook = () => {
   return (
@@ -20,6 +31,15 @@ const StoryBook = () => {
 };
 
 export const Bookcover1 = () => {
+  const [modal, setModal]=useState(false);
+  const [resume, setResume]=useState(null);
+
+  useEffect(()=>{
+    getDownloadURL(ref(storage, 'https://firebasestorage.googleapis.com/v0/b/learningplatform-1c912.appspot.com/o/Book%2F1694937278229-DATA%20COLLECTION%20FORM.pdf?alt=media&token=f672364c-9d22-4fe4-b351-8164b4f1c181')).then((url)=>{
+      setResume(url);
+    })
+  },[])
+
   return (
     <div className="card card-compact w-80 bg-black shadow-xl">
       <figure>
@@ -34,7 +54,12 @@ export const Bookcover1 = () => {
         <p className="text-white">කතෘ - පිලිප් පෙරේරා</p>
         <div className="card-actions justify-end">
           <NavLink to={"/QuizScreen2"}>
-            <button className="btn btn-primary">කියවන්න</button>
+          <ResumeButton />
+
+      {/* {modal===true&&(
+        <Modal setModal={setModal} resume={resume}/>
+      )} */}
+
           </NavLink>
         </div>
       </div>
