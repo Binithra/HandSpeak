@@ -116,6 +116,9 @@ export const VideoCard = ({videos , index}) => {
 
   }
 
+  //https://www.npmjs.com/package/react-player
+  // Remove the Contect and add new player
+
   return (
     <div className="card  w-96 bg-base-100 shadow-xl" onClick={addToContext}>
       <figure>
