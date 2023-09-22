@@ -46,6 +46,20 @@ router.get("/getAll", async (req, res) => {
   }
 });
 
+router.get("/getCato/:cato", async (req, res) => {
+  // return res.json("getting all");
+  const options = {
+    category: req.params.cato,
+  };
+
+  const data = await video.find(options);
+  if (data) {
+    return res.status(200).send({ success: true, videos: data });
+  } else {
+    return res.status(400).send({ success: false, msg: "Data not found" });
+  }
+});
+
 router.delete("/delete/:id", async (req, res) => {
   const filter = { _id: req.params.id };
 

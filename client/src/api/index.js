@@ -33,6 +33,15 @@ export const getAllVideos = async () => {
   }
 };
 
+export const getCatoVideos = async (cato) => {
+  try {
+    const res = await axios.get(`${baseURL}api/videos/getCato/${cato}`);
+    return res.data;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const getAllStorybooks = async () => {
   try {
     const res = await axios.get(`${baseURL}api/storybooks/getAll`);

@@ -11,4 +11,5 @@ export const initialState = {
   alertType:null,
   isVideoPlaying :false,
   videoIndex:0,
+  videoCato:null,
 };

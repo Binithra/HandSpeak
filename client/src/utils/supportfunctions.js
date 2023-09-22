@@ -3,7 +3,7 @@
 
 export const filters = [
   { id: 1, name: "Colors", value: "Colors" },
-  { id: 2, name: "Daily Usage", value: "Daily Usage" },
+  { id: 2, name: "Daily Usage", value: "DailyUsage" },
   { id: 3, name: "Fruits", value: "Fruits" },
   { id: 4, name: "Greetings", value: "Greetings" },
   { id: 5, name: "Letters", value: "Letters" },

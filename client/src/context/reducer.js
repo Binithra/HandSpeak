@@ -11,7 +11,8 @@ export const actionType = {
 
   SET_ALERT_TYPE:"SET_ALERT_TYPE",
   SET_ISVIDEO_PLAYING : "SET_ISVIDEO_PLAYING",
-  SET_VIDEO_INDEX :"SET_VIDEO_INDEX"
+  SET_VIDEO_INDEX :"SET_VIDEO_INDEX",
+  SET_VIDEO_CATO : "SET_VIDEO_CATO"
 }
 
 const reducer = (state, action) => {
@@ -83,6 +84,12 @@ const reducer = (state, action) => {
             return {
               ...state,
               videoIndex: action.videoIndex,
+            };
+
+            case actionType.SET_VIDEO_CATO:
+            return {
+              ...state,
+              videoIndex: action.videoCato,
             };
 
 
