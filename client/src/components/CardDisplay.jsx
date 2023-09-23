@@ -112,13 +112,16 @@ export const CardDisplay = ({ data, index, type }) => {
   }
 
   return (
+    
     <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
-    onClick={type ==="video" || "storybooks" && addToContext}
+    // onClick={type ==="video" && addToContext}
     >
       <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
+          onClick={type ==="video" && addToContext} 
+          //this onClick opens the videoPlayer 
           className="w-full h-full rounded-lg object-cover"
         />
       </div>
@@ -151,7 +154,7 @@ export const CardDisplay = ({ data, index, type }) => {
             <motion.button
               className="px-2 py-1 text-sm uppercase bg-teal-300 rounded-md hover:bg-teal-500 cursor-pointer"
               whileTap={{ scale: 0.7 }}
-              onClick={deleteData(data)}
+              onClick={() => deleteData(data)}
             >
               Yes
             </motion.button>
