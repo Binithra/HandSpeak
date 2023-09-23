@@ -3,11 +3,26 @@ import { NavLink } from "react-router-dom";
 import { getCatoVideos } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import {actionType} from '../context/reducer'
+import ReactPlayer from 'react-player'
+import ReactVideoPlayer from "./ReactVideoPlayer";
 
 const VideoScreen = ({cato, closeVideoScreen}) => {
 
   const[{videoCato},dispatch] = useStateValue()
   const [videos, setVideos] = useState([]);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoToPlay, setVideoToPlay] = useState([]);
+
+  const showModal = (video) => {
+    setShowVideoModal(true);
+    setVideoToPlay(video);
+    console.log("video",video);
+
+  }
+
+  const closeModal = () => {
+    setShowVideoModal(false);
+  }
 
 
   useEffect(()=>{
@@ -75,19 +90,14 @@ const VideoScreen = ({cato, closeVideoScreen}) => {
         </div>
       </div>
 
-      <div className="pt-8 ">
-        {videos?.length}</div>
-        {
-          videos &&(
-          videos?.map((videos ,i)=>{
+      {showVideoModal && <ReactVideoPlayer videos={videoToPlay} index={0} closeModal={closeModal}/>}
 
-            return(
-              <VideoCard videos={videos} index={i}  />
-            )
-          }))
-        }
-
-
+      <div className="pt-8 flex flex-wrap gap-4 grid-cols-4">
+        {videos &&
+          videos?.map((videos, i) => {
+            return <VideoCard videos={videos} index={i} openVideo={showModal}/>;
+          })}
+      </div>
     </div>
   );
 };
@@ -95,41 +105,23 @@ const VideoScreen = ({cato, closeVideoScreen}) => {
 
 export default VideoScreen;
 
-export const VideoCard = ({videos , index}) => {
+export const VideoCard = ({videos , index , openVideo}) => {
+  
 
-  const[{isVideoPlaying, videoIndex},dispatch] = useStateValue()
-
-
-  const addToContext=()=>{
-    if(!isVideoPlaying){
-      dispatch({
-        type: actionType.SET_ISVIDEO_PLAYING,
-        isVideoPlaying: true,
-      });
-    }
-    if(videoIndex !== index){
-      dispatch({
-        type: actionType.SET_VIDEO_INDEX,
-        videoIndex: index,
-      });
-    }
-
-  }
-
-  //https://www.npmjs.com/package/react-player
-  // Remove the Contect and add new player
+  const[{isVideoPlaying, videoIndex},dispatch] = useStateValue();
 
   return (
-    <div className="card  w-96 bg-base-100 shadow-xl" onClick={addToContext}>
+    <div className="card w-72 border-2 bg-base-100 shadow-xl hover:shadow-slate-300 cursor-pointer" onClick={() => openVideo(videos)}>
       <figure>
         <img
           src={videos?.imageURL}
           alt="tumbnains"
+          className="w-full h-48 object-cover rounded-t-md hover:scale-110 ease-in duration-150"
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">
-          {videos?.name}
+        <h2 className='font-semibold'>
+          {videos?.name} <br/>
           <div className="badge badge-secondary">{videos?.level}</div>
         </h2>
         <p>Created At - {videos?.createdAt}</p>
@@ -138,3 +130,4 @@ export const VideoCard = ({videos , index}) => {
     </div>
   );
 };
+

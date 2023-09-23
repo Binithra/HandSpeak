@@ -30,3 +30,5 @@ export { default as VideoCreate } from "./VideoCreate";
 export { default as VideoCategory } from "./VideoCategory";
 export { default as DashboardQuiz } from "./DashboardQuiz";
 export { default as FilterButtons } from "./FilterButtons";
+export { default as ReactVideoPlayer } from "./ReactVideoPlayer";
+
