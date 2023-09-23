@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { getCatoVideos } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import {actionType} from '../context/reducer'
-import ReactPlayer from 'react-player'
 import ReactVideoPlayer from "./ReactVideoPlayer";
 
 const VideoScreen = ({cato, closeVideoScreen}) => {
@@ -107,9 +106,6 @@ export default VideoScreen;
 
 export const VideoCard = ({videos , index , openVideo}) => {
   
-
-  const[{isVideoPlaying, videoIndex},dispatch] = useStateValue();
-
   return (
     <div className="card w-72 border-2 bg-base-100 shadow-xl hover:shadow-slate-300 cursor-pointer" onClick={() => openVideo(videos)}>
       <figure>
@@ -125,7 +121,6 @@ export const VideoCard = ({videos , index , openVideo}) => {
           <div className="badge badge-secondary">{videos?.level}</div>
         </h2>
         <p>Created At - {videos?.createdAt}</p>
-        
       </div>
     </div>
   );
