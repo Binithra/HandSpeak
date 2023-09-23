@@ -33,14 +33,14 @@ const Alert = ({ type }) => {
           </div>
         )}
 
-        {type === "fileUploadError" && (
+        {/* {type === "fileUploadError" && (
           <div className="flex items-center justify-center gap-4">
             <BsEmojiFrown className="text-3xl text-primary" />
             <p className="text-xl font-semibold text-primary">
             Please select a PDF file for uploading.
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </motion.div>
   );

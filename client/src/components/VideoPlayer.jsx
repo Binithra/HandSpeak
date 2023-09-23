@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { DefaultPlayer as Video } from "react-html5video";
 import "react-html5video/dist/styles.css";
-import { FaTimes } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
-import { DashboardVideo } from "./DashboardVideo";
+import { IoMdClose } from "react-icons/io";
+import { motion } from "framer-motion";
+import { actionType } from "../context/reducer";
 
 const VideoPlayer = () => {
   const [{ videoIndex, allVideos, isVideoPlaying }, dispatch] = useStateValue();
   const [isPlaylistVisible, setIsPlaylistVisible] = useState(true);
+  const closeVideoPlayer = () => {
+    if (isVideoPlaying) {
+      dispatch({
+        type: actionType.SET_ISVIDEO_PLAYING,
+        isVideoPlaying: false,
+      });
+    }
+  };
 
   return (
     <div className="w-full flex gap-3 overflow-hidden relative">
@@ -56,12 +64,16 @@ const VideoPlayer = () => {
            
 
             <div className="absolute top-2 right-2">
-              <NavLink
+            <motion.i whileTap={{ scale: 0.8 }} onClick={closeVideoPlayer}>
+            <IoMdClose className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
+          </motion.i>
+         
+              {/* <NavLink
                 onClick={"/dashboard/videos"}
                 className="flex items-center px-4 py-3 border rounded-md border-gray-300 hover:border-gray-400 hover:shadow-md cursor-pointer"
               >
                 <FaTimes />
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
           

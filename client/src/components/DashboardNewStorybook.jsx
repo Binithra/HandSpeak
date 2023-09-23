@@ -23,8 +23,8 @@ const DashboardNewStorybook = () => {
   const [storybookName, setStorybookName] = useState("");
   const [storybookImageCover, setStorybookImageCover] = useState(null);
   const [storybookImageUrl, setStorybookImageUrl] = useState(null);
-  const [imageUploadProgress, setImageUploadProgress] = useState(0);
-  const [isImageLoading, setIsImageLoading] = useState(false);
+  const [bookImageUploadProgress, setBookImageUploadProgress] = useState(0);
+  const [isBookImageLoading, setIsBookImageLoading] = useState(false);
 
   // the book
   const [bookImageCover, setBookImageCover] = useState(null);
@@ -60,7 +60,7 @@ const DashboardNewStorybook = () => {
 
   const deleteFileObject = (url, isImage) => {
     if (isImage) {
-      setIsImageLoading(true);
+      setIsBookImageLoading(true);
       setIsBookLoading(true);
       dispatch({
         type: actionType.SET_ALERT_TYPE,
@@ -87,7 +87,7 @@ const DashboardNewStorybook = () => {
       }, 4000);
       setStorybookImageCover(null);
       setBookImageCover(null);
-      setIsImageLoading(false);
+      setIsBookImageLoading(false);
       setIsBookLoading(false);
     });
   };
@@ -96,7 +96,7 @@ const DashboardNewStorybook = () => {
     if (!storybookImageCover || bookImageCover) {
       dispatch({
         type: actionType.SET_ALERT_TYPE,
-        alertType: "error",
+        alertType: "success",
       });
       setInterval(() => {
         dispatch({
@@ -106,7 +106,7 @@ const DashboardNewStorybook = () => {
       }, 4000);
     } else {
       setIsBookLoading(true);
-      setIsImageLoading(true);
+      setIsBookImageLoading(true);
 
       const data = {
         name: storybookName,
@@ -125,7 +125,7 @@ const DashboardNewStorybook = () => {
       });
       dispatch({
         type: actionType.SET_ALERT_TYPE,
-        alertType: "success",
+        alertType: "error",
       });
       setInterval(() => {
         dispatch({
@@ -136,7 +136,7 @@ const DashboardNewStorybook = () => {
 
       setStorybookName(null);
       setIsBookLoading(false);
-      setIsImageLoading(false);
+      setIsBookImageLoading(false);
       setStorybookImageCover(null);
       setBookImageCover(null);
       dispatch({ type: actionType.SET_LEVEL_FILTER, levelFilter: null });
@@ -159,14 +159,14 @@ const DashboardNewStorybook = () => {
         <FilterButtons filterData={filterByLevel} flag={"Level"} />
       </div>
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
-        {isImageLoading && <FileLoader progress={imageUploadProgress} />}
-        {!isImageLoading && (
+        {isBookImageLoading && <FileLoader progress={bookImageUploadProgress} />}
+        {!isBookImageLoading && (
           <>
             {!storybookImageCover ? (
               <FileUploader
                 updateState={setStorybookImageCover}
-                setProgress={setImageUploadProgress}
-                isLoading={setIsImageLoading}
+                setProgress={setBookImageUploadProgress}
+                isLoading={setIsBookImageLoading}
                 isImage={true}
               />
             ) : (
@@ -238,7 +238,7 @@ const DashboardNewStorybook = () => {
         )}
       </div>
       <div className="flex items-center justify-center w-60 p-4">
-        {isImageLoading || isbookLoading ? (
+        {isBookImageLoading || isbookLoading ? (
           <DisabledButton />
         ) : (
           <motion.button
