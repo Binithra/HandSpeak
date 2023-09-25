@@ -31,7 +31,7 @@ const VideoPlayer = () => {
           onCanPlayThrough={() => {
             // Do stuff
           }}
-          className="w-full h-auto"
+          className="w-640px h-360px"
         >
           <track
             label="English"
@@ -67,13 +67,6 @@ const VideoPlayer = () => {
             <motion.i whileTap={{ scale: 0.8 }} onClick={closeVideoPlayer}>
             <IoMdClose className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
           </motion.i>
-         
-              {/* <NavLink
-                onClick={"/dashboard/videos"}
-                className="flex items-center px-4 py-3 border rounded-md border-gray-300 hover:border-gray-400 hover:shadow-md cursor-pointer"
-              >
-                <FaTimes />
-              </NavLink> */}
             </div>
           </div>
           

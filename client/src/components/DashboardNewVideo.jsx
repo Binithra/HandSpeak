@@ -56,7 +56,7 @@ const DashboardNewVideo = () => {
           type:actionType.SET_ALERT_TYPE,
         alertType:null
         }) 
-      }, 4000);
+      }, 8000);
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {

@@ -16,14 +16,14 @@ const storybooksSchema = mongoose.Schema(
       required: true,
     },
     
-    level: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
-    },
+    // level: {
+    //   type: String,
+    //   required: true,
+    // },
+    // category: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );

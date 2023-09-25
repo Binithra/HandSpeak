@@ -93,7 +93,7 @@ const DashboardNewStorybook = () => {
   };
 
   const saveStorybook = () => {
-    if (!storybookImageCover || bookImageCover) {
+    if (!storybookImageCover || !bookImageCover) {
       dispatch({
         type: actionType.SET_ALERT_TYPE,
         alertType: "success",
@@ -112,8 +112,8 @@ const DashboardNewStorybook = () => {
         name: storybookName,
         coverURL: storybookImageCover,
         bookURL: bookImageCover,
-        level: levelFilter,
-        category: filterTerm,
+        // level: levelFilter,
+        // category: filterTerm,
       };
       saveNewStorybook(data).then((res) => {
         getAllStorybooks().then((data) => {
@@ -125,7 +125,7 @@ const DashboardNewStorybook = () => {
       });
       dispatch({
         type: actionType.SET_ALERT_TYPE,
-        alertType: "error",
+        alertType: "success",
       });
       setInterval(() => {
         dispatch({
@@ -154,10 +154,10 @@ const DashboardNewStorybook = () => {
         onChange={(e) => setStorybookName(e.target.value)}
       />
 
-      <div className="flex gap-8">
+      {/* <div className="flex gap-8">
         <FilterButtons filterData={filters} flag={"Category"} />
         <FilterButtons filterData={filterByLevel} flag={"Level"} />
-      </div>
+      </div> */}
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {isBookImageLoading && <FileLoader progress={bookImageUploadProgress} />}
         {!isBookImageLoading && (
@@ -305,23 +305,6 @@ export const FileUploader = ({
     isLoading(true);
     const uploadedFile = e.target.files[0];
 
-    // if (isImage) {
-    //      // Check if the selected file is an image (e.g., JPEG, PNG, etc.)
-    //      if (!uploadedFile.type.startsWith('image/')) {
-    //       alert('Please select an image file.');
-    //       e.target.value = ''; // Clear the input field
-    //       isLoading(false);
-    //       return;
-    //     }
-    //   } else {
-    //     // Check if the selected file is a PDF
-    //     if (uploadedFile.type !== 'application/pdf') {
-    //       alert('Please select a PDF file.');
-    //       e.target.value = ''; // Clear the input field
-    //       isLoading(false);
-    //       return;
-    //     }
-    //   }
     const storageRef = ref(
       storage,
       `${isImage ? "BookCover" : "Book"}/${Date.now()}-${uploadedFile.name}`

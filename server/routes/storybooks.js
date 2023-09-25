@@ -8,8 +8,8 @@ router.post("/save", async (req, res) => {
     name: req.body.name,
     coverURL: req.body.coverURL,
     bookURL: req.body.bookURL,
-    level:req.body.level,
-    category: req.body.category,
+    // level:req.body.level,
+    // category: req.body.category,
   });
 
   try {
@@ -74,8 +74,8 @@ router.put("/update/:id", async (req, res) => {
         name: req.body.name,
         coverURL: req.body.coverURL,
         bookURL: req.body.bookURL,
-        level:req.body.level,
-        category: req.body.category,
+        // level:req.body.level,
+        // category: req.body.category,
       },
       options
     );
