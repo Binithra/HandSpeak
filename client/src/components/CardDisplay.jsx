@@ -116,7 +116,7 @@ export const CardDisplay = ({ data, index, type }) => {
     <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
     // onClick={type ==="video" && addToContext}
     >
-      <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
+      <div className="w-40 min-w-[160px] h-48 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
@@ -125,13 +125,14 @@ export const CardDisplay = ({ data, index, type }) => {
           className="w-full h-full rounded-lg object-cover"
         />
       </div>
-      <p className="text-base text-headingColor font-semibold my-2">
+      <p className="text-base text-headingColor pt-4 font-semibold my-2">
         {data.name.length > 25 ? `${data.name.slice(0, 25)}..` : data.name}
         <span className="block text-sm text-gray-400 my-1">
           {data.category}
         </span>
       </p>
 
+      {type === "video" || type === "storybook" ? (
       <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
         <motion.i
           whileTap={{ scale: 0.75 }}
@@ -141,6 +142,8 @@ export const CardDisplay = ({ data, index, type }) => {
           <IoTrash />
         </motion.i>
       </div>
+       ) : null}
+
       {isDelete && (
         <motion.div
           className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center flex-col justify-center px-4 py-2 gap-0"

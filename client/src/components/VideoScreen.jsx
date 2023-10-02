@@ -100,7 +100,6 @@ const VideoScreen = ({cato, closeVideoScreen}) => {
     </div>
   );
 };
-//Map issue in render ing the cards
 
 export default VideoScreen;
 
