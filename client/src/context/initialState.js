@@ -2,7 +2,7 @@ export const initialState = {
   user: null,
   allUsers: null,
   allBooks: null,
-  allquiz: null,
+  // allquiz: null,
   allVideos: null,
   videoFilter:null,
   filterTerm: "all",

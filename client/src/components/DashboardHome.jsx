@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SlBookOpen, SlUser } from "react-icons/sl";
+import { SlBookOpen, SlUser, SlNote } from "react-icons/sl";
 import { RxVideo } from "react-icons/rx";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
@@ -21,7 +21,7 @@ export const DashBoardCard = ({ icon, name, userCount }) => {
 };
 
 const DashBoardHome = () => {
-  const [{ allUsers, allVideos, allBooks }, dispatch] = useStateValue();
+  const [{ allUsers, allVideos, allBooks, allQuiz }, dispatch] = useStateValue();
   useEffect(() => {
     if (!allUsers) {
       getAllUsers().then((data) => {
@@ -49,6 +49,15 @@ const DashBoardHome = () => {
         });
       });
     }
+
+    // if (!allQuiz) {
+    //   getAllStorybooks().then((data) => {
+    //     dispatch({
+    //       type: actionType.SET_QUIZ,
+    //       allQuiz: data.quiz,
+    //     });
+    //   });
+    // }
   }, []);
   return (
     <div className="w-full p-6 flex items-center justify-evenly flex-wrap">
@@ -67,6 +76,11 @@ const DashBoardHome = () => {
         name={"Storybooks"}
         userCount={allBooks?.length > 0 ? allBooks?.length : 0}
       />
+       {/* <DashBoardCard
+        icon={<SlNote className="text-3xl text-textColor" />}
+        name={"Quiz"}
+        userCount={allquiz?.length > 0 ? allquiz?.length : 0}
+      /> */}
     </div>
   );
 };

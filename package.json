@@ -2,6 +2,7 @@
   "dependencies": {
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@teachablemachine/pose": "^0.8.6",
     "pdfjs-dist": "^3.4.120"
   }
 }

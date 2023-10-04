@@ -1,153 +1,93 @@
-import React, { useRef, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import * as tf from '@tensorflow/tfjs';
+import * as tmPose from '@teachablemachine/pose';
+import Header from "./Header";
 
 const SignPractice = () => {
-  const videoRef = useRef(null);
-  const photoRef = useRef(null);
+   // the link to your model provided by Teachable Machine export panel
+   const URL = "https://teachablemachine.withgoogle.com/models/ZAmlSd_pF/";
+   let model, webcam, ctx, labelContainer, maxPredictions;
 
-  const [hasPhoto, setHasPhoto] = useState(false);
+   useEffect(() => {
+    init();
+  }, []);
 
-  const getVideo = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: { width: 1920, height: 1080 },
-      })
-      .then((stream) => {
-        let video = videoRef.current;
-        video.srcObject = stream;
-        video.play();
-      })
+   async function init() {
+       const modelURL = URL + "model.json";
+       const metadataURL = URL + "metadata.json";
 
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+       // load the model and metadata
+       // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+       // Note: the pose library adds a tmPose object to your window (window.tmPose)
+       model = await tmPose.load(modelURL, metadataURL);
+       maxPredictions = model.getTotalClasses();
 
-  const takePhoto = () => {
-    const width = 414;
-    const height = width / (16 / 9);
+       // Convenience function to setup a webcam
+       const size = 200;
+       const flip = true; // whether to flip the webcam
+       webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+       await webcam.setup(); // request access to the webcam
+       await webcam.play();
+       window.requestAnimationFrame(loop);
 
-    let video = videoRef.current;
-    let photo = photoRef.current;
+       // append/get elements to the DOM
+       const canvas = document.getElementById("canvas");
+       canvas.width = size; canvas.height = size;
+       ctx = canvas.getContext("2d");
+       labelContainer = document.getElementById("label-container");
+       for (let i = 0; i < maxPredictions; i++) { // and class labels
+           labelContainer.appendChild(document.createElement("div"));
+       }
+   }
 
-    photo.width = width;
-    photo.height = height;
+   async function loop(timestamp) {
+       webcam.update(); // update the webcam frame
+       await predict();
+       window.requestAnimationFrame(loop);
+   }
 
-    let ctx = photo.getContext("2d");
-    ctx.drawImage(video, 0, 0, width, height);
-    setHasPhoto(true);
+   async function predict() {
+       // Prediction #1: run input through posenet
+       // estimatePose can take in an image, video or canvas html element
+       const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+       // Prediction 2: run input through teachable machine classification model
+       const prediction = await model.predict(posenetOutput);
 
-    // Convert canvas content to Blob
-    photo.toBlob((blob) => {
-      // Create a temporary object URL
-      const objectURL = URL.createObjectURL(blob);
+       for (let i = 0; i < maxPredictions; i++) {
+           const classPrediction =
+               prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+           labelContainer.childNodes[i].innerHTML = classPrediction;
+       }
 
-      // Create a link element and simulate a click to trigger download
-      const downloadLink = document.createElement("a");
-      downloadLink.href = objectURL;
-      downloadLink.download = "captured-photo.jpg"; //name for the image
-      downloadLink.style.display = "none";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
+       // finally draw the poses
+      //  drawPose(pose);
+   }
 
-      URL.revokeObjectURL(objectURL);
-      document.body.removeChild(downloadLink);
-    }, "image/jpeg");
-  };
-
-  const closePhoto = () => {
-    let photo = photoRef.current;
-    let ctx = photo.getContext("2d");
-
-    ctx.clearRect(0, 0, photo.width, photo.height);
-    setHasPhoto(false);
-  };
-
-  useEffect(() => {
-    getVideo();
-  }, [videoRef]);
+  //  function drawPose(pose) {
+  //      if (webcam.canvas) {
+  //          ctx.drawImage(webcam.canvas, 0, 0);
+  //          // draw the keypoints and skeleton
+  //          if (pose) {
+  //              const minPartConfidence = 0.5;
+  //              tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+  //              tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+  //          }
+  //      }
+  //  }
 
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center bg-white">
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <NavLink to={"/Home"}>
-            <a className="btn btn-ghost normal-case text-xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-                />
-              </svg>
-              Back
-            </a>
-          </NavLink>
-        </div>
-        <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
+    <div className='w-full h-full flex flex-col items-center justify-center bg-primary'> 
+    <Header/>
+    <div className='flex flex-row w-full h-full p-5 gap-4 bg-primary items-center justify-center '>
+      <div className='bg-white basis-1/2 '>
+      <button type="button" className='bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2' onClick={init}>Start</button>
 
-      <div className="w-full columns-[100rem] bg-indigo-100 font-sans relative">
-        <div className="text-2xl bg-indigo-500 text-center text-white p-4 ">
-          අපි අකුරු ඉගෙන ගනිමු
-        </div>
-        <div className="relative camera">
-          <div className="block text-indigo-900 pt-4 text-center font-sans font-semibold rounded">
-            පියවර: ඔබේ දෑත් නිවැරදිව තිරය වෙත යොමු කිරීමට වග බලා ගන්න.
-            <div className="block text-indigo-900 pt-4 text-center font-sans font-semibold rounded">
-              ඔබගේ රූප බාගත කිරීමට ඔබට "Snap and download button" බොත්තම භාවිතා
-              කළ හැක.
-              <video
-                className="max-width:80% width:80% height:full p-20"
-                ref={videoRef}
-              ></video>
-              <button
-                onClick={takePhoto}
-                className="absolute bottom-8 left-8 p-8 text-2xl bg-indigo-500 text-white font-semibold rounded"
-              >
-                Snap and Download!
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          className={`fixed top-0 left-full w-full h-full flex items-center bg-white transition-all duration-400 result ${
-            hasPhoto ? "hasPhoto" : ""
-          }`}
-        >
-          <canvas ref={photoRef}></canvas>
-          <button
-            onClick={closePhoto}
-            className="absolute bottom-8 left-8 p-4 bg-indigo-500 text-white text-2xl font-semibold rounded"
-          >
-            Close
-          </button>
-        </div>
+      <div id="webcam-container"></div>
+      <canvas id="canvas"></canvas>
+      <div id="label-container"></div>
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
