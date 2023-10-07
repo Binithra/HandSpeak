@@ -24,6 +24,10 @@ app.use("/api/videos/", videosRoutes);
 const storybooksRoutes = require("./routes/storybooks");
 app.use("/api/storybooks/", storybooksRoutes);
 
+//quiz route
+const quizRoutes = require("./routes/quizzes");
+app.use("/api/quiz/", quizRoutes);
+
 mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true });
 mongoose.connection
   .once("open", () => console.log("Connected"))

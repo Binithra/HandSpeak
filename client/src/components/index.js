@@ -30,4 +30,5 @@ export { default as VideoCategory } from "./VideoCategory";
 export { default as DashboardQuiz } from "./DashboardQuiz";
 export { default as FilterButtons } from "./FilterButtons";
 export { default as ReactVideoPlayer } from "./ReactVideoPlayer";
-
+export { default as QuizCreateDialog } from "./QuizCreateDialog";
+export { default as DashboardNewQuiz } from "./DashboardNewQuiz";

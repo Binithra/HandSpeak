@@ -51,6 +51,16 @@ export const getAllStorybooks = async () => {
   }
 };
 
+export const getAllQuiz = async () => {
+  try {
+    const res = await axios.get(`${baseURL}api/quiz/getAll`);
+    return res.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+
 export const changingUserRole = async (userId, role) => {
   try {
     const res = axios.put(`${baseURL}api/users/updateRole/${userId}`, {
@@ -84,6 +94,15 @@ export const saveNewStorybook = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/storybooks/save`, { ...data });
     return (await res).data.savedstorybooks;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const saveNewQuiz = async (data) => {
+  try {
+    const res = axios.post(`${baseURL}api/quiz/save`, { ...data });
+    return (await res).data.savedQuiz;
   } catch (error) {
     return null;
   }

@@ -47,7 +47,7 @@ const Videos = () => {
             <VideoScreen cato={id} closeVideoScreen={closeVideoScreen} />
           ) : (
       <>
-      <div className="text-2xl font-semibold p-4 ">Video Lessons for you</div>
+      <div className="text-2xl font-semibold p-4 ">ඔබ සඳහා වීඩියෝ පාඩම්</div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <VideoCard id="Letters" video={q2} title={'අකුරු'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen} />
         <VideoCard id="Number" video={q5} title={'අංක'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>

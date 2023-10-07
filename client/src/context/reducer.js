@@ -2,7 +2,7 @@ export const actionType = {
   SET_USER: "SET_USER",
   SET_ALL_USERS : "SET_ALL_USERS",
   SET_ALL_BOOKS: "SET_ALL_BOOKS",
-  SET_QUIZ: "SET_QUIZ",
+  SET_ALL_QUIZ: "SET_ALL_QUIZ",
   SET_ALL_VIDEOS: "SET_ALL_VIDEOS",
 // filter types
   SET_FILTER_TERM: "SET_FILTER_TERM",
@@ -38,10 +38,10 @@ const reducer = (state, action) => {
             allBooks: action.allBooks,
         };
 
-        case actionType.SET_QUIZ:
+        case actionType.SET_ALL_QUIZ:
         return {
             ...state,
-            quiz: action.quiz,
+            allquiz: action.allquiz,
         };
 
         case actionType.SET_ALL_VIDEOS:

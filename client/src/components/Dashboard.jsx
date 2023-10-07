@@ -11,6 +11,8 @@ import DashboardNewVideo from "./DashboardNewVideo";
 import { useStateValue } from "../context/StateProvider";
 import Header from "./Header";
 import Alert from "./Alert";
+import DashboardNewQuiz from "./DashboardNewQuiz";
+import DashboardQuiz from "./DashboardQuiz";
 
 const Dashboard = () => {
   const [{alertType},dispatch] = useStateValue();
@@ -28,6 +30,8 @@ const Dashboard = () => {
         <NavLink to={"/dashboard/videos"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Videos </NavLink>
 
         <NavLink to={"/dashboard/storybooks"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Storybooks </NavLink>
+
+        <NavLink to={"/dashboard/quiz"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Quiz </NavLink>
       </div>
       <div className="my-4 w-full p-4">
         <Routes>
@@ -37,6 +41,8 @@ const Dashboard = () => {
           <Route path="/storybooks" element={<DashboardStorybook />} />
           <Route path="/newStorybook" element={<DashboardNewStorybook />} />
           <Route path="/newVideo" element={<DashboardNewVideo />} />
+          <Route path="/newQuiz" element={<DashboardNewQuiz />} />
+          <Route path="/quiz" element={<DashboardQuiz />} />
         </Routes>
       </div>
       {alertType && (<Alert type = {alertType} />)}

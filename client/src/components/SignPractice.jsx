@@ -1,48 +1,144 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as tmPose from "@teachablemachine/pose";
 import Header from "./Header";
 
 const SignPractice = () => {
-  // the link to your model provided by Teachable Machine export panel
-  const URL = "https://teachablemachine.withgoogle.com/models/ZAmlSd_pF/";
-  let model, webcam, ctx, labelContainer, maxPredictions,highestPredictionIndex;
+  const URL1 = "https://teachablemachine.withgoogle.com/models/ZAmlSd_pF/";
+  const URL2 = "https://teachablemachine.withgoogle.com/models/5m6JReaEJ/";
+  const URL3 = "https://teachablemachine.withgoogle.com/models/CWCJ1zSw9/";
+  const [webcamOpen, setWebcamOpen] = useState(false);
+
+  let model,
+    webcam,
+    ctx,
+    labelContainer,
+    maxPredictions,
+    highestPredictionIndex;
 
   useEffect(() => {
     return () => {
-      // Component unmount effect
-      // Perform any cleanup or teardown here
       if (webcam) {
         webcam.stop();
       }
     };
-  }, []);
+  }, [webcam]);
 
-  async function init() {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
+  async function init1() {
+    const modelURL1 = URL1 + "model.json";
+    const metadataURL1 = URL1 + "metadata.json";
 
- 
-      // load the model and metadata
-      // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-      // Note: the pose library adds a tmPose object to your window (window.tmPose)
-      model = await tmPose.load(modelURL, metadataURL);
-      maxPredictions = model.getTotalClasses();
+    model = await tmPose.load(modelURL1, metadataURL1);
+    maxPredictions = model.getTotalClasses();
 
-      // Convenience function to setup a webcam
-      // const size = 200;
-      const flip = true; // whether to flip the webcam
-      webcam = new tmPose.Webcam(200, 200, flip); // width, height, flip
-      await webcam.setup(); // request access to the webcam
-      await webcam.play();
-      window.requestAnimationFrame(loop);
+    const flip = true; 
+    webcam = new tmPose.Webcam(500, 400, flip); // width, height
+    await webcam.setup(); 
+    await webcam.play();
+    setWebcamOpen(true);
+    window.requestAnimationFrame(loop);
 
-      // append/get elements to the DOM
-      document.getElementById("webcam-container").appendChild(webcam.canvas);
-      labelContainer = document.getElementById("label-container");
-      }
-    
-  
+    const webcamContainer = document.getElementById("webcam-container");
+    webcamContainer.innerHTML = ""; 
+    webcamContainer.appendChild(webcam.canvas);
+
+    labelContainer = document.getElementById("label-container");
+    labelContainer.style.fontSize = "24px";
+    labelContainer.innerHTML = ""; 
+    for (let i = 0; i < maxPredictions; i++) {
+      labelContainer.appendChild(document.createElement("div"));
+    }
+  }
+
+  function closeWebcam() {
+    if (webcam) {
+      webcam.stop();
+      setWebcamOpen(false);
+    }
+  }
+
+
+  async function init2() {
+    const modelURL2 = URL2 + "model.json";
+    const metadataURL2 = URL2 + "metadata.json";
+
+    model = await tmPose.load(modelURL2, metadataURL2);
+    maxPredictions = model.getTotalClasses();
+
+    const flip = true; // whether to flip the webcam
+    webcam = new tmPose.Webcam(500, 400, flip); // width, height, flip
+    await webcam.setup(); // request access to the webcam
+    await webcam.play();
+    window.requestAnimationFrame(loop);
+
+    const webcamContainer = document.getElementById("webcam-container");
+    webcamContainer.innerHTML = ""; 
+    webcamContainer.appendChild(webcam.canvas);
+
+    labelContainer = document.getElementById("label-container");
+    labelContainer.style.fontSize = "24px";
+    labelContainer.innerHTML = ""; 
+    for (let i = 0; i < maxPredictions; i++) {
+      labelContainer.appendChild(document.createElement("div"));
+    }
+  }
+
+  async function init3() {
+    const modelURL3 = URL3 + "model.json";
+    const metadataURL3 = URL3 + "metadata.json";
+
+    model = await tmPose.load(modelURL3, metadataURL3);
+    maxPredictions = model.getTotalClasses();
+
+    const flip = true;
+    webcam = new tmPose.Webcam(500, 400, flip); 
+    await webcam.setup(); 
+    await webcam.play();
+    window.requestAnimationFrame(loop);
+
+    const webcamContainer = document.getElementById("webcam-container");
+    webcamContainer.innerHTML = ""; 
+    webcamContainer.appendChild(webcam.canvas);
+
+    labelContainer = document.getElementById("label-container");
+    labelContainer.style.fontSize = "24px";
+    labelContainer.innerHTML = ""; 
+    for (let i = 0; i < maxPredictions; i++) {
+      labelContainer.appendChild(document.createElement("div"));
+    }
+}
+
+async function loop(timestamp) {
+    webcam.update(); 
+    await predict();
+    window.requestAnimationFrame(loop);
+}
+
+async function predict() {
+    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+    const prediction = await model.predict(posenetOutput);
+
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        labelContainer.childNodes[i].innerHTML = classPrediction;
+    }
+
+    // finally draw the poses
+    drawPose(pose);
+}
+
+function drawPose(pose) {
+    if (webcam.canvas) {
+        ctx.drawImage(webcam.canvas, 0, 0);
+        
+        if (pose) {
+            const minPartConfidence = 0.5;
+            tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+            tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+        }
+    }
+}
 
   async function loop() {
     webcam.update(); // update the webcam frame
@@ -59,50 +155,60 @@ const SignPractice = () => {
 
     highestPredictionIndex = 0;
     for (let i = 1; i < maxPredictions; i++) {
-        if (prediction[i].probability > prediction[highestPredictionIndex].probability) {
-            highestPredictionIndex = i;
-        }
+      if (
+        prediction[i].probability >
+        prediction[highestPredictionIndex].probability
+      ) {
+        highestPredictionIndex = i;
+      }
     }
 
     // Display the highest prediction
-    labelContainer.innerHTML = prediction[highestPredictionIndex].className + ": " +
-        prediction[highestPredictionIndex].probability.toFixed(2);
-
-    // finally draw the poses
-    //  drawPose(pose);
+    labelContainer.innerHTML =
+      prediction[highestPredictionIndex].className +
+      ": " +
+      prediction[highestPredictionIndex].probability.toFixed(2);
   }
-
-  //  function drawPose(pose) {
-  //      if (webcam.canvas) {
-  //          ctx.drawImage(webcam.canvas, 0, 0);
-  //          // draw the keypoints and skeleton
-  //          if (pose) {
-  //              const minPartConfidence = 0.5;
-  //              tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-  //              tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
-  //          }
-  //      }
-  //  }
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center bg-primary">
       <Header />
+      <div className="text-2xl font-semibold p-2 ">පුහුණු වීමට මාතෘකාවක් තෝරා ගනිමු</div>
       <div className="flex flex-row w-full h-full p-5 gap-4 bg-primary items-center justify-center ">
-        <div className="bg-white basis-1/2 ">
+        <div className="bg-red basis-1/2 ">
           <button
             type="button"
             className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
-            onClick={init}
+            onClick={init1}
           >
-            Start
+            Colors
           </button>
+          <button
+            type="button"
+            className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
+            onClick={init2}
+          >
+            Numbers
+          </button>
+          <button
+            type="button"
+            className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
+            onClick={init3}
+          >
+            People
+          </button>
+          {webcamOpen && (
+            <button
+              type="button"
+              className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
+              onClick={closeWebcam}
+            >
+              Close Webcam
+            </button>
+          )}
 
           <div id="webcam-container"></div>
-          <canvas id="canvas"></canvas>
           <div id="label-container"></div>
-          <div id="no-webcam" style={{ display: "none" }}>
-            Webcam not available
-          </div>
         </div>
       </div>
     </div>
@@ -110,20 +216,3 @@ const SignPractice = () => {
 };
 
 export default SignPractice;
-
-{
-  /* <div className="w-full h-auto flex flex-col items-center justify-center bg-white">
-      <Header />
-      <div className="mockup-code items-center">
-        <pre data-prefix="1">
-          <code>sign detection</code>
-        </pre>
-        <pre data-prefix="2">
-          <code>installing...</code>
-        </pre>
-        <pre data-prefix="3" className="bg-warning text-warning-content">
-          <code>under maintenece !</code>
-        </pre>
-      </div>
-    </div> */
-}

@@ -21,7 +21,7 @@ export const DashBoardCard = ({ icon, name, userCount }) => {
 };
 
 const DashBoardHome = () => {
-  const [{ allUsers, allVideos, allBooks }, dispatch] = useStateValue();
+  const [{ allUsers, allVideos, allBooks,allquiz }, dispatch] = useStateValue();
   useEffect(() => {
     if (!allUsers) {
       getAllUsers().then((data) => {
@@ -46,6 +46,15 @@ const DashBoardHome = () => {
         dispatch({
           type: actionType.SET_ALL_BOOKS,
           allBooks: data.storybooks,
+        });
+      });
+    }
+
+    if (!allquiz) {
+      getAllStorybooks().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_BOOKS,
+          allquiz: data.quiz,
         });
       });
     }
