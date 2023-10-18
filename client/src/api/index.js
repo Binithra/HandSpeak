@@ -125,3 +125,12 @@ export const deleteStorybookById = async (id) => {
     return null;
   }
 };
+
+export const deleteQuizById = async (id) => {
+  try {
+    const res = axios.delete(`${baseURL}api/quiz/delete/${id}`);
+    return res;
+  } catch (error) {
+    return null;
+  }
+};

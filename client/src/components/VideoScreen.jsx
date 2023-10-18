@@ -9,7 +9,7 @@ const VideoScreen = ({cato, closeVideoScreen}) => {
 
   const[{videoCato},dispatch] = useStateValue()
   const [videos, setVideos] = useState([]);
-  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState();
   const [videoToPlay, setVideoToPlay] = useState([]);
 
   const showModal = (video) => {

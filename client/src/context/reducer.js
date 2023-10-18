@@ -12,7 +12,9 @@ export const actionType = {
   SET_ALERT_TYPE:"SET_ALERT_TYPE",
   SET_ISVIDEO_PLAYING : "SET_ISVIDEO_PLAYING",
   SET_VIDEO_INDEX :"SET_VIDEO_INDEX",
-  SET_VIDEO_CATO : "SET_VIDEO_CATO"
+  SET_VIDEO_CATO : "SET_VIDEO_CATO",
+
+  SET_ISQUIZ_VIEWING:"SET_ISQUIZ_VIEWING"
 }
 
 const reducer = (state, action) => {
@@ -91,6 +93,12 @@ const reducer = (state, action) => {
               ...state,
               videoIndex: action.videoCato,
             };
+
+            case actionType.SET_ISQUIZ_VIEWING:
+              return {
+                ...state,
+                isQuizViewing: action.isQuizViewing,
+              };
 
 
     default:

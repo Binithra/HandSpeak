@@ -18,9 +18,8 @@ router.get("/getAll", async (req, res) => {
   
   router.post("/save", async (req, res) => {
     const newQuiz = quiz({
+      title:req.body.title,
       questions: req.body.questions,
-      category: req.body.category,
-      imgUrl: req.body.imgUrl,
       scores:req.body.scores,
       createdAt: req.body.createdAt,
       deleted: req.body.deleted,
@@ -50,7 +49,7 @@ router.get("/getAll", async (req, res) => {
     const filter = { _id: req.params.id };
   
     const result = await quiz.deleteOne(filter);
-    if (result) {
+    if (!result) {
       return res
         .status(200)
         .send({ success: true, msg: "Data Deleted successfully", data: result });
@@ -71,9 +70,8 @@ router.get("/getAll", async (req, res) => {
       const result = await quiz.findOneAndUpdate(
         filter,
         {
+          title:req.body.title,
           questions: req.body.questions,
-          category: req.body.category,
-          imgUrl: req.body.imgUrl,
           scores:req.body.scores,
           createdAt: req.body.createdAt,
           deleted: req.body.deleted,

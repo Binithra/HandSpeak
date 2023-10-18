@@ -153,11 +153,7 @@ const DashboardNewStorybook = () => {
         value={storybookName}
         onChange={(e) => setStorybookName(e.target.value)}
       />
-
-      {/* <div className="flex gap-8">
-        <FilterButtons filterData={filters} flag={"Category"} />
-        <FilterButtons filterData={filterByLevel} flag={"Level"} />
-      </div> */}
+      
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {isBookImageLoading && <FileLoader progress={bookImageUploadProgress} />}
         {!isBookImageLoading && (

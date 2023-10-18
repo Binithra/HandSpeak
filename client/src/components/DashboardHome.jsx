@@ -3,7 +3,7 @@ import { SlBookOpen, SlUser, SlNote } from "react-icons/sl";
 import { RxVideo } from "react-icons/rx";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { getAllUsers, getAllVideos, getAllStorybooks } from "../api";
+import { getAllUsers, getAllVideos, getAllStorybooks, getAllQuiz } from "../api";
 import { bgColors } from "../utils/styles";
 
 export const DashBoardCard = ({ icon, name, userCount }) => {
@@ -51,9 +51,9 @@ const DashBoardHome = () => {
     }
 
     if (!allquiz) {
-      getAllStorybooks().then((data) => {
+      getAllQuiz().then((data) => {
         dispatch({
-          type: actionType.SET_ALL_BOOKS,
+          type: actionType.SET_ALL_QUIZ,
           allquiz: data.quiz,
         });
       });
@@ -77,6 +77,11 @@ const DashBoardHome = () => {
         icon={<SlBookOpen className="text-3xl text-textColor" />}
         name={"Storybooks"}
         userCount={allBooks?.length > 0 ? allBooks?.length : 0}
+      />
+       <DashBoardCard
+        icon={<SlNote className="text-3xl text-textColor" />}
+        name={"Quiz"}
+        userCount={allquiz?.length > 0 ? allquiz?.length : 0}
       />
       
     </div>
