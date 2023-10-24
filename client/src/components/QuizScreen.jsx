@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "axios";
+import { getAllQuiz } from "../api";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 // const quiz1 = ({ data }) => {
 //   <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
@@ -19,21 +21,20 @@ import axios from "axios";
 const QuizScreen = () => {
   const [quiz, setQuiz] = useState(null);
   const { id } = useParams();
+  const [{ allquiz }, dispatch] = useStateValue();
 
   useEffect(() => {
-    // Fetch quiz data when the component mounts
-    const fetchQuiz = async () => {
-      try {
-        const response = await axios.get(`/api/quiz/getOne/${id}`);
-        setQuiz(response.data.quiz);
-      } catch (error) {
-        console.error("Error fetching quiz:", error);
-      }
-    };
-
-    fetchQuiz();
-  }, [id]);
-
+    //to fetch all quiz
+    if (!allquiz) {
+      getAllQuiz().then((data) => {
+        console.log(data.quiz);
+        dispatch({
+          type: actionType.SET_ALL_QUIZ,
+          allquiz: data.quiz,
+        });
+      });
+    }
+  }, []);
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-white">

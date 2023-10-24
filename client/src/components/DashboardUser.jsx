@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineClear } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { getAllUsers } from "../api";
 import { actionType } from "../context/reducer";
@@ -60,8 +59,7 @@ const DashboardUser = () => {
               setFiltereUsers(null);
             }}
           >
-            <AiOutlineClear className="text-3xl text-textColor cursor-pointer" />
-          </motion.i>
+         </motion.i>
         )}
       </div>
 

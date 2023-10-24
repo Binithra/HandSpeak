@@ -34,18 +34,18 @@ const DashboardNewStorybook = () => {
   const [{ allBooks, filterTerm, levelFilter, alertType }, dispatch] =
     useStateValue();
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
 
-    if (file) {
-      // Ensure the selected file is a PDF
-      if (file.type === "application/pdf") {
-        setBookImageCover(URL.createObjectURL(file));
-      } else {
-        alert("Please select a PDF file.");
-      }
-    }
-  };
+  //   if (file) {
+  //     // Ensure the selected file is a PDF
+  //     if (file.type === "application/pdf") {
+  //       setBookImageCover(URL.createObjectURL(file));
+  //     } else {
+  //       alert("Please select a PDF file.");
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     if (!allBooks) {
@@ -205,7 +205,7 @@ const DashboardNewStorybook = () => {
                   src={bookImageCover}
                   type="file"
                   accept=".pdf"
-                  onChange={handleFileChange}
+                  // onChange={handleFileChange}
                   id="pdf-upload"
                   style={{ display: "none" }}
                 />
@@ -223,7 +223,7 @@ const DashboardNewStorybook = () => {
                 {bookImageCover && (
                   <embed
                     src={bookImageCover}
-                    type="application/pdf"
+                    // type="application/pdf"
                     width="100%"
                     height="500px"
                   />

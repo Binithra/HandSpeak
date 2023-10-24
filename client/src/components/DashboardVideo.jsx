@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AiOutlineClear } from "react-icons/ai";
 import { IoAdd, IoPause, IoPlay, IoTrash } from "react-icons/io5";
 import { useStateValue } from "../context/StateProvider";
 import { getAllVideos } from "../api";
@@ -46,9 +45,6 @@ export const DashboardVideo=()=> {
           onFocus={() => setIsFocus(true)}
         />
 
-        <i>
-          <AiOutlineClear className="text-3xl text-textColor cursor-pointer"/>
-        </i>
       </div>
           {/* Main Container */}
           <div className="relative w-full my-4 p-4 py-16 border border-gray-300 rounded-md">

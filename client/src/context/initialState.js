@@ -10,6 +10,8 @@ export const initialState = {
   categoryFilter:null,
   alertType:null,
   isVideoPlaying :false,
+  isBookViewing:false,
   videoIndex:0,
+  bookIndex:0,
   videoCato:null,
 };

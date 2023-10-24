@@ -110,7 +110,7 @@ export const VideoCard = ({videos , index , openVideo}) => {
       <figure>
         <img
           src={videos?.imageURL}
-          alt="tumbnains"
+          alt="tumbnails"
           className="w-full h-48 object-cover rounded-t-md hover:scale-110 ease-in duration-150"
         />
       </figure>

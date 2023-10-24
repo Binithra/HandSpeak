@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import Uncomp from "./Uncomp";
+import ProgressBody from "./ProgressBody";
 
 import { Prog } from "../assets/img/index";
 
@@ -26,8 +26,8 @@ const Progress = () => {
           </p>
 
           <div>
-            <Uncomp type="Sinhala Letters" />
-            <Uncomp type="Greetings" />
+            <ProgressBody type="Sinhala Letters" />
+            <ProgressBody type="Greetings" />
           </div>
         </div>
 

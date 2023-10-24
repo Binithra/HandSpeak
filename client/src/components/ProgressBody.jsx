@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Uncomp = ({type}) => {
+const ProgressBody = ({type}) => {
   return (
     <div className='p-2'>
         <div className='bg-pink-100 px-4 py-2 rounded-full drop-shadow-lg'>
@@ -10,4 +10,4 @@ const Uncomp = ({type}) => {
   )
 }
 
-export default Uncomp
+export default ProgressBody

@@ -20,9 +20,11 @@ import {
   DashboardVideo,
   DashboardUserCard,
   VideoPlayer,
+  DashboardQuiz,
+  QuizViewer,
+  BookViewer,
 } from "./components";
 import { app } from "./config/firebase.config";
-
 
 import {
   getAuth,
@@ -40,7 +42,18 @@ function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
 
-  const [{ user, isVideoPlaying, allBooks, allVideos }, dispatch] = useStateValue();
+  const [
+    {
+      user,
+      isVideoPlaying,
+      allBooks,
+      allVideos,
+      allquiz,
+      getAllQuiz,
+      isBookViewing,
+    },
+    dispatch,
+  ] = useStateValue();
   const [isLoading, setIsLoading] = useState(false);
 
   const [auth, setAuth] = useState(
@@ -95,6 +108,18 @@ function App() {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (!allquiz && user) {
+      getAllQuiz().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_QUIZ,
+          allquiz: data.quiz,
+        });
+      });
+    }
+  }, []);
+
   return (
     <AnimatePresence>
       <div className="h-auto flex items-center justify-center min-w-[680px]">
@@ -120,18 +145,29 @@ function App() {
           <Route path="/DashboardUser" element={<DashboardUser />} />
           <Route path="/DashboardVideo" element={<DashboardVideo />} />
           <Route path="/DashboardStorybook" element={<DashboardStorybook />} />
+          <Route path="/DashboardQuiz" element={<DashboardQuiz />} />
           <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
+          <Route path="/QuizViewer" element={<QuizViewer />} />
+          <Route path="/BookViewer" element={<BookViewer />} />
         </Routes>
 
-        {isVideoPlaying &&(
+        {isVideoPlaying && (
           <motion.div
-          initial={{opacity :0, y:50}}
-          animate={{opacity:1,y:0}}
-          exit={{ opacity: 0, y: 50 }}
-          className={`fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`} >
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className={`fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
+          >
             <VideoPlayer />
-
           </motion.div>
+        )}
+
+        {isBookViewing && (
+          <div
+            className={`fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
+          >
+            <BookViewer />
+          </div>
         )}
       </div>
     </AnimatePresence>

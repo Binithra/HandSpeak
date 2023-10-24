@@ -18,14 +18,3 @@ export const filterByLevel = [
   { id: 2, name: "Intermediate", value: "Intermediate" },
   { id: 3, name: "Advanced", value: "Advanced" },
 ];
-
-// export const deleteFileObject = (referenceUrl) => {
-//   const deleteRef = ref(storage, referenceUrl);
-//   deleteObject(deleteRef)
-//     .then(() => {
-//       return true;
-//     })
-//     .catch((error) => {
-//       return false;
-//     });
-// };

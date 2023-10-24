@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AiOutlineClear } from "react-icons/ai";
 import { IoAdd} from "react-icons/io5";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks } from "../api";
@@ -46,12 +45,9 @@ const DashboardStorybook=()=> {
           onFocus={() => setIsFocus(true)}
         />
 
-        <i>
-          <AiOutlineClear className="text-3xl text-textColor cursor-pointer"/>
-        </i>
       </div>
           {/* Main Container */}
-          <div className="relative w-full my-4 p-4 py-16 border border-gray-300 rounded-md">
+          <div className="relative w-full my-4 py-16 border border-gray-300 rounded-md">
             {/* The count */}
             <div className="absolute top-4 left-4">
               <p className="text-xl font-bold"><span className="text-sm font-semibold text-black">Count : </span>
@@ -64,11 +60,11 @@ const DashboardStorybook=()=> {
         }
 
   // internal component creating
-  export const BookContainer =({data})=>{
+  export const BookContainer =({data, handleSubmit})=>{
     return(
       <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
         {data && data.map((storybooks,i)=>(
-          <CardDisplay key={storybooks._id} data={storybooks} index={i} type="storybook"/>
+          <CardDisplay key={storybooks._id} data={storybooks} index={i} type="storybook" onChange={handleSubmit}/>
         ))}
       </div>
     )

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import { AiOutlineClear } from "react-icons/ai";
 import { IoAdd, IoTrash } from "react-icons/io5";
 import { getAllQuiz, deleteQuizById } from "../api";
 import { useStateValue } from "../context/StateProvider";
@@ -48,10 +47,6 @@ const DashboardQuiz = () => {
           onBlur={() => setIsFocus(false)}
           onFocus={() => setIsFocus(true)}
         />
-
-        <i>
-          <AiOutlineClear className="text-3xl text-textColor cursor-pointer" />
-        </i>
       </div>
       {/* Main Container */}
       <div className="relative w-full my-4 p-4 py-16 border border-gray-300 rounded-md">
@@ -65,7 +60,7 @@ const DashboardQuiz = () => {
         <QuizContainer
           data={allquiz}
           setSelectedQuiz={setSelectedQuiz}
-          isDelete={isDelete} 
+          isDelete={isDelete}
           setIsDelete={setIsDelete}
         />
         {showQuizViewer && (
@@ -91,7 +86,12 @@ const DashboardQuiz = () => {
   );
 };
 
-export const QuizContainer = ({ data, setSelectedQuiz, setIsDelete, isDelete }) => {
+export const QuizContainer = ({
+  data,
+  setSelectedQuiz,
+  setIsDelete,
+  isDelete,
+}) => {
   const [{ alertType }, dispatch] = useStateValue();
 
   function formatDate(dateString) {
@@ -146,21 +146,23 @@ export const QuizContainer = ({ data, setSelectedQuiz, setIsDelete, isDelete }) 
             key={i}
             className="relative w-full rounded-md flex items-center justify-between py-4 bg-gray-200 cursor-pointer hover:bg-card hover:shadow-md"
           >
-            <div className=" flex items-center justify-center">
+            {/* <div className=" flex items-center justify-center"> */}
               <p className="text-base text-blaleteck font-bold text-center pl-40">
                 {quiz.title}
               </p>
               <p className="text-base text-textColor  pl-40">
                 Created on : {formatDate(quiz.createdAt)}
               </p>
+            {/* </div> */}
+            <NavLink to={"/QuizViewer"}>
               <motion.button
-                className="px-2 py-1 text-sm uppercase bg-red-300 font-semibold rounded-md hover:bg-red-700 cursor-pointer"
+                className="text-[14px] font-semibold text-teal-700 flex items-center px-4 h-12 w-40 hover:bg-teal-700 hover:text-gray-200 bg-gray-200 rounded-sm hover:shadow-md"
                 whileTap={{ scale: 0.7 }}
                 onClick={() => setSelectedQuiz(quiz._id)}
               >
-                View
+                View Quiz
               </motion.button>
-            </div>
+            </NavLink>
 
             <div className="absolute left-4 w-8 h-8 rounded-md flex items-center justify-center bg-gray-200">
               <motion.i
