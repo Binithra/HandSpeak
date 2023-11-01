@@ -84,3 +84,22 @@
      .my-quizzes-wrapper .quizzes-wrapper .quiz-card .questions {
          margin: 2px 0;
      }
+
+
+     .row{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+     }
+    /* .col_3{
+        flex: 0 0 auto;
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        padding-top: 100px;
+     } */
+     /* .col_6{
+        flex: 0 0 auto;
+        width: 50%;
+        
+             } */

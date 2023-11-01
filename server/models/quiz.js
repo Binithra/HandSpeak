@@ -50,4 +50,4 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 
-module.exports = mongoose.model("quiz", quizSchema);
+module.exports = mongoose.model("quizzes", quizSchema);

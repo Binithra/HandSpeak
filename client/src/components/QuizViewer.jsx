@@ -32,17 +32,17 @@ const QuizViewer = ({ quizId, formatDate }) => {
 
   console.log("QuizViewer - Current quiz:", currentQuiz);
 
-  const handleAnswerChange = (questionIndex, selectedAnswer) => {
+  const handleAnswerSelection  = (questionIndex, selectedAnswer) => {
     setSelectedAnswers((prevAnswers) => ({
       ...prevAnswers,
       [questionIndex]: selectedAnswer,
     }));
   };
 
-  if (!currentQuiz) {
-    console.log("QuizViewer - Loading...");
-    return <p>Loading...</p>;
-  }
+  // if (!currentQuiz) {
+  //   console.log("QuizViewer - Loading...");
+  //   return <p>Loading...</p>;
+  // }
 
 
   return (
@@ -69,29 +69,31 @@ const QuizViewer = ({ quizId, formatDate }) => {
           </a>
         </NavLink>
       </div>
-      <div className="pt-8 flex flex-wrap gap-4 grid-cols-4">
-          <h2 className="font-semibold">{currentQuiz.title} </h2>
-          {currentQuiz.questions.map((question, id) => (
-            <div key={id}>
-              <h3>{question.questionName}</h3>
-              <ul>
-                {question.answers.map((answer, answerIndex) => (
-                  <li key={answerIndex}>
-                    <label>
-                      <input
-                        type="radio"
-                        name={`question_${id}`}
-                        value={answer}
-                        onChange={() => handleAnswerChange(id, answer)}
-                      />
-                      {answer}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      {/* <div className="quiz-display">
+      <h1>{quizId.title}</h1>
+      {quizId.questions.map((question, questionIndex) => (
+        <div key={questionIndex} className="question">
+          <p>{question.questionName}</p>
+          <ul>
+            {question.answers.map((answer, answerIndex) => (
+              <li key={answerIndex}>
+                <input
+                  type="radio"
+                  id={`q${questionIndex}-a${answerIndex}`}
+                  name={`q${questionIndex}`}
+                  value={answer}
+                  checked={selectedAnswers[questionIndex] === answerIndex}
+                  onChange={() => handleAnswerSelection(questionIndex, answerIndex)}
+                />
+                <label htmlFor={`q${questionIndex}-a${answerIndex}`}>{answer}</label>
+              </li>
+            ))}
+          </ul>
         </div>
+      ))}
+    </div> */}
+
+
       </div>
     </div>
   )

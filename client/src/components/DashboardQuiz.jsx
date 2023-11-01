@@ -11,7 +11,7 @@ const DashboardQuiz = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [isDelete, setIsDelete] = useState({});
   const [{ allquiz, isViewing }, dispatch] = useStateValue();
-  const [showQuizViewer, setShowQuizViewer] = useState(false);
+  const [showQuizScreen, setShowQuizScreen] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
 
   // useEffect(() => {
@@ -63,8 +63,8 @@ const DashboardQuiz = () => {
           isDelete={isDelete}
           setIsDelete={setIsDelete}
         />
-        {showQuizViewer && (
-          <QuizViewer
+        {showQuizScreen && (
+          <QuizScreen
             selectedQuiz={selectedQuiz}
             setSelectedQuiz={setSelectedQuiz}
             allquiz={allquiz}
@@ -154,7 +154,7 @@ export const QuizContainer = ({
                 Created on : {formatDate(quiz.createdAt)}
               </p>
             {/* </div> */}
-            <NavLink to={"/QuizViewer"}>
+            <NavLink to={"/QuizScreen"}>
               <motion.button
                 className="text-[14px] font-semibold text-teal-700 flex items-center px-4 h-12 w-40 hover:bg-teal-700 hover:text-gray-200 bg-gray-200 rounded-sm hover:shadow-md"
                 whileTap={{ scale: 0.7 }}
@@ -208,7 +208,7 @@ export const QuizContainer = ({
   );
 };
 
-export const QuizViewer = ({
+export const QuizScreen = ({
   selectedQuiz,
   setSelectedQuiz,
   allquiz,
