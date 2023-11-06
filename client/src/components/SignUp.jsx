@@ -113,9 +113,9 @@ const SignUp = (setAuth) => {
       </header>
       <img src={Reg} className="w-full h-full object-cover"></img>
 
-      <div className="absolute inset-0 bg-opacity-70 flex items-center justify-center p-4">
-        <div className="w-full md:w-375 p-4 gap-4 shadow-xl rounded-md backdrop-blur-md flex flex-col items-center justify-center">
-          <div className="rounded-lg bg-slate-100/50 ... overflow-hidden shadow-2xl px-8 p-5">
+      <div className="absolute inset-0 bg-opacity-70 flex items-center justify-center p-8">
+        <div className="w-full md:w-375 p-2 gap-4 shadow-xl rounded-md backdrop-blur-md flex flex-col items-center justify-center">
+          <div className="rounded-lg bg-slate-100/50 overflow-hidden shadow-2xl px-8">
             <label
               for="create account"
               className="block mb-1 text-center text-2xl font-semibold text-rose-500"
@@ -196,12 +196,14 @@ const SignUp = (setAuth) => {
               Sign Up with Google
             </div>
             <br />
+            <div className="mb-4 text-center">
             <Link
               onClick={handleClick}
-              className="mb-1 underline text-center text-sky-700 hover:text-black"
+              className="underline text-rose-500 hover:text-black"
             >
               Already have an account? Login
             </Link>
+            </div>
           </div>
         </div>
       </div>

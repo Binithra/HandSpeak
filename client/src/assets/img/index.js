@@ -19,3 +19,5 @@ export {default as w4} from "./w4.png";
 export {default as w5} from "./w5.png";
 export {default as w6} from "./w6.png";
 export {default as w7} from "./w7.png";
+
+export {default as L1} from "./L1.jpg";

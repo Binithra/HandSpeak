@@ -48,15 +48,15 @@ const Videos = () => {
           ) : (
       <>
       <div className="text-2xl font-semibold p-4 ">ඔබ සඳහා වීඩියෝ පාඩම්</div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <VideoCard id="Letters" video={q2} title={'අකුරු'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen} />
+        <VideoCard id="Colors" video={q8} title={'පාට'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="Number" video={q5} title={'අංක'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="People" video={q1} title={'මිනිසුන්'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="Fruits" video={q3} title={'පළතුරු'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="Places" video={q7} title={'ස්ථාන'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="Greetings" video={q4} title={'සුභ පැතුම්'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="DailyUsage"  video={q6} title={'දෛනික භාවිත'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
-        <VideoCard id="Colors" video={q8} title={'පාට'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
       </div>
       </>
        )}
@@ -68,7 +68,7 @@ const Videos = () => {
 
 export const VideoCard  = ({id , video , title, screen, openVideoScreen }) => {
   return (
-    <div className="card card-compact w-80 bg-yellow-500 shadow-xl hover:shadow-orange-200 ">
+    <div className="card card-compact w-60 bg-yellow-500 shadow-xl hover:shadow-orange-200 ">
       <figure>
         <video
           src={video}
@@ -76,15 +76,17 @@ export const VideoCard  = ({id , video , title, screen, openVideoScreen }) => {
           autoPlay
           muted
           loop
-          className="w-full h-full object-cover hover:scale-110 ease-in duration-150"
+          className="w-full h-60 object-cover hover:scale-110 ease-in duration-150"
         ></video>
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        <div className="card-actions justify-end">
+      <div className="flex flex-col card-body">
+      <h2 className="card-title">{title}</h2>
+    
+        <div className="flex flex-col p-4">
+       
             <button className="btn btn-primary" onClick={() => openVideoScreen(id)} >බලන්න</button>
         </div>
-      </div>
+        </div>
     </div>
   );
 };

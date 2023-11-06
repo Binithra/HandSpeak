@@ -26,7 +26,6 @@ export { default as DashboardNewVideo } from "./DashboardNewVideo";
 export { default as CardDisplay } from "./CardDisplay";
 export { default as Alert } from "./Alert";
 export { default as VideoPlayer } from "./VideoPlayer";
-export { default as VideoCategory } from "./VideoCategory";
 export { default as DashboardQuiz } from "./DashboardQuiz";
 export { default as FilterButtons } from "./FilterButtons";
 export { default as ReactVideoPlayer } from "./ReactVideoPlayer";

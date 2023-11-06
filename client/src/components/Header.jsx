@@ -32,7 +32,7 @@ const Header = () => {
         <img src={Logo} alt="Logo" className="w-16" />
       </NavLink>
 
-      <ul className="flex items-center justify-center ml-7">
+      <ul className="flex items-center justify-center ml-32">
         <li className="mx-5 text-lg">
           <NavLink
             to={"/home"}
@@ -86,7 +86,7 @@ const Header = () => {
           </NavLink>
         </li>
 
-        <li className="mx-5 text-lg">
+        {/* <li className="mx-5 text-lg">
           <NavLink
             to={"/Progress"}
             className={({ isActive }) =>
@@ -95,7 +95,7 @@ const Header = () => {
           >
             My Progress
           </NavLink>
-        </li>
+        </li> */}
       </ul>
 
       <div

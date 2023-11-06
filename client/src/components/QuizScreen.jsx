@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { w2 } from "../assets/img/index";
+import { L1 } from "../assets/img/index";
 import Header from "./Header";
 
 const QuizScreen = () => {
   const questions = [
     {
-      questionText: "What is the capital of France?",
+      questionText: "ලබා දී ඇති රූපය හඳුනා ගැනීමෙන්, අදාළ අකුර තෝරන්න.",
       answerOptions: [
-        { answerText: "New York", isCorrect: false },
-        { answerText: "London", isCorrect: false },
-        { answerText: "Paris", isCorrect: true },
-        { answerText: "Dublin", isCorrect: false },
+        { answerText: "ය", isCorrect: false },
+        { answerText: "ඉ", isCorrect: false },
+        { answerText: "අ", isCorrect: true },
+        { answerText: "ඇ", isCorrect: false },
       ],
     },
     {
@@ -95,10 +95,10 @@ const QuizScreen = () => {
               <p className="text-base mb-8">
                 Question {currentQuestion + 1}/{questions.length}
               </p>
-              <div className="flex flex-col items-center mb-4 text-teal-700 text-xl">
+              <div className="flex flex-col items-center mb-4 font-semibold text-teal-700 text-xl">
                 {questions[currentQuestion].questionText}
                 <img
-                  src={w2}
+                  src={L1}
                   alt="Sign Language Image"
                   className="max-w-full max-h-full mt-4"
                 />
@@ -109,7 +109,7 @@ const QuizScreen = () => {
                   (answerOption) => (
                     <button
                       key={answerOption.id}
-                      className="text-white rounded-lg flex hover:bg-gray-700 p-2 justify-start border-2 border-blue-800 m-2"
+                      className="text-xl text-blue-800 rounded-lg flex w-20 hover:bg-white p-2 justify-center border-2 border-blue-800 m-2"
                       onClick={() =>
                         handleAnswerOptionClick(answerOption.isCorrect)
                       }

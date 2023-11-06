@@ -10,3 +10,5 @@ export {default as q7} from "./q7.mp4";
 export {default as w1} from "./w1.mp4";
 export {default as q8} from "./q8.mp4";
 export {default as h1} from "./h1.mp4";
+export {default as quiz1} from "./quiz1.gif";
+export {default as quiz2} from "./quiz2.gif";

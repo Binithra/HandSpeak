@@ -5,24 +5,10 @@ import { w1 } from "../assets/video/index";
 import { w2, w3, w4, w5, w6, w7 } from "../assets/img/index";
 import SignUp from "./SignUp";
 
-const last = (
-  <div className="w-full h-auto flex flex-col items-center justify-center">
-    <h2 className="text-center text-2xl font-semibold text-teal-700 pt-20 pb-8">
-      Ready to dive deep?
-    </h2>
-    <button
-      class="bg-amber-400 text-white font-bold py-2 px-4 rounded"
-      onClick={SignUp}
-    >
-      Start Learning!
-    </button>
-  </div>
-);
-
 const middle = (
   <div className="text-left text-2xl pt-6">
     <h2 className="text-center text-2xl font-semibold text-teal-700 pt-12 pb-12">
-      How HandSpeak powers you up?
+    HandSpeak ඔබව ශක්තිමත් කරන්නේ කෙසේද?
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="card card-compact h-[22rem] w-96 bg-teal-100 shadow-xl">
@@ -130,26 +116,22 @@ const middle = (
 
 const Welcome = () => {
   return (
-    <div className="w-full h-auto flex flex-col items-center pb-8">
+    <div className="w-full flex flex-col items-center pb-2">
       <Header />
-      <div class="flex pt-6">
-        <header className="bg-white shadow ">
+      <div class="flex pt-1">
+        <header className="bg-white shadow h-64">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 grid grid-cols-2">
             <div className="flex-1 mb-2  ">
               <h1 className="text-left text-2xl font-semibold text-teal-700 pt-6">
-                Sinhala Learning Platform for Hearing-Impaired Children
+              ශ්‍රවණාබාධිත ළමුන් සඳහා සිංහල ඉගෙනුම් වේදිකාව
               </h1>
-              <h3 className="mb-2 text-left text-base text-red-400 pt-6">
-                Let your hands speak!
+              <h3 className="mb-2 text-left text-base text-red-400 pt-2">
+              ඔබේ අත්වලට කතා කිරීමට ඉඩ දෙන්න!
               </h3>
-              <p className="mb-2 text-left text-sm text-slate-500 pt-6 pb-4">
-                Together with HandSpeak, hearing-impaired children can learn
-                Sinhala with confidence and unlock boundless opportunities for
-                communication.
+              <p className="mb-2 text-sm text-slate-500 pt-6 pb-4">
+                HandSpeak සමඟ එක්ව, ශ්‍රවණාබාධිත දරුවන්ට විශ්වාසයෙන් යුතුව සිංහල
+                ඉගෙන ගත හැකි අතර සන්නිවේදනය සඳහා අසීමිත අවස්ථා විවෘත කළ හැකිය.
               </p>
-              <button class="bg-amber-400 text-white font-bold py-2 px-4 rounded">
-                Start Learning!
-              </button>
             </div>
 
             <div className="flex-none mb-2">
@@ -160,7 +142,7 @@ const Welcome = () => {
                   autoPlay
                   muted
                   loop
-                  className="float-right h-32 md:h-48 lg:h-64"
+                  className="float-right h-72 "
                 ></video>
               </figure>
             </div>
@@ -168,7 +150,6 @@ const Welcome = () => {
         </header>
       </div>
       {middle}
-      {last}
     </div>
   );
 };

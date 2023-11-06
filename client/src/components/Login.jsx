@@ -161,9 +161,15 @@ const Login = ({ setAuth }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+               <Link
+              className="mb-2 text-center text-xs underline text-gray-500 hover:text-pink-700"
+              to="/Signup"
+            >
+              Forgot Password?
+            </Link>
             </div>
             <button
-              className="w-full p-3 mt-4 bg-teal-500 text-sky-200 rounded shadow  hover:bg-teal-800 hover:shadow-md"
+              className="w-full p-3 mt-2  bg-teal-500 text-sky-200 rounded shadow  hover:bg-teal-800 hover:shadow-md"
               onClick={handleLogin}
             >
               Login

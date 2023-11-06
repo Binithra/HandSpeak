@@ -168,7 +168,7 @@ const SignPractice = () => {
             {selectedLetter} අකුර පුරුදු වෙමු
           </p>
           <p className="text-2xl font-medium p-4 text-teal-700 ">
-            Word: {dictionary[selectedLetter]}
+          අකුරට සම්බන්ධ වචන: {dictionary[selectedLetter]}
           </p>
         </div>
         <div className="col_6">
@@ -188,7 +188,7 @@ const SignPractice = () => {
               <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">සමත්</p>
             </div>
           ) : (
-            <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">Try again</p>
+            <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">අපි නැවත උත්සාහ කරමු</p>
           )}
         
         <div className="flex-col text-base font-semibold">
