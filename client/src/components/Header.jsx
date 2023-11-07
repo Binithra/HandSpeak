@@ -131,17 +131,6 @@ const Header = () => {
               </p>
             </NavLink> */}
 
-            {user?.user?.role === "Student" && (
-              <>
-                <NavLink to={"/Welcome"}>
-                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
-                    WelcomeScreen
-                  </p>
-                  <hr />
-                </NavLink>
-              </>
-            )}
-
             <NavLink to={"/support"}>
               <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
                 Support
@@ -149,7 +138,7 @@ const Header = () => {
             </NavLink>
 
             <hr />
-            {user?.user?.role === "Admin" && (
+            {/* {user?.user?.role === "Admin" && (
               <>
                 <NavLink to={"/dashboard/home"}>
                   <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
@@ -158,7 +147,7 @@ const Header = () => {
                   <hr />
                 </NavLink>
               </>
-            )}
+            )} */}
 
             <p
               className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"

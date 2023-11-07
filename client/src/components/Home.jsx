@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useStateValue } from "../context/StateProvider";
 import { motion } from "framer-motion";
 import { h1 } from "../assets/video/index";
+import Dashboard from "./Dashboard";
 
 const middle = (
   <div className="text-left text-2xl pt-6 pb-8">
@@ -50,8 +51,10 @@ const Home = () => {
   const [{ user }, dispatch] = useStateValue();
   return (
     <div className="w-full h-auto flex flex-col items-center pb-8">
-      <Header />
+      
+      {user?.user?.role === "Student" && (
       <div class="flex pt-6">
+        <Header />
         <header className="bg-white shadow ">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 grid grid-cols-2">
             <div className="flex-1 mb-2">
@@ -80,7 +83,12 @@ const Home = () => {
           </div>
         </header>
       </div>
+      )} 
+      {user?.user?.role === "Admin" && (
+          <Dashboard />
+      )}
       {middle}
+      
     </div>
   );
 };

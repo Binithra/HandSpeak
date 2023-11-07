@@ -15,23 +15,54 @@ import DashboardNewQuiz from "./DashboardNewQuiz";
 import DashboardQuiz from "./DashboardQuiz";
 
 const Dashboard = () => {
-  const [{alertType},dispatch] = useStateValue();
+  const [{ alertType }, dispatch] = useStateValue();
   const [{ userCount }] = useStateValue();
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
+    <div className="w-full h-screen flex flex-col ">
       <Header />
 
-      <div className="w-[60%] my-2 p-4 flex items-center justify-evenly">
-        
-        <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-textColor" /></NavLink>
-        
-        <NavLink to={"/dashboard/user"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Users </NavLink>
+      <div className="w-full my-2 p-4 flex items-center justify-evenly  bg-pink-200">
+        {/* <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-yellow-600" /></NavLink> */}
 
-        <NavLink to={"/dashboard/videos"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Videos </NavLink>
+        <NavLink
+          to={"/dashboard/user"}
+          className={({ isActive }) =>
+            isActive ? isActiveStyles : isNotActiveStyles
+          }
+        >
+          {" "}
+          Manage Users{" "}
+        </NavLink>
 
-        <NavLink to={"/dashboard/storybooks"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Storybooks </NavLink>
+        <NavLink
+          to={"/dashboard/videos"}
+          className={({ isActive }) =>
+            isActive ? isActiveStyles : isNotActiveStyles
+          }
+        >
+          {" "}
+          Manage Videos{" "}
+        </NavLink>
 
-        <NavLink to={"/dashboard/quiz"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Quiz </NavLink>
+        <NavLink
+          to={"/dashboard/storybooks"}
+          className={({ isActive }) =>
+            isActive ? isActiveStyles : isNotActiveStyles
+          }
+        >
+          {" "}
+          Manage Storybooks{" "}
+        </NavLink>
+
+        <NavLink
+          to={"/dashboard/quiz"}
+          className={({ isActive }) =>
+            isActive ? isActiveStyles : isNotActiveStyles
+          }
+        >
+          {" "}
+          Manage Quiz{" "}
+        </NavLink>
       </div>
       <div className="my-4 w-full p-4">
         <Routes>
@@ -45,7 +76,6 @@ const Dashboard = () => {
           <Route path="/quiz" element={<DashboardQuiz />} />
         </Routes>
       </div>
-      {alertType && (<Alert type = {alertType} />)}
     </div>
   );
 };

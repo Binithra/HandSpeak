@@ -5,17 +5,18 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { getAllUsers, getAllVideos, getAllStorybooks, getAllQuiz } from "../api";
 import { bgColors } from "../utils/styles";
+import Dashboard from "./Dashboard";
 
 export const DashBoardCard = ({ icon, name, userCount }) => {
   const bg_color = bgColors[parseInt(Math.random() * bgColors.length)];
   return (
     <div
       style={{ background: `${bg_color}` }}
-      className={`p-4 w-40 gap-3 h-auto rounded-lg shadow-md flex flex-col items-center justify-center`}
+      className={`pb-8 w-60 gap-3 h-72 rounded-lg shadow-md flex flex-col items-center justify-center`}
     >
       {icon}
-      <p className="text-xl text-textColor font-semibold">{name}</p>
-      <p className="text-sm text-textColor">{userCount}</p>
+      <p className="text-xl text-textColor font-semibold pb-4">{name}</p>
+      <p className="text-sm text-textColor">Total Count: {userCount}</p>
     </div>
   );
 };
@@ -63,6 +64,7 @@ const DashBoardHome = () => {
   }, []);
   return (
     <div className="w-full p-6 flex items-center justify-evenly flex-wrap">
+      {/* <Dashboard /> */}
       <DashBoardCard
         icon={<SlUser className="text-3xl text-textColor" />}
         name={"Users"}
