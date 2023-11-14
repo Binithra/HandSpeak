@@ -34,19 +34,6 @@ const DashboardNewStorybook = () => {
   const [{ allBooks, filterTerm, levelFilter, alertType }, dispatch] =
     useStateValue();
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-
-  //   if (file) {
-  //     // Ensure the selected file is a PDF
-  //     if (file.type === "application/pdf") {
-  //       setBookImageCover(URL.createObjectURL(file));
-  //     } else {
-  //       alert("Please select a PDF file.");
-  //     }
-  //   }
-  // };
-
   useEffect(() => {
     if (!allBooks) {
       getAllStorybooks().then((data) => {

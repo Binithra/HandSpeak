@@ -7,8 +7,10 @@ import { motion } from "framer-motion";
 import { actionType } from "../context/reducer";
 
 const VideoPlayer = () => {
+  
   const [{ videoIndex, allVideos, isVideoPlaying }, dispatch] = useStateValue();
   const [isPlaylistVisible, setIsPlaylistVisible] = useState(true);
+ 
   const closeVideoPlayer = () => {
     if (isVideoPlaying) {
       dispatch({

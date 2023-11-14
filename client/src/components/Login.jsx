@@ -48,7 +48,13 @@ const Login = ({ setAuth }) => {
               });
             });
 
-            navigate("/", { replace: true });
+            if (userCred.providerData[0].providerId === "google.com") {
+              // Redirect to the home page for Google login
+              navigate("/", { replace: true });
+            } else {
+              // Handle email/password login (render blank page or redirect as needed)
+              navigate("/blank-page", { replace: true });
+            }
           } else {
             setAuth(false);
             dispatch({

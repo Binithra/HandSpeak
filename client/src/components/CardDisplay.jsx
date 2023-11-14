@@ -14,7 +14,7 @@ import {
 
 export const CardDisplay = ({ data, index, type }) => {
   const [isDelete, setIsDelete] = useState(false);
-  const [{ alertType, allBooks, allVideos, videoIndex, isVideoPlaying}, dispatch] = useStateValue();
+  const [{ alertType, allBooks, allVideos,bookIndex, videoIndex, isVideoPlaying, isBookViewing}, dispatch] = useStateValue();
 
   const deleteData = (data) => {
     //Storybook deleting
@@ -111,6 +111,22 @@ export const CardDisplay = ({ data, index, type }) => {
 
   }
 
+  const addToRead=()=>{
+    if(!isBookViewing){
+      dispatch({
+        type: actionType.SET_ISBOOK_VIEWING,
+        isBookViewing: true,
+      });
+    }
+    if(bookIndex !== index){
+      dispatch({
+        type: actionType.SET_BOOK_INDEX,
+        bookIndex: index,
+      });
+    }
+
+  }
+
   return (
     
     <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
@@ -119,7 +135,7 @@ export const CardDisplay = ({ data, index, type }) => {
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
-          onClick={type ==="video" && addToContext} 
+          onClick={type ==="video" && addToContext || type==="storybook" && addToRead} 
           //this onClick opens the videoPlayer 
           className="w-full h-full rounded-lg object-cover"
         />

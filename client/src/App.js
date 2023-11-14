@@ -164,7 +164,7 @@ function App() {
 
         {isBookViewing && (
           <div
-            className={`fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
+            className={`fixed min-w-[700px] h-3/4 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
           >
             <BookViewer />
           </div>
