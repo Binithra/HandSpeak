@@ -6,8 +6,8 @@ import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../config/firebase.config";
 import { Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+// import "@react-pdf-viewer/core/lib/styles/index.css";
+// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks } from "../api";
 import { actionType } from "../context/reducer";
@@ -32,14 +32,14 @@ const StoryBook = () => {
     }
   }, []);
 
-  const closeModal = () => {
-    setShowBookModal(false);
-  };
-  const showModal = (data) => {
-    setShowBookModal(true);
-    setBookToRead(data);
-    console.log("data", data);
-  };
+  // const closeModal = () => {
+  //   setShowBookModal(false);
+  // };
+  // const showModal = (data) => {
+  //   setShowBookModal(true);
+  //   setBookToRead(data);
+  //   console.log("data", data);
+  // };
 
   return (
     <div className="w-full h-auto pb-10 flex flex-col items-center justify-center bg-pink-100">

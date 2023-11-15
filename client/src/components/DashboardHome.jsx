@@ -51,14 +51,14 @@ const DashBoardHome = () => {
       });
     }
 
-    if (!allquiz) {
-      getAllQuiz().then((data) => {
-        dispatch({
-          type: actionType.SET_ALL_QUIZ,
-          allquiz: data.quiz,
-        });
-      });
-    }
+    // if (!allquiz) {
+    //   getAllQuiz().then((data) => {
+    //     dispatch({
+    //       type: actionType.SET_ALL_QUIZ,
+    //       allquiz: data.quiz,
+    //     });
+    //   });
+    // }
 
  
   }, []);

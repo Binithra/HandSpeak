@@ -210,7 +210,7 @@ const DashboardNewStorybook = () => {
                 {bookImageCover && (
                   <embed
                     src={bookImageCover}
-                    // type="application/pdf"
+                    type="application/pdf"
                     width="100%"
                     height="500px"
                   />

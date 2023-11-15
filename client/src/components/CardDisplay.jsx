@@ -14,7 +14,18 @@ import {
 
 export const CardDisplay = ({ data, index, type }) => {
   const [isDelete, setIsDelete] = useState(false);
-  const [{ alertType, allBooks, allVideos,bookIndex, videoIndex, isVideoPlaying, isBookViewing}, dispatch] = useStateValue();
+  const [
+    {
+      alertType,
+      allBooks,
+      allVideos,
+      bookIndex,
+      videoIndex,
+      isVideoPlaying,
+      isBookViewing,
+    },
+    dispatch,
+  ] = useStateValue();
 
   const deleteData = (data) => {
     //Storybook deleting
@@ -95,48 +106,43 @@ export const CardDisplay = ({ data, index, type }) => {
       });
     }
   };
-  const addToContext=()=>{
-    if(!isVideoPlaying){
+  const addToContext = () => {
+    if (!isVideoPlaying) {
       dispatch({
         type: actionType.SET_ISVIDEO_PLAYING,
         isVideoPlaying: true,
       });
     }
-    if(videoIndex !== index){
+    if (videoIndex !== index) {
       dispatch({
         type: actionType.SET_VIDEO_INDEX,
         videoIndex: index,
       });
     }
+  };
 
-  }
-
-  const addToRead=()=>{
-    if(!isBookViewing){
+  const addToRead = () => {
+    if (!isBookViewing) {
       dispatch({
         type: actionType.SET_ISBOOK_VIEWING,
         isBookViewing: true,
       });
     }
-    if(bookIndex !== index){
+    if (bookIndex !== index) {
       dispatch({
         type: actionType.SET_BOOK_INDEX,
         bookIndex: index,
       });
     }
-
-  }
+  };
 
   return (
-    
-    <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
-    >
+    <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center">
       <div className="w-40 h-60 rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
-          onClick={type ==="video" && addToContext || type==="storybook" && addToRead} 
-          //this onClick opens the videoPlayer 
+          onClick={() => (type === "video" ? addToContext() : addToRead())}
           className="w-full h-full rounded-lg object-cover"
         />
       </div>
@@ -147,17 +153,16 @@ export const CardDisplay = ({ data, index, type }) => {
         </span>
       </p>
 
-      {type === "video" || type === "storybook" ? (
-      <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
-        <motion.i
-          whileTap={{ scale: 0.75 }}
-          className="text-base text-red-400 drop-shadow-md hover:text-red-600"
-          onClick={() => setIsDelete(true)}
-        >
-          <IoTrash />
-        </motion.i>
-      </div>
-       ) : null}
+      
+        <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
+          <motion.i
+            whileTap={{ scale: 0.75 }}
+            className="text-base text-red-400 drop-shadow-md hover:text-red-600"
+            onClick={() => setIsDelete(true)}
+          >
+            <IoTrash />
+          </motion.i>
+        </div>
 
       {isDelete && (
         <motion.div
@@ -187,8 +192,6 @@ export const CardDisplay = ({ data, index, type }) => {
         </motion.div>
       )}
     </motion.div>
-
-    
   );
 };
 

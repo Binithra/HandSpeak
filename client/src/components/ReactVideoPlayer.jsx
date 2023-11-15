@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import { motion } from "framer-motion";
 
 const ReactVideoPlayer = ({videos , index, closeModal}) => {
+  //the video player for student
   return (
     <motion.div
       className="w-1/2 border-2 bg-base-100 rounded-lg shadow-xl"
@@ -10,7 +11,6 @@ const ReactVideoPlayer = ({videos , index, closeModal}) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
     >
-      {/* if there is a button in form, it will close the modal */}
       <button
         className="btn btn-sm btn-circle btn-ghost absolute m-1"
         onClick={() => closeModal()}

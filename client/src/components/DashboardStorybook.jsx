@@ -53,20 +53,26 @@ const DashboardStorybook=()=> {
               <p className="text-xl font-bold"><span className="text-sm font-semibold text-black">Count : </span>
               {allBooks?.length}
               </p></div>
-              <BookContainer data={allBooks} /></div>
-
+              <BookContainer data={allBooks} searchFilter={storybookFilter} />
+              </div>
     </div>
   );
         }
 
   // internal component creating
   export const BookContainer =({data, handleSubmit})=>{
+    // const filteredData = data.filter(storybook => storybook.name.toLowerCase().includes(searchFilter.toLowerCase()));
+
     return(
       <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
-        {data && data.map((storybooks,i)=>(
-          <CardDisplay key={storybooks._id} data={storybooks} index={i} type="storybook" onChange={handleSubmit}/>
-        ))}
-      </div>
+       {data && data.length > 0 ? (
+        data.map((storybooks, i) => (
+          <CardDisplay key={storybooks._id} data={storybooks} index={i} type="storybook"  />
+        ))
+      ) : (
+        <p>No storybooks found</p>
+      )}
+    </div>
     )
   
     

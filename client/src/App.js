@@ -109,16 +109,16 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!allquiz && user) {
-      getAllQuiz().then((data) => {
-        dispatch({
-          type: actionType.SET_ALL_QUIZ,
-          allquiz: data.quiz,
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!allquiz && user) {
+  //     getAllQuiz().then((data) => {
+  //       dispatch({
+  //         type: actionType.SET_ALL_QUIZ,
+  //         allquiz: data.quiz,
+  //       });
+  //     });
+  //   }
+  // }, []);
 
   return (
     <AnimatePresence>
@@ -163,9 +163,8 @@ function App() {
         )}
 
         {isBookViewing && (
-          <div
-            className={`fixed min-w-[700px] h-3/4 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
-          >
+          <div className={`fixed w-screen h-screen bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}>
+          
             <BookViewer />
           </div>
         )}

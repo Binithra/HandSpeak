@@ -53,10 +53,11 @@ export const getAllStorybooks = async () => {
 
 export const getAllQuiz = async () => {
   try {
-    const res = await axios.get(`${baseURL}api/quiz/getAll`);
+    const res = await axios.get('/api/quiz'); // Replace with your API endpoint
     return res.data;
   } catch (error) {
-    return null;
+    console.error('Error fetching quiz data:', error);
+    throw error;
   }
 };
 
