@@ -18,7 +18,7 @@ export const CardDisplay = ({ data, index, type }) => {
     {
       alertType,
       allBooks,
-      allVideos,
+      user,
       bookIndex,
       videoIndex,
       isVideoPlaying,
@@ -138,7 +138,7 @@ export const CardDisplay = ({ data, index, type }) => {
 
   return (
     <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center">
-      <div className="w-40 h-60 rounded-lg drop-shadow-lg relative overflow-hidden">
+      <div className=" w-44 h-60 rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
@@ -153,7 +153,7 @@ export const CardDisplay = ({ data, index, type }) => {
         </span>
       </p>
 
-      
+      {user?.user?.role === "Admin" && (
         <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
           <motion.i
             whileTap={{ scale: 0.75 }}
@@ -162,8 +162,7 @@ export const CardDisplay = ({ data, index, type }) => {
           >
             <IoTrash />
           </motion.i>
-        </div>
-
+      
       {isDelete && (
         <motion.div
           className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center flex-col justify-center px-4 py-2 gap-0"
@@ -191,6 +190,9 @@ export const CardDisplay = ({ data, index, type }) => {
           </div>
         </motion.div>
       )}
+        </div>
+      )}
+      
     </motion.div>
   );
 };

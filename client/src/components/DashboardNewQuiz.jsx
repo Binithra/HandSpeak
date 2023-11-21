@@ -1,100 +1,101 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
-import { MdDelete } from "react-icons/md";
-import { storage } from "../config/firebase.config";
 import { useStateValue } from "../context/StateProvider";
-import { getAllQuiz, saveNewQuiz } from "../api";
+import { saveNewQuiz, getAllQuiz } from "../api";
 import { actionType } from "../context/reducer";
+import { createContext } from "react";
+
+export const quizContext = createContext(); //This Context will hold all the states realted to note
 
 const DashboardNewQuiz = () => {
   const [quizTitle, setQuizTitle] = useState("");
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
-  const [{ allquiz}, dispatch] = useStateValue();
-    const [incorrectAnswers, setIncorrectAnswers] = useState(["", "", "", ""]);
+  const [{ allquiz }, dispatch] = useStateValue();
+  const [incorrectAnswers, setIncorrectAnswers] = useState(["", "", "", ""]);
+  const { addQuiz } = context;
+  const context = useContext(quizContext);
+  const [select, setSelect] = useState("yes");
 
-  const handleIncorrectAnswerChange = (index, value) => {
-    const newIncorrectAnswers = [...incorrectAnswers];
-    newIncorrectAnswers[index] = value;
-    setIncorrectAnswers(newIncorrectAnswers);
-  };
+  // useEffect(() => {
+  //   // Fetch all quizzes when the component mounts
+  //   getAllQuiz().then((quiz) => {
+  //     dispatch({
+  //       type: actionType.SET_ALL_QUIZ,
+  //       allquiz: quiz.quiz,
+  //     });
+  //   });
+  // }, [dispatch]);
 
-  const addQuestion = () => {
-    setQuestions([
-      ...questions,
-      {
-        questionName: question,
-        correctAnswer: correctAnswer,
-        answers: [...incorrectAnswers, correctAnswer],
-      },
-    ]);
-    // Reset question-related state
-    setQuestion("");
-    setCorrectAnswer("");
-    setIncorrectAnswers(["", "", ""]);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log("Question:", question);
-    console.log("Correct Answer:", correctAnswer);
-    console.log("Incorrect Answers:", incorrectAnswers);
-  };
-
-  useEffect(() => {
-    if (!allquiz) {
-      getAllQuiz().then((data) => {
-        dispatch({
-          type: actionType.SET_ALL_QUIZ,
-          allquiz: data.quiz,
-        });
-      });
-    }
+  const [quiz, setQuiz] = useState({
+    id: "",
+    question: "",
+    option1: "",
+    option2: "",
+    option3: "",
+    option4: "",
+    answer: "",
+    title: "",
+    mcq: select,
+    code: "",
   });
 
   const saveQuiz = () => {
-      const data = {
-        title:quizTitle,
-        questions: question,
-      };
-      saveNewQuiz(data).then((res) => {
-        getAllQuiz().then((quiz) => {
-          dispatch({
-            type: actionType.SET_ALL_QUIZ,
-            allquiz: quiz.quiz,
-          });
-        });
-      });
-      dispatch({
-        type:actionType.SET_ALERT_TYPE,
-        alertType:"success"
-      })
-      setInterval(() => {
-        dispatch({
-          type:actionType.SET_ALERT_TYPE,
-        alertType:null
-        }) 
-      }, 4000);
+   
 
-      setQuizTitle("");
-      setQuestions([]);
+    addQuiz(
+      quiz.question,
+      quiz.option1,
+      quiz.option2,
+      quiz.option3,
+      quiz.option4,
+      quiz.answer,
+      quiz.title,
+      select,
+    );
+    setQuiz({
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      answer: "",
+      title: "",
+      mcq: select,
+    });
+    // if (res.data) {
+    //   dispatch({
+    //     type: actionType.SET_ALERT_TYPE,
+    //     alertType: "success",
+    //   });
+    //   setInterval(() => {
+    //     dispatch({
+    //       type: actionType.SET_ALERT_TYPE,
+    //       alertType: null,
+    //     });
+    //   }, 4000);}
+  };
 
-    }
+  const onChange = (e) => {
+    setQuiz({ ...quiz, [e.target.name]: e.target.value }); //whatever value inside the quiz object will exist as it is but jo properties aage likhi ja rhi hai inko add ya overwrite kar dena
+  };
 
-
-  return (
-<div className="flex flex-col items-center justify-center p-4 border border-gray-300 gap-4 rounded-md">
-<input
+   return (
+    <div className="flex flex-col items-center justify-center p-4 border border-gray-300 gap-4 rounded-md">
+      <input
         type="text"
         placeholder="Type Quiz Title"
         className="w-full p-3 rounded-md text-base font-regular text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
-        value={quizTitle}
-        onChange={(e) => setQuizTitle(e.target.value)}
+        id="title"
+        name="title"
+        onChange={onChange}
+        value={quiz.title}
+        required
       />
-      
-      <form onSubmit={handleSubmit}>
+
+      {/* <form onSubmit={handleSubmit}> */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Question:
@@ -102,60 +103,101 @@ const DashboardNewQuiz = () => {
           <input
             type="text"
             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            id={question}
+            name={question}
+            onChange={(e) => onChange(e.target.value)}
+            value={quiz.question}
             required
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
-            Correct Answer:
+            Option 1:
           </label>
           <input
             type="text"
             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-            value={correctAnswer}
-            onChange={(e) => setCorrectAnswer(e.target.value)}
+            id="option1"
+            name="option1"
+            onChange={onChange}
+            value={quiz.option1}
             required
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
-            Incorrect Answers:
+            Option 2:
+          </label>
+          <input
+            type="text"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            id="option2"
+            name="option2"
+            onChange={onChange}
+            value={quiz.option2}
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Option 2:
+          </label>
+          <input
+            type="text"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            id="option3"
+            name="option3"
+            onChange={onChange}
+            value={quiz.option3}
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Option 2:
+          </label>
+          <input
+            type="text"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            id="option4"
+            name="option4"
+            onChange={onChange}
+            value={quiz.option4}
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Answer:
           </label>
           {incorrectAnswers.map((answer, index) => (
             <input
-              key={index}
               type="text"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              value={incorrectAnswers[index]}
-              onChange={(e) => handleIncorrectAnswerChange(index, e.target.value)}
+              id="answer"
+              name="answer"
+              onChange={onChange}
+              value={quiz.answer}
               required
-            />))}
+            />
+          ))}
         </div>
+      {/* </form> */}
 
-        <button
-          type="button"
-          className="px-4 py-2 w-50 text-white rounded-md bg-teal-600 hover:shadow-lg"
-          onClick={addQuestion}
-        >
-          Add Question
-        </button>
-
-      </form>
-      
       <button
-          type="submit"
-          className="px-8 py-2 w-60 text-white rounded-md bg-red-600 hover:shadow-lg"
-          onClick={saveQuiz}
-        >
-          Save Quiz
-        </button>
+        type="submit"
+        className="px-8 py-2 w-60 text-white rounded-md bg-red-600 hover:shadow-lg"
+        onClick={saveQuiz}
+      >
+        Save Quiz
+      </button>
     </div>
+  );
+};
 
-  )
-}
-
-export default DashboardNewQuiz
+export default DashboardNewQuiz;

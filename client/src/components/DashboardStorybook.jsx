@@ -4,7 +4,7 @@ import { IoAdd} from "react-icons/io5";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks } from "../api";
 import {actionType} from '../context/reducer'
-import {CardDisplay} from './CardDisplay'
+import CardDisplay from './CardDisplay'
 
 const DashboardStorybook=()=> {
   const [storybookFilter, setStorybookFilter] = useState("");
@@ -29,7 +29,7 @@ const DashboardStorybook=()=> {
       <div className="w-full flex justify-center items-center gap-24">
         <NavLink
           to={"/dashboard/newStorybook"}
-          className="flex items-center px-4 py-3 border rounded-md border-gray-300 hover:border-gray-400 hover:shadow-md cursor-pointer"
+          className="flex items-center px-4 py-3 border rounded-md border-teal-700 hover:bg-teal-200 hover:shadow-md cursor-pointer"
         >
           <IoAdd />
         </NavLink>

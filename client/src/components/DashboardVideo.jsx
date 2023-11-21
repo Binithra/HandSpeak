@@ -29,7 +29,7 @@ export const DashboardVideo=()=> {
       <div className="w-full flex justify-center items-center gap-24">
         <NavLink
           to={"/dashboard/newVideo"}
-          className="flex items-center px-4 py-3 border rounded-md border-gray-300 hover:border-gray-400 hover:shadow-md cursor-pointer"
+          className="flex items-center px-4 py-3 border rounded-md border-teal-700 hover:bg-teal-200 hover:shadow-md cursor-pointer"
         >
           <IoAdd />
         </NavLink>

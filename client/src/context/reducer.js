@@ -85,6 +85,7 @@ const reducer = (state, action) => {
         ...state,
         isVideoPlaying: action.isVideoPlaying,
       };
+
     case actionType.SET_VIDEO_INDEX:
       return {
         ...state,
@@ -107,6 +108,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         bookIndex: action.bookIndex,
+      };
+
+      case actionType.SET_ISQUIZ_VIEWING:
+      return {
+        ...state,
+        isQuizViewing: action.isQuizViewing,
+      };
+
+    case actionType.SET_QUIZ_INDEX:
+      return {
+        ...state,
+        quizIndex: action.quizIndex,
       };
 
     default:

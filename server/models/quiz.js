@@ -4,31 +4,51 @@ const Schema = mongoose.Schema;
 //category: this.state.categoryVal
 const router = require("express").Router();
 
-const quizSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  questions: [
-    {
-      type: Object,
-      contains: {
-        answers: { type: Array },
-        correctAnswer: String,
-        questionName: String,
-      },
+const quizSchema = mongoose.Schema(
+  {
+    question: {
+      type: String,
+      required: true,
     },
-  ],
-  scores: { type: Array, default: [] },
-  createdAt: {
-    type: Date,
-    default: new Date(),
+    option1: {
+      type: String,
+      required: true,
+    },
+    option2: {
+      type: String,
+      required: true,
+    },
+    option3: {
+      type: String,
+      required: true,
+    },
+    option4: {
+      type: String,
+      required: true,
+    },
+    answer: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    mcq: {
+      type: Boolean,
+      default: true,
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
-  deleted: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { timestamps: true }
+);
 
 // Route to delete a quiz by ID
 router.delete("/delete/:id", async (req, res) => {
@@ -39,15 +59,18 @@ router.delete("/delete/:id", async (req, res) => {
     const deletedQuiz = await Quiz.findByIdAndDelete(quizId);
 
     if (!deletedQuiz) {
-      return res.status(404).json({ success: false, message: 'Quiz not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "Quiz not found" });
     }
 
-    res.status(200).json({ success: true, message: 'Quiz deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: "Quiz deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
-
 
 module.exports = mongoose.model("quizzes", quizSchema);

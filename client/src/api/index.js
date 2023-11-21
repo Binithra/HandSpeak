@@ -17,6 +17,7 @@ export const validateUser = async (token) => {
 
 export const getAllUsers = async () => {
   try {
+    //API call
     const res = await axios.get(`${baseURL}api/users/getUsers`);
     return res.data;
   } catch (error) {
@@ -53,11 +54,10 @@ export const getAllStorybooks = async () => {
 
 export const getAllQuiz = async () => {
   try {
-    const res = await axios.get('/api/quiz'); // Replace with your API endpoint
+    const res = await axios.get(`${baseURL}api/quiz/getAll`);
     return res.data;
   } catch (error) {
-    console.error('Error fetching quiz data:', error);
-    throw error;
+    return null;
   }
 };
 

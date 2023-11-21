@@ -47,7 +47,6 @@ const StoryBook = () => {
       <div className="text-2xl font-semibold pt-8 pb-12">
         ඔබ කියවීමට කැමති පොතක් තෝරන්න.
       </div>
-      {/* Main Container */}
 
       <UserBookContainer data={allBooks} />
     </div>

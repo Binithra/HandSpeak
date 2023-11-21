@@ -6,7 +6,7 @@ import {
   Login,
   Progress,
   Quiz,
-  QuizScreen,
+  // QuizScreen,
   SignPractice,
   SignUp,
   Support,
@@ -51,6 +51,8 @@ function App() {
       allquiz,
       getAllQuiz,
       isBookViewing,
+      isQuizViewing,
+      
     },
     dispatch,
   ] = useStateValue();
@@ -109,16 +111,16 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!allquiz && user) {
-  //     getAllQuiz().then((data) => {
-  //       dispatch({
-  //         type: actionType.SET_ALL_QUIZ,
-  //         allquiz: data.quiz,
-  //       });
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!allquiz && user) {
+      getAllQuiz().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_QUIZ,
+          allquiz: data.quiz,
+        });
+      });
+    }
+  }, []);
 
   return (
     <AnimatePresence>
@@ -137,7 +139,7 @@ function App() {
           <Route path="/Support" element={<Support />} />
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
-          <Route path="/QuizScreen" element={<QuizScreen />} />
+          {/* <Route path="/QuizScreen" element={<QuizScreen />} /> */}
           <Route path="/Welcome" element={<Welcome />} />
           <Route path="/VideoScreen" element={<VideoScreen />} />
           <Route path="/StoryBook" element={<StoryBook />} />
@@ -166,6 +168,13 @@ function App() {
           <div className={`fixed w-screen h-screen bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}>
           
             <BookViewer />
+          </div>
+        )}
+
+        {isQuizViewing &&(
+          <div onClick={ "_blank"} className={`fixed w-screen h-screen bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}>
+
+          <QuizViewer />
           </div>
         )}
       </div>

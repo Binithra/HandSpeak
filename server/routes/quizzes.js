@@ -18,11 +18,15 @@ router.get("/getAll", async (req, res) => {
   
   router.post("/save", async (req, res) => {
     const newQuiz = quiz({
+      question:req.body.question,
+      option1: req.body.option1,
+      option2:req.body.option2,
+      option3: req.body.option3,
+      option4: req.body.option4,
+      answer:req.body.answer,
       title:req.body.title,
-      questions: req.body.questions,
-      scores:req.body.scores,
-      createdAt: req.body.createdAt,
-      deleted: req.body.deleted,
+      mcq:true,
+      // user:req.user.id,
     });
   
     try {
@@ -58,31 +62,31 @@ router.get("/getAll", async (req, res) => {
     }
   });
 
-  router.put("/update/:id", async (req, res) => {
-    const filter = { _id: req.params.id };
+  // router.put("/update/:id", async (req, res) => {
+  //   const filter = { _id: req.params.id };
   
-    const options = {
-      upsert: true, //upsert is used in case if the data isnt available it'll create new one.
-      new: true,
-    };
+  //   const options = {
+  //     upsert: true, //upsert is used in case if the data isnt available it'll create new one.
+  //     new: true,
+  //   };
   
-    try {
-      const result = await quiz.findOneAndUpdate(
-        filter,
-        {
-          title:req.body.title,
-          questions: req.body.questions,
-          scores:req.body.scores,
-          createdAt: req.body.createdAt,
-          deleted: req.body.deleted,
-        },
-        options
-      );
+  //   try {
+  //     const result = await quiz.findOneAndUpdate(
+  //       filter,
+  //       {
+  //         title:req.body.title,
+  //         questions: req.body.questions,
+  //         scores:req.body.scores,
+  //         createdAt: req.body.createdAt,
+  //         deleted: req.body.deleted,
+  //       },
+  //       options
+  //     );
   
-      return res.status(200).send({ success: true, data: result });
-    } catch (error) {
-      return res.status(400).send({ success: false, msg: error });
-    }
-  });
+  //     return res.status(200).send({ success: true, data: result });
+  //   } catch (error) {
+  //     return res.status(400).send({ success: false, msg: error });
+  //   }
+  // });
 
   module.exports = router;
