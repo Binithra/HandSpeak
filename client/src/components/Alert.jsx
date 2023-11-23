@@ -20,7 +20,7 @@ const Alert = ({ type }) => {
         {type === "success" && (
           <div className="flex items-center justify-center gap-4">
             <BsEmojiWink className="text-3xl text-primary" />
-            <p className="text-xl font-semibold text-primary">Data Saved</p>
+            <p className="text-xl font-semibold text-primary">Task is successful</p>
           </div>
         )}
 

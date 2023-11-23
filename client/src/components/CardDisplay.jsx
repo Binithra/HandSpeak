@@ -137,8 +137,8 @@ export const CardDisplay = ({ data, index, type }) => {
   };
 
   return (
-    <motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center">
-      <div className=" w-44 h-60 rounded-lg drop-shadow-lg relative overflow-hidden">
+    <motion.div className="relative w-40 h-72 min-w-210 px-2 py-4 cursor-pointer hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center">
+      <div className="w-40 min-w-[160px] h-48 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={data.imageURL || data.coverURL}
@@ -146,53 +146,51 @@ export const CardDisplay = ({ data, index, type }) => {
           className="w-full h-full rounded-lg object-cover"
         />
       </div>
-      <p className="text-base text-headingColor pt-4 font-semibold my-2">
-        {data.name.length > 25 ? `${data.name.slice(0, 25)}..` : data.name}
-        <span className="block text-sm text-gray-400 my-1">
-          {data.category}
-        </span>
-      </p>
+      {/* <div className="flex"> */}
+        <p className="text-base text-headingColor pt-1 font-semibold my-2">
+          {data.name.length > 25 ? `${data.name.slice(0, 25)}..` : data.name}
+        </p>
 
-      {user?.user?.role === "Admin" && (
-        <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
-          <motion.i
-            whileTap={{ scale: 0.75 }}
-            className="text-base text-red-400 drop-shadow-md hover:text-red-600"
-            onClick={() => setIsDelete(true)}
-          >
-            <IoTrash />
-          </motion.i>
-      
-      {isDelete && (
-        <motion.div
-          className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center flex-col justify-center px-4 py-2 gap-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <p className="text-xl text-headingColor font-semibold text-center">
-            Are you sure to delete?
-          </p>
-          <div className="flex items-center gap-4 pt-8">
-            <motion.button
-              className="px-2 py-1 text-sm uppercase bg-teal-300 rounded-md hover:bg-teal-500 cursor-pointer"
-              whileTap={{ scale: 0.7 }}
-              onClick={() => deleteData(data)}
+        {user?.user?.role === "Admin" && (
+          <div className="w-full absolute bottom-2 right-2 flex items-center justify-between px-4">
+            <motion.i
+              whileTap={{ scale: 0.75 }}
+              className="  left-8 bottom-8 w-8 h-8 rounded-md flex items-center justify-center bg-gray-200 text-base text-red-400 drop-shadow-md hover:text-red-600"
+              onClick={() => setIsDelete(true)}
             >
-              Yes
-            </motion.button>
-            <motion.button
-              className="px-2 py-1 text-sm uppercase bg-red-300 rounded-md hover:bg-red-500 cursor-pointer"
-              whileTap={{ scale: 0.7 }}
-              onClick={() => setIsDelete(false)}
-            >
-              No
-            </motion.button>
+              <IoTrash />
+            </motion.i>
+
+            {isDelete && (
+              <motion.div
+                className=" w-40 h-52 backdrop-blur-md bg-card flex items-center flex-col justify-center px-4 py-2 "
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <p className="text-xl text-headingColor font-semibold text-center">
+                  Are you sure to delete?
+                </p>
+                <div className="flex items-center gap-4 pt-8">
+                  <motion.button
+                    className="px-2 py-1 text-sm uppercase bg-teal-300 rounded-md hover:bg-teal-500 cursor-pointer"
+                    whileTap={{ scale: 0.7 }}
+                    onClick={() => deleteData(data)}
+                  >
+                    Yes
+                  </motion.button>
+                  <motion.button
+                    className="px-2 py-1 text-sm uppercase bg-red-300 rounded-md hover:bg-red-500 cursor-pointer"
+                    whileTap={{ scale: 0.7 }}
+                    onClick={() => setIsDelete(false)}
+                  >
+                    No
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
           </div>
-        </motion.div>
-      )}
-        </div>
-      )}
-      
+        )}
+      {/* </div> */}
     </motion.div>
   );
 };

@@ -27,9 +27,9 @@ const Login = ({ setAuth }) => {
   const provider = new GoogleAuthProvider();
 
   const navigate = useNavigate();
-  const [dispatch] = useState();
+  // const [dispatch] = useState();
 
-  // const [{ user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   const loginWithGoogle = async () => {
     await signInWithPopup(firebaseAuth, provider).then((userCred) => {

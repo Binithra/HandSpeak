@@ -63,7 +63,7 @@ const QuizViewer = () => {
       
           <div className=" card my-3 card-body">
             <h5 className="card-title">{data.question}</h5>
-              <div className="row">
+              <div className="col">
                 <div className="form-check">
               <input
               className="form-check-input mr-4"
@@ -83,7 +83,7 @@ const QuizViewer = () => {
               </label>
             </div>
             </div>
-            <div className="row">
+            <div className="col">
                 <div className="form-check">
               <input
                 type="radio"
@@ -102,7 +102,7 @@ const QuizViewer = () => {
               </label>
             </div>
             </div>
-            <div className="row">
+            <div className="col">
                 <div className="form-check">
               <input
                 type="radio"
@@ -121,7 +121,7 @@ const QuizViewer = () => {
               </label>
             </div>
             </div>
-            <div className="row">
+            <div className="col">
                 <div className="form-check">
               <input
                 type="radio"

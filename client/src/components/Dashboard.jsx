@@ -76,6 +76,9 @@ const Dashboard = () => {
           <Route path="/quiz" element={<DashboardQuiz />} />
         </Routes>
       </div>
+
+      {alertType && <Alert type={alertType} />}
+      
     </div>
   );
 };

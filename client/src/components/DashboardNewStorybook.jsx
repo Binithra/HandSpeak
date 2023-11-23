@@ -49,6 +49,7 @@ const DashboardNewStorybook = () => {
     if (isImage) {
       setIsBookImageLoading(true);
       setIsBookLoading(true);
+
       dispatch({
         type: actionType.SET_ALERT_TYPE,
         alertType: "success",
@@ -60,6 +61,7 @@ const DashboardNewStorybook = () => {
         });
       }, 4000);
     }
+
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
       dispatch({
@@ -80,10 +82,10 @@ const DashboardNewStorybook = () => {
   };
 
   const saveStorybook = () => {
-    if (!storybookImageCover || !bookImageCover) {
+    if (!storybookImageCover && !bookImageCover) {
       dispatch({
         type: actionType.SET_ALERT_TYPE,
-        alertType: "success",
+        alertType: "error",
       });
       setInterval(() => {
         dispatch({
@@ -102,6 +104,7 @@ const DashboardNewStorybook = () => {
         // level: levelFilter,
         // category: filterTerm,
       };
+
       saveNewStorybook(data).then((res) => {
         getAllStorybooks().then((data) => {
           dispatch({
@@ -140,9 +143,11 @@ const DashboardNewStorybook = () => {
         value={storybookName}
         onChange={(e) => setStorybookName(e.target.value)}
       />
-      
+
       <div className="bg-card backdrop-blur-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
-        {isBookImageLoading && <FileLoader progress={bookImageUploadProgress} />}
+        {isBookImageLoading && (
+          <FileLoader progress={bookImageUploadProgress} />
+        )}
         {!isBookImageLoading && (
           <>
             {!storybookImageCover ? (
@@ -284,6 +289,8 @@ export const FileUploader = ({
   isLoading,
   isImage,
 }) => {
+  const [{ alertType }, dispatch] = useStateValue();
+
   const uploadFile = (e) => {
     isLoading(true);
     const uploadedFile = e.target.files[0];
@@ -301,12 +308,34 @@ export const FileUploader = ({
       },
       (error) => {
         console.log(error);
+        dispatch({
+          type: actionType.SET_ALERT_TYPE,
+          alertType: "error",
+        });
+        setInterval(() => {
+          dispatch({
+            type: actionType.SET_ALERT_TYPE,
+            alertType: null,
+          });
+        }, 4000);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           updateState(downloadURL);
           isLoading(false);
+
+          dispatch({
+            type: actionType.SET_ALERT_TYPE,
+            alertType: "success",
+          });
+          setInterval(() => {
+            dispatch({
+              type: actionType.SET_ALERT_TYPE,
+              alertType: null,
+            });
+          }, 4000);
         });
+       
       }
     );
   };

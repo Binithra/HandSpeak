@@ -35,8 +35,8 @@ const Quiz = () => {
 };
 
 export const QuizCardContainer = ({ data }) => {
-  // const [isDelete, setIsDelete] = useState({});
-  // const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [isDelete, setIsDelete] = useState({});
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
 
   return (
     <div className=" flex flex-wrap gap-3 items-center justify-evenly">
@@ -46,9 +46,9 @@ export const QuizCardContainer = ({ data }) => {
             key={quiz._id}
             data={quiz}
             index={i}
-            // setSelectedQuiz={setSelectedQuiz}
-            // isDelete={isDelete}
-            // setIsDelete={setIsDelete}
+            setSelectedQuiz={setSelectedQuiz}
+            isDelete={isDelete}
+            setIsDelete={setIsDelete}
             formatDate={(dateString) => {
               const options = {
                 year: "numeric",

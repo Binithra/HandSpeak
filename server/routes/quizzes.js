@@ -25,6 +25,7 @@ router.get("/getAll", async (req, res) => {
       option4: req.body.option4,
       answer:req.body.answer,
       title:req.body.title,
+      imageURL:req.body.imageURL,
       mcq:true,
       // user:req.user.id,
     });

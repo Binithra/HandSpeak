@@ -10,6 +10,10 @@ const quizSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    imageURL: {
+      type: String,
+      required: true,
+    },
     option1: {
       type: String,
       required: true,
