@@ -66,7 +66,7 @@ const Dashboard = () => {
       </div>
       <div className="my-4 w-full p-4">
         <Routes>
-          <Route path="/home" element={<DashboardHome />} />
+          <Route path="/*" element={<DashboardHome />} />
           <Route path="/user" element={<DashboardUser />} />
           <Route path="/videos" element={<DashboardVideo />} />
           <Route path="/storybooks" element={<DashboardStorybook />} />

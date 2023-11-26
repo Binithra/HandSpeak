@@ -27,14 +27,18 @@ const QuizCard = ({
   const [showScore, setShowScore] = useState(true);
 
 
+const [answered, setAnswered] = useState(false);
+
   const handleOptionChange = (value) => {
+
+    setAnswered(true)
     const selectedOption = value;
     if (selectedOption === data.answer) {
       // Increment the score by 10 for each correct answer
       handleAnswerSelection();
     }
     // Notify the parent component about the answer selection
-    handleAnswerSelection(selectedOption);
+   // handleAnswerSelection(selectedOption);
   };
 
 
@@ -88,65 +92,76 @@ const QuizCard = ({
             className=" rounded-lg object-cover w-56 h-44"
             src={data.imageURL}
           />
-          <div className="row ">
+          
+          <div className=" p-2 ">
             <div className="form-check">
               <input
-                className="form-check-input mr-4"
+                className="form-check-input mr-4 "
                 type="radio"
                 id={data.option1}
                 name="quizOptions"
                 value={data.option1}
-                onClick={handleOptionChange}
+                onClick={() => handleOptionChange(data.option1)}
+                disabled={answered ? true : false}
               />
               <label className="text-black" for="flexRadioDefault2">
                 {data.option1}
               </label>
             </div>
-          </div>
-          <div className="row">
+          
             <div className="form-check">
               <input
                 type="radio"
                 id={data.option2}
                 name="quizOptions"
                 value={data.option2}
-                onClick={handleOptionChange}
+                onClick={() =>handleOptionChange(data.option2)}
                 className="form-check-input mr-4"
+                disabled={answered ? true : false}
               />
               <label className="text-black" for={data.option2}>
                 {data.option2}
               </label>
             </div>
-          </div>
-          <div className="row">
+          
             <div className="form-check">
               <input
                 type="radio"
                 id={data.option3}
                 name="quizOptions"
                 value={data.option3}
-                onClick={handleOptionChange}
+                onClick={() =>handleOptionChange(data.option3)}
                 className="form-check-input mr-4"
+                disabled={answered ? true : false}
               />
               <label className="text-black" for={data.option3}>
                 {data.option3}
               </label>
             </div>
-          </div>
-          <div className="row">
+          
             <div className="form-check">
               <input
                 type="radio"
                 id={data.option4}
                 name="quizOptions"
                 value={data.option4}
-                onClick={handleOptionChange}
+                onClick={() => handleOptionChange(data.option4)}
                 className="form-check-input mr-4"
+                disabled={answered ? true : false}
               />
               <label className="text-black" for={data.option4}>
                 {data.option4}
               </label>
             </div>
+            { answered && (
+              <p className="text-base text-headingColor font-semibold ">Answer : {data.answer}</p>
+            )}
+
+            {/* clear answer button
+            { answered && (
+              <button className="btn btn-xs bg-blue-50" onClick={() => setAnswered(false)}>Clear Answer</button>
+            )} */}
+            
           </div>
 
           {user?.user?.role === "Admin" && (

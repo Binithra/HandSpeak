@@ -44,7 +44,7 @@ const Quiz = ({ data }) => {
         setScore={setScore}
       />
       <button
-        className="btn btn-primary mx-2"
+        className="btn btn-primary mx-2 my-4 p-4"
         onClick={() => setShowScore(true)}
       >
         GENERATE SCORE
