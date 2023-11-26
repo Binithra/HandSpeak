@@ -3,11 +3,10 @@ import Header from "./Header";
 import { motion } from "framer-motion";
 import { w1 } from "../assets/video/index";
 import { w2, w3, w4, w5, w6, w7 } from "../assets/img/index";
-import SignUp from "./SignUp";
 
 const middle = (
   <div className="text-left text-2xl pt-6">
-    <h2 className="text-center text-2xl font-semibold text-teal-700 pt-12 pb-12">
+    <h2 className="text-center text-2xl font-semibold text-teal-700 pb-12">
     HandSpeak ඔබව ශක්තිමත් කරන්නේ කෙසේද?
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -119,16 +118,15 @@ const Welcome = () => {
     <div className="w-full flex flex-col items-center pb-2">
       <Header />
       <div class="flex pt-1">
-        <header className="bg-white shadow h-64">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 grid grid-cols-2">
-            <div className="flex-1 mb-2  ">
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-4 grid grid-cols-2">
+            <div className="flex-1 ml-8">
               <h1 className="text-left text-2xl font-semibold text-teal-700 pt-6">
               ශ්‍රවණාබාධිත ළමුන් සඳහා සිංහල ඉගෙනුම් වේදිකාව
               </h1>
               <h3 className="mb-2 text-left text-base text-red-400 pt-2">
               ඔබේ අත්වලට කතා කිරීමට ඉඩ දෙන්න!
               </h3>
-              <p className="mb-2 text-sm text-slate-500 pt-6 pb-4">
+              <p className="mb-2 text-sm text-slate-500 pt-6">
                 HandSpeak සමඟ එක්ව, ශ්‍රවණාබාධිත දරුවන්ට විශ්වාසයෙන් යුතුව සිංහල
                 ඉගෙන ගත හැකි අතර සන්නිවේදනය සඳහා අසීමිත අවස්ථා විවෘත කළ හැකිය.
               </p>
@@ -147,7 +145,6 @@ const Welcome = () => {
               </figure>
             </div>
           </div>
-        </header>
       </div>
       {middle}
     </div>

@@ -5,48 +5,6 @@ import { motion } from "framer-motion";
 import { h1 } from "../assets/video/index";
 import Dashboard from "./Dashboard";
 
-const middle = (
-  <div className="text-left text-2xl pt-6 pb-8">
-    <h2 className="text-center text-2xl font-semibold text-teal-700 pt-12 pb-12">
-      Let's Complete!
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="card card-compact h-[8rem] w-96 bg-orange-100 shadow-xl pb-8">
-        <div className="card-body">
-          <h2 className="card-title text-center text-orange-700">Quiz</h2>
-          <p className="text-justify">Family</p>
-          <div className="card-actions justify-end"></div>
-        </div>
-        <button class="bg-teal-500 text-white font-bold py-2 px-4 rounded">
-          Continue
-        </button>
-      </div>
-
-      <div className="card card-compact h-[8rem] w-96 bg-violet-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-center text-violet-700">Storybook</h2>
-          <p className="text-justify">Humpty Dumpty</p>
-          <div className="card-actions justify-end"></div>
-        </div>
-        <button class="bg-teal-500 text-white font-bold py-2 px-4 rounded">
-          Continue
-        </button>
-      </div>
-
-      <div className="card card-compact h-[8rem] w-96 bg-rose-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-center text-rose-700">Quiz</h2>
-          <p className="text-justify">Letters</p>
-          <div className="card-actions justify-end"></div>
-        </div>
-        <button class="bg-teal-500 text-white font-bold py-2 px-4 rounded">
-          Continue
-        </button>
-      </div>
-    </div>
-  </div>
-);
-
 const Home = () => {
   const [{ user }, dispatch] = useStateValue();
   return (
@@ -87,7 +45,6 @@ const Home = () => {
       {user?.user?.role === "Admin" && (
           <Dashboard />
       )}
-      {/* {middle} */}
       
     </div>
   );

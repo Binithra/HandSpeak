@@ -96,28 +96,4 @@ export const QuizContainer = ({ data }) => {
   );
 };
 
-// export const QuizScreen = ({
-//   selectedQuiz,
-//   setSelectedQuiz,
-//   allquiz,
-//   formatDate,
-// }) => {
-//   const quiz = allquiz.find((data) => data._id === selectedQuiz);
-
-//   return (
-//     <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
-//       {quiz ? (
-//         <>
-//           <h1>{quiz.title}</h1>
-//           {/* Display other details of the quiz as needed */}
-//           <p>Created on: {formatDate(quiz.createdAt)}</p>
-//           {/* Add more details here as needed */}
-//           <button onClick={() => setSelectedQuiz(null)}>Close Viewer</button>
-//         </>
-//       ) : (
-//         <p>No quiz selected.</p>
-//       )}
-//     </div>
-//   );
-// };
 export default DashboardQuiz;

@@ -8,7 +8,6 @@ export { default as SignPractice } from "./SignPractice";
 
 export { default as Dashboard } from "./Dashboard";
 
-// export { default as QuizScreen } from "./QuizScreen";
 
 export { default as Progress } from "./Progress";
 export { default as ProgressBody } from "./ProgressBody";
@@ -31,6 +30,6 @@ export { default as FilterButtons } from "./FilterButtons";
 export { default as ReactVideoPlayer } from "./ReactVideoPlayer";
 export { default as QuizCard } from "./QuizCard";
 export { default as DashboardNewQuiz } from "./DashboardNewQuiz";
-export { default as QuizViewer } from "./QuizViewer";
 
 export { default as BookViewer } from "./BookViewer";
+export { default as Contact } from "./Contact";

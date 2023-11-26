@@ -6,7 +6,6 @@ import {
   Login,
   Progress,
   Quiz,
-  // QuizScreen,
   SignPractice,
   SignUp,
   Support,
@@ -21,8 +20,8 @@ import {
   DashboardUserCard,
   VideoPlayer,
   DashboardQuiz,
-  QuizViewer,
   BookViewer,
+  Contact,
 } from "./components";
 import { app } from "./config/firebase.config";
 
@@ -139,7 +138,6 @@ function App() {
           <Route path="/Support" element={<Support />} />
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
-          {/* <Route path="/QuizScreen" element={<QuizScreen />} /> */}
           <Route path="/Welcome" element={<Welcome />} />
           <Route path="/VideoScreen" element={<VideoScreen />} />
           <Route path="/StoryBook" element={<StoryBook />} />
@@ -149,8 +147,9 @@ function App() {
           <Route path="/DashboardStorybook" element={<DashboardStorybook />} />
           <Route path="/DashboardQuiz" element={<DashboardQuiz />} />
           <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
-          <Route path="/QuizViewer" element={<QuizViewer />} />
           <Route path="/BookViewer" element={<BookViewer />} />
+          <Route path="/Contact" element={<Contact />} />
+          
         </Routes>
 
         {isVideoPlaying && (
@@ -174,7 +173,7 @@ function App() {
         {isQuizViewing &&(
           <div onClick={ "_blank"} className={`fixed w-screen h-screen bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}>
 
-          <QuizViewer />
+          <Quiz />
           </div>
         )}
       </div>
