@@ -33,3 +33,5 @@ export { default as DashboardNewQuiz } from "./DashboardNewQuiz";
 
 export { default as BookViewer } from "./BookViewer";
 export { default as Contact } from "./Contact";
+
+export { default as Certificate } from "./Certificate";

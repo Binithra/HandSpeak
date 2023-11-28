@@ -135,3 +135,12 @@ export const deleteQuizById = async (id) => {
     return null;
   }
 };
+
+export const sendCertificateEmail = async (id) => {
+  try {
+    const res = axios.delete(`${baseURL}api/quiz/sendCertificateEmail/${id}`);
+    return res;
+  } catch (error) {
+    return null;
+  }
+};

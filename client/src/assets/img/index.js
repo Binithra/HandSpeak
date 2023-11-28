@@ -21,3 +21,5 @@ export {default as w6} from "./w6.png";
 export {default as w7} from "./w7.png";
 
 export {default as L1} from "./L1.jpg";
+
+export {default as certificate} from "./certificate.png";

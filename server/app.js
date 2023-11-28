@@ -28,6 +28,9 @@ app.use("/api/storybooks/", storybooksRoutes);
 const quizRoutes = require("./routes/quizzes");
 app.use("/api/quiz/", quizRoutes);
 
+const emailRoutes = require("./routes/emails");
+app.use("/api/email/", emailRoutes);
+
 mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true });
 mongoose.connection
   .once("open", () => console.log("Connected"))

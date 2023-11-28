@@ -154,7 +154,7 @@ const [answered, setAnswered] = useState(false);
               </label>
             </div>
             { answered && (
-              <p className="text-base text-headingColor font-semibold ">Answer : {data.answer}</p>
+              <p className="text-base text-headingColor font-semibold ">නිවැරදි පිළිතුර : {data.answer}</p>
             )}
 
             {/* clear answer button

@@ -31,6 +31,39 @@ const Quiz = ({ data }) => {
     }
   }, [allquiz, dispatch]);
 
+  // useEffect(() => {
+  //   // Check the score and redirect if it's more than 80%
+  //   if (score > 10) {
+  //     // Redirect to a specific URL when the score is more than 80%
+  //     window.location.href = "/Certificate";
+  //   }
+  // }, [score]);
+
+  // useEffect(() => {
+  //   // Check the score and send email if it's more than 80%
+  //   if (score > 10) {
+  //     fetch("http://localhost:4000/api/email/sendCertificateEmail", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email: "rushini29binithra@gmail.com" }),
+  //     })
+  //       .then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error("Network response was not ok");
+  //         }
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error sending email:", error);
+  //       });
+  //   }
+  // }, [score]);
+
   return (
     <div className="w-full h-auto pb-10 flex flex-col items-center justify-center bg-teal-100">
       {" "}

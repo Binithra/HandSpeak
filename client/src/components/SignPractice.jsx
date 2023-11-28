@@ -167,8 +167,8 @@ const SignPractice = () => {
           <p className="text-3xl text-black text bg-yellow-500 rounded-lg font-semibold p-4 ">
             {selectedLetter} අකුර පුරුදු වෙමු
           </p>
-          <p className="text-2xl font-medium p-4 text-teal-700 ">
-          අකුරට සම්බන්ධ වචන: {dictionary[selectedLetter]}
+          <p className=" text-lg text-teal-700 mt-4 "> අකුරට සම්බන්ධ වචන:</p>
+          <p className="text-2xl w-20 font-medium p-4 text-teal-700 "> {dictionary[selectedLetter]}
           </p>
         </div>
         <div className="col_6">
@@ -185,7 +185,7 @@ const SignPractice = () => {
           {selectedLetter == defaultValue ? (
             <div>
               <p className="text-xl font-medium p-4 text-teal-700 "> {selectedLetter} අකුර ඉගෙනීම</p>
-              <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">සමත්</p>
+              <p className="text-xl font-medium p-4 text-red-700 pb-60 ">සමත්</p>
             </div>
           ) : (
             <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">අපි නැවත උත්සාහ කරමු</p>
