@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const isNotActiveStyles = `p-2 px-6 text-gray-500 text-lg rounded-full hover:text-headingColor duration-100 transition-all hover:bg-teal-400 `;
-  const isActiveStyles = `p-2 px-6 text-gray-500 text-headingColor rounded-full bg-slate-300 text-lg font-bold`;
+  const isActiveStyles = `p-2 px-6 text-white text-headingColor rounded-full bg-teal-600 text-lg font-bold`;
 
   const logOut = () => {
     const firebaseAuth = getAuth(app);
@@ -64,16 +64,6 @@ const Header = () => {
             Videos
           </NavLink>
         </li>
-        <li className="mx-5 text-lg">
-          <NavLink
-            to={"/Quiz"}
-            className={({ isActive }) =>
-              isActive ? isActiveStyles : isNotActiveStyles
-            }
-          >
-            Quiz
-          </NavLink>
-        </li>
 
         <li className="mx-5 text-lg">
           <NavLink
@@ -85,23 +75,24 @@ const Header = () => {
             Storybook Library
           </NavLink>
         </li>
-
-        {/* <li className="mx-5 text-lg">
+        
+        <li className="mx-5 text-lg">
           <NavLink
-            to={"/Progress"}
+            to={"/Quiz"}
             className={({ isActive }) =>
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            My Progress
+            Quiz
           </NavLink>
-        </li> */}
+        </li>
+
       </ul>
 
       <div
         onMouseEnter={() => setisMenu(true)}
         onMouseLeave={() => setisMenu(false)}
-        className="flex items-center ml-auto cursor-pointer gap-2 relative"
+        className="flex items-center ml-auto cursor-pointer gap-6 relative"
       >
         <img
           src={user?.user?.imageURL}

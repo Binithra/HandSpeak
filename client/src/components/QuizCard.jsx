@@ -13,34 +13,25 @@ const QuizCard = ({
   formatDate,
   index,
   handleAnswerSelection,
-  // handleOptionChange,
 }) => {
   const [
     { allquiz, isViewing, user, isQuizViewing, quizIndex, alertType },
     dispatch,
   ] = useStateValue();
-  // const [{ user }] = useStateValue();
   const [isDelete, setIsDelete] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [score, setScore] = useState(0);
-  // const [flag, setFlag] = useState(0);
   const [showScore, setShowScore] = useState(true);
-
-
 const [answered, setAnswered] = useState(false);
 
-  const handleOptionChange = (value) => {
-
-    setAnswered(true)
-    const selectedOption = value;
-    if (selectedOption === data.answer) {
-      // Increment the score by 10 for each correct answer
-      handleAnswerSelection();
-    }
-    // Notify the parent component about the answer selection
-   // handleAnswerSelection(selectedOption);
-  };
-
+const handleOptionChange = (value) => {
+  setAnswered(true);
+  const selectedOption = value;
+  if (selectedOption === data.answer) {
+    // Increment the score by 10 for each correct answer
+    handleAnswerSelection();
+  }
+};
 
   const deleteData = (data) => {
     // const deleteRef = ref(storage, data.quizImageURL);

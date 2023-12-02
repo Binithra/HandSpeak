@@ -167,8 +167,8 @@ const SignPractice = () => {
           <p className="text-3xl text-black text bg-yellow-500 rounded-lg font-semibold p-4 ">
             {selectedLetter} අකුර පුරුදු වෙමු
           </p>
-          <p className=" text-lg text-teal-700 mt-4 "> අකුරට සම්බන්ධ වචන:</p>
-          <p className="text-2xl w-20 font-medium p-4 text-teal-700 "> {dictionary[selectedLetter]}
+          <p className=" text-lg text-teal-700 mt-8 ml-12 "> අකුරට සම්බන්ධ වචන:</p>
+          <p className="text-2xl w-20 font-medium p-4 text-teal-700 ml-8 "> {dictionary[selectedLetter]}
           </p>
         </div>
         <div className="col_6">
@@ -183,16 +183,16 @@ const SignPractice = () => {
         </div>
         <div className="flex-col items-center justify-center">
           {selectedLetter == defaultValue ? (
-            <div>
+            <div className="p-8 ml-8 rounded-lg border border-red-700 h-60">
               <p className="text-xl font-medium p-4 text-teal-700 "> {selectedLetter} අකුර ඉගෙනීම</p>
-              <p className="text-xl font-medium p-4 text-red-700 pb-60 ">සමත්</p>
+              <p className="text-xl font-semibold p-4 text-red-700 pb-60 ">සමත්</p>
             </div>
           ) : (
-            <p className="text-xl font-medium p-4 text-teal-700 pb-60 ">අපි නැවත උත්සාහ කරමු</p>
+            <p className="text-xl font-semibold p-4 text-teal-700 pb-60 ml-8 border rounded-lg border-red-700 h-60">අපි නැවත උත්සාහ කරමු</p>
           )}
         
-        <div className="flex-col text-base font-semibold">
-          <p>ඔබේ අත් ස්ථාවරව තබා ගන්න. </p>ඔබේ දෑත් කැමරාව වෙත යොමු කරන්න.
+        <div className="flex-col text-base font-medium border border-dashed p-8 ml-8 rounded-lg border-teal-700 mt-8">
+          <p className="mb-2">ඔබේ අත් ස්ථාවරව තබා ගන්න. </p><p className="mb-2">පැහැදිලි පසුබිමක් තබා ගන්න</p>ඔබේ දෑත් කැමරාව වෙත යොමු කරන්න.
         </div>
         </div>
 

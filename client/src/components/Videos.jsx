@@ -10,7 +10,6 @@ import VideoScreen from "./VideoScreen";
 const Videos = () => {
   const [showVideoScreen, setShowVideoScreen] = useState(false);
   const [id, setId] = useState("");
-
   const[{allVideos},dispatch] = useStateValue()
 
   const openVideoScreen = (id) => {
@@ -22,7 +21,6 @@ const Videos = () => {
   const closeVideoScreen = () => {
     setShowVideoScreen(false);
   }
-
 
   useEffect(()=>{
     setId("");
@@ -41,14 +39,14 @@ const Videos = () => {
   
 
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center bg-yellow-100">
+    <div className="w-full h-auto flex flex-col  bg-yellow-100">
       <Header />
       {showVideoScreen ? (
             <VideoScreen cato={id} closeVideoScreen={closeVideoScreen} />
           ) : (
       <>
-      <div className="text-2xl font-semibold p-4 ">ඔබ සඳහා වීඩියෝ පාඩම්</div>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="text-2xl font-semibold p-4 text-center justify-center">ඔබ සඳහා වීඩියෝ පාඩම්</div>
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 ml-12">
         <VideoCard id="Letters" video={q2} title={'අකුරු'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen} />
         <VideoCard id="Colors" video={q8} title={'පාට'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
         <VideoCard id="Number" video={q5} title={'අංක'} screen={"/VideoScreen"} openVideoScreen={openVideoScreen}/>
@@ -60,7 +58,6 @@ const Videos = () => {
       </div>
       </>
        )}
-
 
     </div>
   );
