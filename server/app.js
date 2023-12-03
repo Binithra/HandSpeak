@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv/config");
+const signupRoute = require('./routes/auth');
 
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
@@ -8,9 +9,11 @@ const { default: mongoose } = require("mongoose");
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  return res.json("hii");
-});
+app.use('/api', signupRoute);
+
+// app.get("/", (req, res) => {
+//   return res.json("hii");
+// });
 
 //user authentication route
 const userRoute = require("./routes/auth");

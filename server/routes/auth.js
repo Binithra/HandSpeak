@@ -27,6 +27,43 @@ router.get("/login", async (req, res) => {
   }
 });
 
+router.post('/Signup', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Create user in Firebase Authentication
+    const userRecord = await admin.auth().createUser({
+      email: email,
+      password: password,
+    });
+
+    // Create user in your MongoDB
+    const newUser = new user({
+      user_id: userRecord.uid,
+      // Add other user properties as needed
+    });
+
+    const savedUser = await newUser.save();
+
+    // You can add additional logic here based on your requirements
+
+    res.status(200).json({
+      success: true,
+      message: 'User registered successfully',
+      user: savedUser,
+    });
+  } catch (error) {
+    console.error('Error in user signup:', error);
+
+    // Check the error code and handle accordingly
+    if (error.code === 'auth/email-already-exists') {
+      return res.status(400).json({ success: false, message: 'Email already exists.' });
+    }
+
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 const newUserData = async (decodeValue, req, res) => {
   const newUser = new user({
     name: decodeValue.name,

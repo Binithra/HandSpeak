@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Logo } from "../assets/img/index";
 import { Link } from "react-router-dom";
-
-import { app, auth } from "../config/firebase.config";
+import { app, database } from "../config/firebase.config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { validateUser } from "../api";
-
 import { LoginBg } from "../assets/video/index";
 
 const Login = ({ setAuth }) => {
@@ -47,14 +44,8 @@ const Login = ({ setAuth }) => {
                 });
               });
             });
-
-            if (userCred.providerData[0].providerId === "google.com") {
-              // Redirect to the home page for Google login
-              navigate("/", { replace: true });
-            } else {
-              // Handle email/password login (render blank page or redirect as needed)
-              navigate("/blank-page", { replace: true });
-            }
+            // Redirect to the home page for both Google and email/password login
+            navigate("/", { replace: true });
           } else {
             setAuth(false);
             dispatch({
@@ -68,44 +59,35 @@ const Login = ({ setAuth }) => {
     });
   };
 
-  const handleLogin = async () => {
-    if (email !== null && password !== null) {
-      signInWithEmailAndPassword(firebaseAuth, email, password)
-        .then(() => {
-          setAuth(true);
-          window.localStorage.setItem("auth", "true");
-
-          firebaseAuth.onAuthStateChanged((userCred) => {
-            if (userCred) {
-              userCred.getIdToken().then((token) => {
-                validateUser(token).then((data) => {
-                  dispatch({
-                    type: actionType.SET_USER,
-                    user: data,
-                  });
-                });
-              });
-
-              navigate("/", { replace: true });
-            } else {
-              setAuth(false);
-              dispatch({
-                type: actionType.SET_USER,
-                user: null,
-              });
-              navigate("/login");
-            }
-          });
-        })
-        .catch((err) => alert(err));
-    }
-  };
-
   useEffect(() => {
     if (window.localStorage.getItem("auth" === "true")) {
       navigate("/", { replace: true });
     }
   });
+
+  const [login, setLogin] = useState(false);
+  const history = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const email = e.currentTarget.email.value;
+    const password = e.currentTarget.password.value;
+
+    createUserWithEmailAndPassword(database, email, password)
+      .then((data) => {
+        console.log(data, "authData");
+        history("/");
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
+  };
+
+  const handleReset = () => {
+    history("/reset");
+  };
 
   return (
     <div className="relative w-screen h-screen ">
@@ -167,16 +149,16 @@ const Login = ({ setAuth }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-               <Link
-              className="mb-2 text-center text-xs underline text-gray-500 hover:text-pink-700"
-              to="/Signup"
-            >
-              Forgot Password?
-            </Link>
+              <Link
+                className="mb-2 text-center text-xs underline text-gray-500 hover:text-pink-700"
+                onClick={handleReset}
+              >
+                Forgot Password?
+              </Link>
             </div>
             <button
               className="w-full p-3 mt-2  bg-teal-500 text-sky-200 rounded shadow  hover:bg-teal-800 hover:shadow-md"
-              onClick={handleLogin}
+              onClick={handleSubmit}
             >
               Login
             </button>

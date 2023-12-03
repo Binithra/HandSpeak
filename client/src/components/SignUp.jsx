@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { app, auth } from "../config/firebase.config";
-
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { validateUser } from "../api";
@@ -12,52 +11,43 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const SignUp = (setAuth) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
-
-  async function handleSignup() {
-    if (email !== null && password !== null) {
-      signInWithEmailAndPassword(firebaseAuth, email, password)
-        .then(() => {
-          setAuth(true);
-          window.localStorage.setItem("auth", "true");
-
-          firebaseAuth.onAuthStateChanged((userCred) => {
-            if (userCred) {
-              userCred.getIdToken().then((token) => {
-                validateUser(token).then((data) => {
-                  dispatch({
-                    type: actionType.SET_USER,
-                    user: data,
-                  });
-                });
-              });
-
-              navigate("/", { replace: true });
-            } else {
-              setAuth(false);
-              dispatch({
-                type: actionType.SET_USER,
-                user: null,
-              });
-              navigate("/Signup");
-            }
-          });
-        })
-        .catch((err) => alert(err));
+  const [errorMessage, setErrorMessage] = useState('');
+  const auth = getAuth();
+  
+  const register = () => {
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
     }
-  }
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Registration successful, handle additional logic if needed
+      const user = userCredential.user;
+      console.log('User registered:', userCredential.user);
+      setErrorMessage('');
+
+      alert('Registration successful!');
+      navigate("/Welcome", { replace: true });
+    })
+    .catch((error) => {
+      // Registration failed, display error message
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error('Registration failed:', errorCode, errorMessage);
+      setErrorMessage(errorMessage);
+    });
+};
 
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-
   const navigate = useNavigate();
-
   const [{ user }, dispatch] = useStateValue();
 
   const signUpWithGoogle = async () => {
@@ -94,6 +84,7 @@ const SignUp = (setAuth) => {
   function handleClick() {
     window.location.href = "/Login";
   }
+
   useEffect(() => {
     if (window.localStorage.getItem("auth" === "true")) {
       navigate("/", { replace: true });
@@ -137,6 +128,7 @@ const SignUp = (setAuth) => {
                 className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="mb-4">
@@ -153,6 +145,7 @@ const SignUp = (setAuth) => {
                 className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none"
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
+                required
               />
             </div>
             <div className="mb-4">
@@ -168,13 +161,14 @@ const SignUp = (setAuth) => {
                 placeholder="Confirm password"
                 className="block w-full p-3 rounded bg-gray-200 border border-transparent focus:outline-none"
                 value={confirmPassword}
+                required
                 onChange={(e) => setconfirmPassword(e.target.value)}
               />
             </div>
 
             <button
               className="w-full p-3 mt-1 bg-rose-300 text-white rounded shadow  hover:bg-rose-500 hover:shadow-md"
-              onClick={handleSignup}
+              onClick={register}
             >
               Submit
             </button>
