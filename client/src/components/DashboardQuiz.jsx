@@ -31,21 +31,10 @@ const DashboardQuiz = () => {
       <div className="w-full flex justify-center items-center gap-24">
         <NavLink
           to={"/dashboard/newQuiz"}
-          className="flex items-center px-4 py-3 border rounded-md border-teal-700 hover:bg-teal-200 hover:shadow-md cursor-pointer"
-           >
+          className="flex items-center px-4 py-3 font-semibold border-2 rounded-md border-orange-500 hover:shadow-md cursor-pointer gap-4"
+        >Add New Quiz
           <IoAdd />
         </NavLink>
-        <input
-          type="text"
-          placeholder="Search here"
-          className={`w-52 px-4 py-2 border ${
-            isFocus ? "border-gray-500 shadow-md" : "border-gray-300"
-          } rounded-md bg-transparent outline-none duration-150 transition-all ease-in-out text-base text-textColor font-semibold`}
-          value={quizFilter}
-          onChange={(e) => setQuizFilter(e.target.value)}
-          onBlur={() => setIsFocus(false)}
-          onFocus={() => setIsFocus(true)}
-        />
       </div>
       {/* Main Container */}
       <div className="relative w-full my-4 p-4 py-16 border border-gray-300 rounded-md">
@@ -65,7 +54,6 @@ const DashboardQuiz = () => {
 export const QuizContainer = ({ data }) => {
   const [isDelete, setIsDelete] = useState({});
   const [selectedQuiz, setSelectedQuiz] = useState(null);
-  
 
   return (
     <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">

@@ -39,7 +39,7 @@ const DashboardUser = () => {
       <div className="w-full flex justify-center items-center gap-24">
         <input
           type="text"
-          placeholder="Search here"
+          placeholder="Search "
           className={`w-52 px-4 py-2 border ${
             isFocus ? "border-gray-500 shadow-md" : "border-gray-300"
           } rounded-md bg-transparent outline-none duration-150 transition-all ease-in-out text-base text-textColor font-semibold`}

@@ -32,20 +32,11 @@ const StoryBook = () => {
     }
   }, []);
 
-  // const closeModal = () => {
-  //   setShowBookModal(false);
-  // };
-  // const showModal = (data) => {
-  //   setShowBookModal(true);
-  //   setBookToRead(data);
-  //   console.log("data", data);
-  // };
-
   return (
     <div className="w-full h-auto pb-10 flex flex-col items-center justify-center bg-pink-100">
       <Header />
       <div className="text-2xl font-semibold pt-8 pb-12">
-        ඔබ කියවීමට කැමති පොතක් තෝරන්න.
+        ඔබ කියවීමට කැමති පොතක් තෝරන්න.📚
       </div>
 
       <UserBookContainer data={allBooks} />

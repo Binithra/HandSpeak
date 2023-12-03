@@ -12,7 +12,7 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const isNotActiveStyles = `p-2 px-6 text-gray-500 text-lg rounded-full hover:text-headingColor duration-100 transition-all hover:bg-teal-400 `;
+  const isNotActiveStyles = `p-2 px-6 text-gray-500 text-lg rounded-full hover:text-headingColor duration-100 transition-all hover:bg-orange-300 `;
   const isActiveStyles = `p-2 px-6 text-white text-headingColor rounded-full bg-teal-600 text-lg font-bold`;
 
   const logOut = () => {
@@ -122,9 +122,9 @@ const Header = () => {
               </p>
             </NavLink> */}
 
-            <NavLink to={"/support"}>
+            <NavLink to={"/Welcome"}>
               <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-                Support
+              HandSpeak පිලිබඳ දැන ගන්න
               </p>
             </NavLink>
 

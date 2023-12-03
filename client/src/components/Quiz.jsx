@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { getAllQuiz } from "../api";
+import { getAllQuiz, getAllUsers} from "../api";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
 import QuizCard from "./QuizCard";
 import { ws1, ws3, ws5 } from "../assets/img/index";
 
 const Quiz = ({ data }) => {
-  const [{ allquiz }, dispatch] = useStateValue();
+  const [{ allquiz, allUsers }, dispatch] = useStateValue();
   const [showScore, setShowScore] = useState(true);
   const [score, setScore] = useState(0);
   const [isReady, setIsReady] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleAnswerSelection = () => {
     setScore((prevScore) => prevScore + 10);
@@ -28,38 +29,61 @@ const Quiz = ({ data }) => {
     }
   }, [allquiz, dispatch]);
 
+  useEffect(() => {
+    // Fetch all quizzes only if not already fetched
+    if (!allUsers) {
+      getAllUsers().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_USERS,
+          allUsers: data.data,
+        });
+      });
+    }
+  }, [allUsers, dispatch]);  
+
   const startQuiz = () => {
     setIsReady(true);
   };
 
   useEffect(() => {
-    if (score > 90) {
+    if (score > 90 && !emailSent) {
       sendCertificateEmail();
+      setEmailSent(true); 
     }
-  }, [score]);
+  }, [score, emailSent]);
 
-  const sendCertificateEmail = () => {
-    // making HTTP requests
-    fetch("http://localhost:4000/api/email/sendCertificateEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: "rushinibin@gmail.com", score }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-      });
+  const sendCertificateEmail = (userId) => {
+    // Check if allUsers is defined
+    if (allUsers) {
+      const user = allUsers.find((user) => user.id === userId);
+  
+      // Check if user and user email are defined
+      if (user && user.email) {
+        fetch("http://localhost:4000/api/email/sendCertificateEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: user.email, score }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+          });
+      } else {
+        console.error("User email is not defined");
+      }
+    }
   };
+  
 
   return (
     <div className="w-full h-full pb-10 flex flex-col bg-purple-100">
@@ -67,7 +91,7 @@ const Quiz = ({ data }) => {
 
       {!isReady && (
         <div className="flex flex-col">
-          <p className=" text-base text-justify p-8 text-gray-700 ">
+          <p className=" text-base text-justify p-8 text-gray-700  ml-4">
             <li>
               ප්‍රශ්නාවලිය ආරම්භ කිරීමෙන් පසු ලබා දී ඇති පිළිතුරු ලැයිස්තුවෙන්
               නිවැරදි පිළිතුර තෝරන්න.
@@ -91,7 +115,7 @@ const Quiz = ({ data }) => {
             </button>
           </p>
 
-          <div className="flex ml-64 gap-12 ">
+          <div className="flex ml-64 gap-12 mt-6 ">
             <img src={ws1} className=" shadow-md h-72 rounded-lg"></img>
             <img src={ws3} className=" shadow-md h-72 rounded-lg"></img>
             <img src={ws5} className="shadow-md h-72 rounded-lg"></img>
@@ -112,16 +136,27 @@ const Quiz = ({ data }) => {
           <div
             className={
               showScore
-                ? "d-flex flex items-center justify-center bg-purple-400 h-12 text-xl mt-4"
+                ? "d-flex flex items-center justify-center text-red-800 font-semibold rounded-lg bg-purple-300 h-14 text-3xl mt-6"
                 : "d-none"
             }
           >
-            Your Score is : {score}
+            ඔබේ ලකුණු : {score}
           </div>
-          <div className="ml-12 mt-12  items-center justify-center">
-            <a href="/Quiz" className="w-24 bg-orange-300 p-4 rounded-lg">
-              REDO
-            </a>
+          <div className=" mt-12  items-center justify-center">
+            {score <= 90 && (
+              <a
+                href="/Quiz"
+                className="w-24 bg-orange-300 p-4 rounded-lg ml-8"
+              >
+                නැවත කරන්න
+              </a>
+            )}
+            {score > 90 && (
+              <p className=" flex w-auto  items-center justify-center bg-success p-4 rounded-lg">
+                සුභ පැතුම් 🥳🎉!! දැන් ඔබට ඔබේ විද්‍යුත් තැපැල් ලිපිනය සඳහා
+                පාඨමාලා සම්පූර්ණ කිරීමේ සහතිකයක් ලැබෙනු ඇත.
+              </p>
+            )}
           </div>
         </>
       )}

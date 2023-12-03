@@ -16,10 +16,10 @@ const Home = () => {
             <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 grid grid-cols-2">
               <div className="flex-1 mb-2">
                 <h1 className="text-left text-2xl font-semibold text-teal-700 pt-6">
-                  Hi {user?.user?.name}!
+                  Hi {user?.user?.name}👋!
                 </h1>
                 <h3 className="mb-2 text-left text-base text-red-400 pt-6">
-                අපි තවත් ඉගෙන ගැනීමට පටන් ගනිමු!
+                අපි තවත් ඉගෙන ගැනීමට පටන් ගනිමු!😊
                 </h3>
                 <p className="mb-2 text-left text-sm text-slate-500 pt-6 pb-4">
                   "දැනුම යනු ලෝකය වෙනස් කිරීමට ඔබට භාවිතා කළ හැකි බලවත්ම

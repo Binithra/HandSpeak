@@ -21,7 +21,7 @@ const Dashboard = () => {
     <div className="w-full h-screen flex flex-col ">
       <Header />
 
-      <div className="w-full my-2 p-4 flex items-center justify-evenly  bg-pink-200">
+      <div className="w-full my-2 p-4 flex items-center justify-evenly  bg-teal-400">
         {/* <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-yellow-600" /></NavLink> */}
 
         <NavLink

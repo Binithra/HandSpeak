@@ -9,7 +9,6 @@ import { MdDelete } from "react-icons/md";
 const DashboardUserCard = ({ data, index }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdateRole, setIsUpdateRole] = useState(false);
-
   const [{ allUsers, user }, dispatch] = useStateValue();
   const createdAt = moment(new Date(data.createdAt)).format("MMMM DD YYYY");
 

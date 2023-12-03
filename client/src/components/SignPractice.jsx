@@ -68,27 +68,27 @@ const SignPractice = () => {
   };
 
   const dictionary = {
-    අ: "අම්මා, අත, අයියා, අහිමි, අපි, අදහස",
-    ආ: "ආහාර, ආගම, ආයුබෝවන්, ආකාර, ආතතිය, ඇය ",
-    ඉ:"ඉලක්ක, ඉහළ, ඉඩම, ඉරිදා",
-    උ:"උගත්, උඩ, උත්සාහ, උදවු ",
-    එ:"එක, එළිය, එන්න, එක්සත්, එළවළු, එළුවා",
-    ඒ:"ඒදන්ඩ, ඒක",
-    ක:"කන්න, කපටි, කතුර",
-    ග:"ගයනවා, ගල, ගන්නවා, ගස් ",
-    ඩ:"යකඩ, වඩේ, කඩය, උඩ, පාඩම ",
-    ත:"අත, වත, හත, ගීතය, තරුණ",
-    ද:"දහය, ඉරිදා, අද, දන්නේ, අදහස",
-    ප:"පන්තිය, පසු, පනහ, ජපන්",
-    බ:"බල්ලෙක්, බහින, සබන්, බස්",
-    ය:"චිත්‍රපටය, යටතේ, කුඩය, ගීතය",
-    ර:"වසර, රතු, රට, සමහර",
-    ල:"බෝල, මිල, මල, වහල, ඊලඟ, දැකල ",
+    අ: "අම්මා අත අයියා අහිමි අපි අදහස",
+    ආ: "ආහාර ආගම ආයුබෝවන් ආකාර ආතතිය ඇය ",
+    ඉ:"ඉලක්ක ඉහළ ඉඩම ඉරිදා",
+    උ:"උගත් උඩ උත්සාහ උදවු ",
+    එ:"එක එළිය එන්න එක්සත් එළවළු එළුවා",
+    ඒ:"ඒදන්ඩ ඒක",
+    ක:"කන්න කපටි කතුර",
+    ග:"ගයනවා ගල ගන්නවා ගස් ",
+    ඩ:"යකඩ වඩේ කඩය උඩ පාඩම ",
+    ත:"අත වත හත ගීතය තරුණ",
+    ද:"දහය ඉරිදා අද දන්නේ අදහස",
+    ප:"පන්තිය පසු පනහ ජපන්",
+    බ:"බල්ලෙක් බහින සබන් බස්",
+    ය:"චිත්‍රපටය යටතේ කුඩය ගීතය",
+    ර:"වසර රතු රට සමහර",
+    ල:"බෝල මිල මල වහල ඊලඟ දැකල ",
     ව:"ශාලාව, ශ්‍රී ලංකාව, ඇමරිකාව, දිව ",
-    ස:"සතුට, සහ, සටන, සමහර, අදහස",
-    හ:"හමුවීම, හඬ, සමහර, හරි, වහන්න ",
-    ෆ:"ෆලූඩා, ෆැක්ස්, ජිරාෆ්",
-    ළ:"ළමුන්, කළමනාකරු",
+    ස:"සතුට සහ සටන සමහර අදහස",
+    හ:"හමුවීම හඬ සමහර හරි වහන්න ",
+    ෆ:"ෆලූඩා ෆැක්ස් ජිරාෆ්",
+    ළ:"ළමුන් කළමනාකරු",
     o:"අo",
   };
 
@@ -131,38 +131,6 @@ const SignPractice = () => {
         ))}
       </div>
       <div className="flex flex-row w-full h-full p-2 gap-1 bg-primary  ">
-        {/* <div className="bg-red basis-1/2 "> */}
-        {/* <button
-            type="button"
-            className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
-            onClick={init1}
-          >
-            Colors
-          </button>
-          <button
-            type="button"
-            className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
-            onClick={init2}
-          >
-            Numbers
-          </button>
-          <button
-            type="button"
-            className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
-            onClick={init3}
-          >
-            People
-          </button>
-          {webcamOpen && (
-            <button
-              type="button"
-              className="bg-teal-700 rounded-lg px-4 py-2 text-white text-lg m-2"
-              onClick={closeWebcam}
-            >
-              Close Webcam
-            </button>
-          )} */}
-
         <div className=" flex-col items-center justify-center">
           <p className="text-3xl text-black text bg-yellow-500 rounded-lg font-semibold p-4 ">
             {selectedLetter} අකුර පුරුදු වෙමු
