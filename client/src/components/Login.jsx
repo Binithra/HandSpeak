@@ -59,35 +59,44 @@ const Login = ({ setAuth }) => {
     });
   };
 
+  const handleLogin = async () => {
+    await signInWithEmailAndPassword(firebaseAuth, email, password)
+      .then((userCred) => {
+        if (email !== null && password !== null) {
+          setAuth(true);
+          window.localStorage.setItem("auth", "true");
+
+          firebaseAuth.onAuthStateChanged((userCred) => {
+            if (userCred) {
+              userCred.getIdToken().then((token) => {
+                validateUser(token).then((data) => {
+                  dispatch({
+                    type: actionType.SET_USER,
+                    user: data,
+                  });
+                });
+              });
+
+              navigate("/", { replace: true });
+            } else {
+              setAuth(false);
+              dispatch({
+                type: actionType.SET_USER,
+                user: null,
+              });
+              navigate("/login");
+            }
+          });
+        }
+      })
+      .catch((err) => alert(err));
+  };
+
   useEffect(() => {
     if (window.localStorage.getItem("auth" === "true")) {
       navigate("/", { replace: true });
     }
   });
-
-  const [login, setLogin] = useState(false);
-  const history = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const email = e.currentTarget.email.value;
-    const password = e.currentTarget.password.value;
-
-    createUserWithEmailAndPassword(database, email, password)
-      .then((data) => {
-        console.log(data, "authData");
-        history("/");
-      })
-      .catch((error) => {
-        // Handle error
-        console.error(error);
-      });
-  };
-
-  const handleReset = () => {
-    history("/reset");
-  };
 
   return (
     <div className="relative w-screen h-screen ">
@@ -151,14 +160,14 @@ const Login = ({ setAuth }) => {
               />
               <Link
                 className="mb-2 text-center text-xs underline text-gray-500 hover:text-pink-700"
-                onClick={handleReset}
+                to="/Signup"
               >
                 Forgot Password?
               </Link>
             </div>
             <button
               className="w-full p-3 mt-2  bg-teal-500 text-sky-200 rounded shadow  hover:bg-teal-800 hover:shadow-md"
-              onClick={handleSubmit}
+              onClick={handleLogin}
             >
               Login
             </button>
