@@ -74,10 +74,6 @@ const DashboardNewQuiz = ({ data }) => {
     });
   };
 
-  // const onChange = (e) => {
-  //   setQuiz({ ...quiz, [e.target.name]: e.target.value }); //whatever value inside the quiz object will exist as it is
-  // };
-
   useEffect(() => {
     if (!allquiz) {
       getAllQuiz().then((data) => {
@@ -145,31 +141,6 @@ const DashboardNewQuiz = ({ data }) => {
     }
   };
 
-  // const saveQuiz = () => {
-  //   // addQuiz(
-  //   //   quiz.question,
-  //   //   quiz.option1,
-  //   //   quiz.option2,
-  //   //   quiz.option3,
-  //   //   quiz.option4,
-  //   //   quiz.answer,
-  //   //   quiz.title,
-  //   //   select,
-  //   // );
-
-  //   setQuiz({
-  //     question: "",
-  //     option1: "",
-  //     option2: "",
-  //     option3: "",
-  //     option4: "",
-  //     answer: "",
-  //     title: "",
-  //     imageURL: quizImage,
-  //     mcq: select,
-  //   });
-  // };
-
   return (
     <div className="flex flex-col items-center justify-center p-2 border border-gray-300 gap-2 rounded-md">
       <input
@@ -216,7 +187,6 @@ const DashboardNewQuiz = ({ data }) => {
         )}
       </div>
 
-      {/* <form onSubmit={handleSubmit} className="flex flex-row"> */}
       <form className="flex flex-row">
         <div className="m-4">
           <label className="block text-sm font-medium text-gray-700">
@@ -319,14 +289,6 @@ const DashboardNewQuiz = ({ data }) => {
             />
           ))}
         </div>
-
-        {/* <button
-          type="button"
-          className="px-4 py-2 w-50 text-white rounded-md bg-teal-600 hover:shadow-lg"
-          onClick={addQuestion}
-        >
-          Add Question
-        </button> */}
       </form>
 
       <button

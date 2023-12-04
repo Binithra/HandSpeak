@@ -62,7 +62,6 @@ const DashboardStorybook = () => {
 
 // internal component creating
 export const BookContainer = ({ data, handleSubmit }) => {
-  // const filteredData = data.filter(storybook => storybook.name.toLowerCase().includes(searchFilter.toLowerCase()));
 
   return (
     <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">

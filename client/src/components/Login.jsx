@@ -24,7 +24,6 @@ const Login = ({ setAuth }) => {
   const provider = new GoogleAuthProvider();
 
   const navigate = useNavigate();
-  // const [dispatch] = useState();
 
   const [{ user }, dispatch] = useStateValue();
 

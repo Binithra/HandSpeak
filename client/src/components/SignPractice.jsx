@@ -46,17 +46,6 @@ const SignPractice = () => {
     }
   };
 
-
-  // useEffect(() => {
-  //   const timerId = setInterval(() => {
-  //     const binaryData = webcamRef.current.getScreenshot();
-
-  //     sendFrameToServer(binaryData);
-  //   }, 1000);
-
-  //   return () => clearInterval(timerId);
-  // }, []);
-
   const handleButtonClick = (letter) => {
     setSelectedLetter(letter);
     const timerId = setInterval(() => {

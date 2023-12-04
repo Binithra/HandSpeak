@@ -8,9 +8,9 @@ export {default as Con4} from "./content5.jpg";
 export {default as Con5} from "./content6.jpeg";
 export {default as Prog} from "./progress.jpg";
 
-export {default as S1} from "././Support/s1.png";
-export {default as S2} from "././Support/s2.png";
-export {default as S3} from "././Support/s3.png";
+// export {default as S1} from "././Support/s1.png";
+// export {default as S2} from "././Support/s2.png";
+// export {default as S3} from "././Support/s3.png";
 
 
 export {default as w2} from "./w2.jpg";

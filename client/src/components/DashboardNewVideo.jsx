@@ -15,10 +15,7 @@ import { useStateValue } from "../context/StateProvider";
 import { getAllVideos, saveNewVideo } from "../api";
 import { actionType } from "../context/reducer";
 import { filterByLevel, filters } from "../utils/supportfunctions";
-import { IoMusicalNote } from "react-icons/io5";
 import FilterButtons from "./FilterButtons";
-// import AlertSuccess from "./AlertSuccess";
-// import AlertError from "./AlertError";
 
 const DashboardNewVideo = () => {
   const [videoName, setVideoName] = useState("");

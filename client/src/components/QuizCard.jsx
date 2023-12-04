@@ -34,8 +34,6 @@ const handleOptionChange = (value) => {
 };
 
   const deleteData = (data) => {
-    // const deleteRef = ref(storage, data.quizImageURL);
-    //   deleteObject(deleteRef).then(() => {});
 
     deleteQuizById(data._id).then((res) => {
       if (res.data) {
@@ -147,12 +145,6 @@ const handleOptionChange = (value) => {
             { answered && (
               <p className="text-base text-headingColor font-semibold ">නිවැරදි පිළිතුර : {data.answer}</p>
             )}
-
-            {/* clear answer button
-            { answered && (
-              <button className="btn btn-xs bg-blue-50" onClick={() => setAnswered(false)}>Clear Answer</button>
-            )} */}
-            
           </div>
 
           {user?.user?.role === "Admin" && (
@@ -195,11 +187,6 @@ const handleOptionChange = (value) => {
             </div>
           )}
         </div>
-        {/* {user?.user?.role === "Admin" && (
-          <p className="text-base text-textColor ">
-            Created on: {formatDate(data.createdAt)}
-          </p>
-        )} */}
       </form>
     </div>
   );

@@ -11,7 +11,6 @@ export { default as Dashboard } from "./Dashboard";
 
 export { default as Progress } from "./Progress";
 export { default as ProgressBody } from "./ProgressBody";
-export { default as Support } from "./Support";
 export { default as Welcome } from "./Welcome";
 export { default as StoryBook } from "./StoryBook";
 export { default as VideoScreen } from "./VideoScreen";
@@ -32,6 +31,3 @@ export { default as QuizCard } from "./QuizCard";
 export { default as DashboardNewQuiz } from "./DashboardNewQuiz";
 
 export { default as BookViewer } from "./BookViewer";
-export { default as Contact } from "./Contact";
-
-export { default as Certificate } from "./Certificate";

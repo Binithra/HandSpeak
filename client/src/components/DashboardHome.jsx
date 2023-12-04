@@ -51,20 +51,19 @@ const DashBoardHome = () => {
       });
     }
 
-    // if (!allquiz) {
-    //   getAllQuiz().then((data) => {
-    //     dispatch({
-    //       type: actionType.SET_ALL_QUIZ,
-    //       allquiz: data.quiz,
-    //     });
-    //   });
-    // }
+    if (!allquiz) {
+      getAllQuiz().then((data) => {
+        dispatch({
+          type: actionType.SET_ALL_QUIZ,
+          allquiz: data.quiz,
+        });
+      });
+    }
 
  
   }, []);
   return (
     <div className="w-full p-6 flex items-center justify-evenly flex-wrap">
-      {/* <Dashboard /> */}
       <DashBoardCard
         icon={<SlUser className="text-3xl text-textColor" />}
         name={"Users"}

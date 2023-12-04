@@ -14,9 +14,6 @@ import { storage } from "../config/firebase.config";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks, saveNewStorybook } from "../api";
 import { actionType } from "../context/reducer";
-import { filterByLevel, filters } from "../utils/supportfunctions";
-import { IoMusicalNote } from "react-icons/io5";
-import FilterButtons from "./FilterButtons";
 
 const DashboardNewStorybook = () => {
   //story book image cover
@@ -101,9 +98,7 @@ const DashboardNewStorybook = () => {
         name: storybookName,
         coverURL: storybookImageCover,
         bookURL: bookImageCover,
-        // level: levelFilter,
-        // category: filterTerm,
-      };
+           };
 
       saveNewStorybook(data).then((res) => {
         getAllStorybooks().then((data) => {
@@ -197,7 +192,6 @@ const DashboardNewStorybook = () => {
                   src={bookImageCover}
                   type="file"
                   accept=".pdf"
-                  // onChange={handleFileChange}
                   id="pdf-upload"
                   style={{ display: "none" }}
                 />

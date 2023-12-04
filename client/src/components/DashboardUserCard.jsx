@@ -105,7 +105,6 @@ const DashboardUserCard = ({ data, index }) => {
             exit={{ opacity: 0, scale: 0.5 }}
             className="absolute z-10 top-12 right-9 rounded-md p-4 flex items-start flex-col gap-6 bg-white shadow-xl"
           >
-            {/* the role of the logged in account cant be changed */}
             <p className="text-textColor text-sm font-semibold">
               Are you sure to assign this user as{" "}
               <span>{data.role === "Admin" ? "Student" : "Admin"}</span> ?

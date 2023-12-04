@@ -27,7 +27,6 @@ const DashboardUser = () => {
   useEffect(() => {
     if (emailFilter) {
       const filtered = allUsers.filter(
-        // prettier-ignore
         (data) =>  data.email.includes(emailFilter) || data.name.includes(emailFilter) || data.role.includes(emailFilter)
       );
       setFiltereUsers(filtered);

@@ -22,7 +22,6 @@ const Dashboard = () => {
       <Header />
 
       <div className="w-full my-2 p-4 flex items-center justify-evenly  bg-teal-400">
-        {/* <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-yellow-600" /></NavLink> */}
 
         <NavLink
           to={"/dashboard/user"}

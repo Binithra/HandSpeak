@@ -8,7 +8,7 @@ import {
   Quiz,
   SignPractice,
   SignUp,
-  Support,
+  // Support,
   Videos,
   Welcome,
   VideoScreen,
@@ -21,7 +21,6 @@ import {
   VideoPlayer,
   DashboardQuiz,
   BookViewer,
-  Contact,
 } from "./components";
 import { app } from "./config/firebase.config";
 
@@ -130,12 +129,11 @@ function App() {
           ))}
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
-          <Route path="/Signup" element={<SignUp />} />
+          <Route path="/Signup" element={<SignUp setAuth={setAuth} />} />
           <Route path="/*" element={<Home />} />
           <Route path="/videos" element={<Videos />} />
           <Route path="/Progress" element={<Progress />} />
           <Route path="/SignPractice" element={<SignPractice />} />
-          <Route path="/Support" element={<Support />} />
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/Welcome" element={<Welcome />} />
@@ -148,8 +146,6 @@ function App() {
           <Route path="/DashboardQuiz" element={<DashboardQuiz />} />
           <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
           <Route path="/BookViewer" element={<BookViewer />} />
-          <Route path="/Contact" element={<Contact />} />
-          
         </Routes>
 
         {isVideoPlaying && (

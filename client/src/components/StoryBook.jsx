@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { Con5, Con4, Con } from "../assets/img/index";
-import { NavLink } from "react-router-dom";
-import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../config/firebase.config";
-import { Viewer } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-// import "@react-pdf-viewer/core/lib/styles/index.css";
-// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { useStateValue } from "../context/StateProvider";
 import { getAllStorybooks } from "../api";
 import { actionType } from "../context/reducer";

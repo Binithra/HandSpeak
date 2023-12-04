@@ -116,11 +116,6 @@ const Header = () => {
             exit={{ opacity: 0, y: 50 }}
             className="absolute z-10 flex flex-col p-3 top-12 right-0 w-275 gap-2 bg-card shadow-lg rounded-lg backdrop-blur-sm "
           >
-            {/* <NavLink to={"/UserProfile"}>
-              <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-                Profile
-              </p>
-            </NavLink> */}
 
             <NavLink to={"/Welcome"}>
               <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
@@ -129,16 +124,6 @@ const Header = () => {
             </NavLink>
 
             <hr />
-            {/* {user?.user?.role === "Admin" && (
-              <>
-                <NavLink to={"/dashboard/home"}>
-                  <p className="text-base text-textColor py-2 hover:font-semibold duration-150 transition-all ease-in-out">
-                    Dashboard
-                  </p>
-                  <hr />
-                </NavLink>
-              </>
-            )} */}
 
             <p
               className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"
