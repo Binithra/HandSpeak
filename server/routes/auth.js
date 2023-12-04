@@ -65,10 +65,11 @@ router.post('/Signup', async (req, res) => {
 });
 
 const newUserData = async (decodeValue, req, res) => {
+  // rusghininbinithra @ gmail.com  --> use @ as a sperator and then forme the name of the user.
   const newUser = new user({
-    name: decodeValue.name,
+    name: decodeValue.name || "User",
     email: decodeValue.email,
-    imageURL: decodeValue.picture,
+    imageURL: decodeValue.picture || "https://i.pinimg.com/564x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg",
     user_id: decodeValue.user_id,
     email_verified: decodeValue.email_verified,
     role: "Student",

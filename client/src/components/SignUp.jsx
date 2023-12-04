@@ -14,41 +14,44 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 
-const SignUp = (setAuth) => {
+const SignUp = ({setAuth}) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const auth = getAuth();
+  const [{ user }, dispatch] = useStateValue();
   
-  const register = () => {
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match.');
-      return;
-    }
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Registration successful, handle additional logic if needed
+  const register = async () => {
+    try {
+      if (password !== confirmPassword) {
+        setErrorMessage('Passwords do not match.');
+        return;
+      }
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log('User registered:', userCredential.user);
       setErrorMessage('');
-
       alert('Registration successful!');
+      const token = await user.getIdToken();
+      const data = await validateUser(token);
+
+      dispatch({
+        type: actionType.SET_USER,
+        user: data,
+      });
       navigate("/Welcome", { replace: true });
-    })
-    .catch((error) => {
-      // Registration failed, display error message
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error('Registration failed:', errorCode, errorMessage);
       setErrorMessage(errorMessage);
-    });
-};
+    }
+  };
+  
 
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
-  const [{ user }, dispatch] = useStateValue();
 
   const signUpWithGoogle = async () => {
     await signInWithPopup(firebaseAuth, provider).then((userCred) => {
