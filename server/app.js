@@ -11,10 +11,6 @@ app.use(express.json());
 
 app.use('/api', signupRoute);
 
-// app.get("/", (req, res) => {
-//   return res.json("hii");
-// });
-
 //user authentication route
 const userRoute = require("./routes/auth");
 app.use("/api/users/", userRoute);

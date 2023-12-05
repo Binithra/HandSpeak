@@ -39,7 +39,7 @@ const SignUp = ({setAuth}) => {
         type: actionType.SET_USER,
         user: data,
       });
-      navigate("/Welcome", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

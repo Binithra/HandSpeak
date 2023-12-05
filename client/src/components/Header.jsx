@@ -40,7 +40,7 @@ const Header = () => {
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            Home
+            මුල් පිටුව
           </NavLink>
         </li>
         <li className="mx-5 text-lg">
@@ -50,7 +50,7 @@ const Header = () => {
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            Sign Practice
+            ඇඟිලි වින්‍යාස පුහුණුවීම්
           </NavLink>
         </li>
 
@@ -61,7 +61,7 @@ const Header = () => {
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            Videos
+            වීඩියෝ
           </NavLink>
         </li>
 
@@ -72,7 +72,7 @@ const Header = () => {
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            Storybook Library
+           කතන්දර පොත්
           </NavLink>
         </li>
         
@@ -83,7 +83,7 @@ const Header = () => {
               isActive ? isActiveStyles : isNotActiveStyles
             }
           >
-            Quiz
+            ප්‍රශ්නාවලිය
           </NavLink>
         </li>
 

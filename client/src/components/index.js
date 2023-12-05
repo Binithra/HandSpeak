@@ -31,3 +31,4 @@ export { default as QuizCard } from "./QuizCard";
 export { default as DashboardNewQuiz } from "./DashboardNewQuiz";
 
 export { default as BookViewer } from "./BookViewer";
+export { default as ForgotPassword } from "./ForgotPassword";

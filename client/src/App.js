@@ -20,7 +20,7 @@ import {
   DashboardUserCard,
   VideoPlayer,
   DashboardQuiz,
-  BookViewer,
+  BookViewer,ForgotPassword,
 } from "./components";
 import { app } from "./config/firebase.config";
 
@@ -123,10 +123,6 @@ function App() {
   return (
     <AnimatePresence>
       <div className="h-auto flex items-center justify-center min-w-[680px]">
-        {isLoading ||
-          (!user && (
-            <div className="fixed inset-0 bg-loaderOverlay backdrop-blur-sm "></div>
-          ))}
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
           <Route path="/Signup" element={<SignUp setAuth={setAuth} />} />
@@ -146,6 +142,7 @@ function App() {
           <Route path="/DashboardQuiz" element={<DashboardQuiz />} />
           <Route path="/DashboardUserCard" element={<DashboardUserCard />} />
           <Route path="/BookViewer" element={<BookViewer />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
         </Routes>
 
         {isVideoPlaying && (

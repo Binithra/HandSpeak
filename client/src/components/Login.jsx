@@ -159,7 +159,7 @@ const Login = ({ setAuth }) => {
               />
               <Link
                 className="mb-2 text-center text-xs underline text-gray-500 hover:text-pink-700"
-                to="/Signup"
+                to="/ForgotPassword"
               >
                 Forgot Password?
               </Link>
